@@ -1,0 +1,125 @@
+/*
+layout contains styles for different aspects of the site's structural layout (think of areas like nav bars, headers, footers, etc.)
+
+*/
+
+
+body {
+    font-family: sans-serif;
+    background-color:$primary-color;
+    box-sizing: border-box;
+    
+  }
+  .container {
+    width: 100%;
+    height: auto;
+    @include flexCenter(column);
+  }
+
+  .header {
+    width: 50%;
+    @include flexCenter(row,space-around);
+    margin: 1rem 0;
+    background-color:$secondary-color;
+    border-radius: 0.4rem;
+  }
+
+
+    /*header-form-content display flex column  altinda */
+    .form-content {
+        width: 50%;
+        height: 100%;
+    @include flexCenter();
+       
+      }
+      /* admin-form ise form-content in icinde...*/
+      .admin-form {
+        width: 100%;
+
+      }
+
+      .happeningformRow {
+        width: 100%;
+        margin-bottom: 1rem;
+      }
+      .formLabel {
+        font-weight: bold;
+        font-size: 0.9rem;
+        color: #6e7375;
+        margin: 0.3rem 0;
+        display: flex; 
+        
+      }
+
+      .labelText{
+        margin-bottom: .4rem;
+        
+      }
+      .formLabelAnnounce{
+        font-weight: bold;
+        font-size: 0.9rem;
+        color: #6e7375;
+      
+        display: flex;
+      }
+      .requiredStar {
+        color: red;
+        font-size: 1rem;
+      }
+
+      .happeningDate {
+        @include flexCenter(row,flex-start);
+
+      }
+
+    .happeningDateSection {
+      width: 30%;  
+      
+      }
+      .happeningDateInput {
+        display: block;
+        box-sizing: border-box;
+        margin-top:-.08rem; 
+      
+      }
+
+     
+      .date-margin{
+        margin: 0.4rem 1rem;
+      }
+      .spantext {
+        font-size: 0.9rem;
+        color: #6e7375;
+  
+      }
+      .payment-margin {
+        margin: 0.4rem 0;
+      }
+
+      .description {
+        min-height: 8rem;
+        text-align: left;
+      }
+     
+      .input-top-mrgn{
+        margin-top:-.4rem;
+      }
+ 
+     
+       .paymentTypeContainer {
+        @include flexCenter(row,flex-start);
+         
+    
+       }
+       .paymentType {
+        
+        @include flexCenter();
+         
+       }
+ 
+       .payTypeInput {
+         display: inline-block;
+         width: 1.3rem;
+         height: 1rem;
+         margin-top:-.01rem;
+       }

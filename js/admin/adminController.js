@@ -1,14 +1,15 @@
 
 function choosePaymentType(id){
     model.data.paymentTypes=model.data.paymentTypes.map((payment,index)=> parseInt(payment.id)==id ? { id:payment.id, title:payment.title  ,isChecked:true } : { id:payment.id, title:payment.title  ,isChecked:false });
+//Silme islemine tiklandigi zaman....checked i false yap...
     model.inputs.adminPage.happening.paymentTypeId.name=id;
   }
   
   
   //Bu toggle durumu olursa checkbox larda input attributu icinde calisacak-  ${getChecked(paymentType.isChecked)}
-  function getChecked(ischecked){
-    return ischecked ? "checked" : "";
-  }
+  // function getChecked(ischecked){
+  //   return ischecked ? "checked" : "";
+  // }
 
 
   //Bir de parametreye model gondersek o zaman tek fonksiyonda sanki hallebebiliriz gibi...
@@ -75,7 +76,7 @@ function getAnnouncementStartDate(selectedDate){
 
 
 function cleanInputFields(){
-  console.log("cleanInputFields calisiyor")
+
   let {happening}=model.inputs.adminPage;
   //Daha pratik temizleyebilir miyiz
 happening.title={name:"",isFieldRequired:true,isValidate:false}
@@ -92,6 +93,7 @@ happening.announcementStartTime={name:"",isFieldRequired:false}
 happening.announcementEndDate={name:"",isFieldRequired:false}
 happening.announcementEndTime={name:"",isFieldRequired:false}
 happening.webSiteUrl={name:"",isFieldRequired:false}
+
 
 }
 
@@ -112,14 +114,14 @@ function getHappeningValues(){
   let eventValues=Object.values(happening);
   eventValues=eventValues.map(item=>item.name);
   let newEvent=Object.assign.apply({},eventKeys.map((value,index)=>({[value]:eventValues[index]})));
-  console.log("newEvent: ", newEvent);
+ 
 return newEvent;
 }
 
 
 function findLastId(happenings){
 let lastId=happenings.reduce((acc,happening)=>acc>happening.id ? acc : happening.id,0);
-console.log("lastId: ", lastId);
+
 return lastId;
 }
 
@@ -177,7 +179,6 @@ function checkAllRequiredFields(happening){
    //Burda ortak mesaj da yazip sadece input ismini dinamiklestirebiliriz...
    //Alternatif span lari dogrudan input altina koyup class larina style da display none yapip sonra da ornegin isValid false ise o class i degil baska bir class goster diyebiliriz ve bu sekilde bu mesaji gostermis oluruz....
    function showValidationMessage(isValidate,errorMessage){
-
      if(!isValidate){
      //  console.log("Error mesaj yazisi gelmesini bekliyoruz...")
        return  `<span class="errorValidationMessage">  ${errorMessage} </span>`;
@@ -190,11 +191,9 @@ function checkAllRequiredFields(happening){
    
 
    function alertHandle(){
-    console.log("error melding running");
     model.inputs.adminPage.isSubmitted=false;
     cleanInputFields();
     updateView();
-   
   }
   
  
