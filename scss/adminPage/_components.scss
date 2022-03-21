@@ -26,10 +26,11 @@ components are like "mini" layouts. Styles for small, reusable pieces of the sit
     padding: 0.375rem 0;
     padding-left: 0.3rem;
     font-size: 0.8rem;
-    color: #6e7375;
+    color: $primary-font-color;
+
     background-color: #fff;
     background-clip: padding-box;
-    border: 1px solid #ced4da;
+    border: .07rem solid #ced4da;
     border-radius: 0.25rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s;
   }
@@ -51,22 +52,22 @@ components are like "mini" layouts. Styles for small, reusable pieces of the sit
 
   
   .errorStyle {
-    border: 1px solid red;
+    border: .07rem solid red;
   }
 
   .successStyle {
-    border: 1px solid green;
+    border: .07rem solid green;
   }
 
 
   .form-element:hover  {
-    color: #495057;
+    color: #495057;/*form element yazisi kalinlasiyor yani darklasiyor uzerine gelince*/
     background-color: #fff;
     border-color: #80bdff;
     outline: 0;
   }
   .form-element:focus {
-    color: #495057;
+    color: #495057;/*focus olunca da yazi darklasiyor...*/
     background-color: #fff;
     border-color: #80bdff;
     outline: 0;
@@ -76,13 +77,13 @@ components are like "mini" layouts. Styles for small, reusable pieces of the sit
   }
 /* hover i incele form-date i mi yoksa digerini mi devreden cikaracaz*/
   .form-date:hover {
-    color: #495057;
+    color: #495057;/*renk darklasiyor*/
     background-color: #fff;
     border-color: #80bdff;
     outline: 0;
   }
   .form-date:focus {
-    color: #495057;
+    color: #495057;/*renk darklasiyor*/
     background-color: #fff;
     border-color: #80bdff;
     outline: 0;

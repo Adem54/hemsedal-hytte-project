@@ -1,10 +1,17 @@
-@import "variables";
-@import "mixins";//Bunu en basa koymamiz gerekebilir
-@import "reset";
-@import "utilities";
-@import "typography";
-@import 'animations';
-
-@import "components";
-@import "layouts";
+@import "./adminPage/variables";
+@import "./common/mixins";//Bunu en basa koymamiz gerekebilir
+@import "./common/reset";
+@import "./common/utilities";
+@import "./adminPage/typography";
+@import "./adminPage/animations";
+@import "./adminPage/components";
+@import "./adminPage/layouts";
+@import "./adminPage/adminPage";
+/*userPage scss files*/
+@import "./userPage/variables";
+@import "./userPage/typography";
+@import "./userPage/animations";
+@import "./userPage/components";
+@import "./userPage/layouts";
+@import "./userPage/userPage";
 

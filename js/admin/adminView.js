@@ -9,10 +9,12 @@ function updateAdminView(){
   </div>
   <div class="header">
   <h3>Welcome to Admin Page</h3>
+  <button  class="btnUserPage" onclick="cleanInputFields(); updateView()" >Clean Form Fields</button>
   <button 
   class="btnUserPage"
   onclick="model.app.page='user'; updateView()"
-  >Tilbake til Bruker Side</button>
+  ><a id="adminPage" href="#userPage">  Tilbake til Bruker Side </a></button>
+  
   </div>
 
   <div
@@ -129,13 +131,13 @@ ${model.inputs.adminPage.isSubmitted ? showValidationStyle(model.inputs.adminPag
 onchange="model.inputs.adminPage.happening.categoryId.name=this.value"
 >
 
-
+<option selected disabled hidden>Velg kategori</option>
 `;
 
 for(let i=0; i<categories.length; i++){
   const category=categories[i];
     happeningMainCategory+=`
-    <option value="${category.id}">${category.title}</option>
+    <option  value="${category.id}">${category.title}</option>
     `;
 
 }
@@ -151,7 +153,7 @@ return happeningMainCategory;
 //Submit butonu tiklanmis ise ve radio buttonlar dan tiklanan yani isSelected true olan var ise o zaman sucess style ve icon mesaji ver....
 createPaymentCategoryHtml()
 function createPaymentCategoryHtml(){
-const { paymentTypes}=model.data;
+let { paymentTypes}=model.data;
 let paymentCategory=``;
 paymentCategory+=`
 <div class="happeningformRow 
@@ -169,13 +171,15 @@ ${model.inputs.adminPage.isSubmitted ? showValidationStyle(model.inputs.adminPag
 
 ">
 `;
-//${getChecked(paymentType.isChecked)} input attributunde buna gerek yok..
+
 for(let i=0; i<paymentTypes.length; i++){
 let paymentType=paymentTypes[i];
 paymentCategory+=`
 <div class="paymentType">
 
-<input type="radio" name="radio" class="payTypeInput"  id="${paymentType.id}" name="${paymentType.title}" 
+<input
+${getChecked(paymentType.isChecked)}
+type="radio" name="radio" class="payTypeInput"  id="${paymentType.id}" name="${paymentType.title}" 
 onchange="choosePaymentType(${paymentType.id})"  />
 </div>
 <div>

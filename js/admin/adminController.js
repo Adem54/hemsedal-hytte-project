@@ -7,9 +7,9 @@ function choosePaymentType(id){
   
   
   //Bu toggle durumu olursa checkbox larda input attributu icinde calisacak-  ${getChecked(paymentType.isChecked)}
-  // function getChecked(ischecked){
-  //   return ischecked ? "checked" : "";
-  // }
+  function getChecked(isChecked){
+    return isChecked ? "checked" : "";
+  }
 
 
   //Bir de parametreye model gondersek o zaman tek fonksiyonda sanki hallebebiliriz gibi...
@@ -57,7 +57,7 @@ function getAnnouncementStartDate(selectedDate){
  function handleSubmit(event){
     event.preventDefault();
        model.inputs.adminPage.isSubmitted=true;//Submit butonuna tiklandi demektir, coook onemli birsey var submit isleminin en son bolumus mesaj verme veya admin sayfasina gelen tum butonlarda biz hep model imiz defaul degerlerle gelmesi icin isSubmitted i tekrardan false yapmamiz gerekecek..
-     
+    
    if (!checkAllRequiredFields(model.inputs.adminPage.happening)){
       // showErrorMessage("");//Bunu ekranda gosterecegiz input alanlarinda eksikleriniz oldugu icin ekleme islemi gerceklestirilemiyor
       updateView();
@@ -83,6 +83,8 @@ happening.title={name:"",isFieldRequired:true,isValidate:false}
 happening.description={name:"",isFieldRequired:false}
 happening.imageSrc={name:"",isFieldRequired:false};
 happening.categoryId={name:null, isFieldRequired:true,isValidate:false}
+let paymentType=model.inputs.adminPage.happening.paymentTypeId;
+model.data.paymentTypes=model.data.paymentTypes.map(payment=>payment.id=paymentType.name ? {...payment,isChecked:false} : payment);
 happening.paymentTypeId={name:null,isFieldRequired:true,isValidate:false};//gratis,betalt,ekstrabetalt
 happening.happeningStartDate={name:"",isFieldRequired:true,isValidate:false}
 happening.happeningStartTime={name:"",isFieldRequired:true,isValidate:false}
@@ -96,7 +98,6 @@ happening.webSiteUrl={name:"",isFieldRequired:false}
 
 
 }
-
 
 
 function addNewHappening(){

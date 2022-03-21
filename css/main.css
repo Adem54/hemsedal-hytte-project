@@ -4,11 +4,11 @@
 background-color: #f7a7a3;
 border-left: .3rem solid #8f130c;
 }
-
 */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;700&family=Roboto:wght@500;700&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Quicksand&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lemonada&display=swap");
 :root {
   /*  font-size: 62.5%; Bunu sonradan uygulamaya calisiriz... */
   box-sizing: border-box;
@@ -84,7 +84,7 @@ components are like "mini" layouts. Styles for small, reusable pieces of the sit
   color: #6e7375;
   background-color: #fff;
   background-clip: padding-box;
-  border: 1px solid #ced4da;
+  border: .07rem solid #ced4da;
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s;
 }
@@ -103,15 +103,16 @@ components are like "mini" layouts. Styles for small, reusable pieces of the sit
 }
 
 .errorStyle {
-  border: 1px solid red;
+  border: .07rem solid red;
 }
 
 .successStyle {
-  border: 1px solid green;
+  border: .07rem solid green;
 }
 
 .form-element:hover {
   color: #495057;
+  /*form element yazisi kalinlasiyor yani darklasiyor uzerine gelince*/
   background-color: #fff;
   border-color: #80bdff;
   outline: 0;
@@ -119,6 +120,7 @@ components are like "mini" layouts. Styles for small, reusable pieces of the sit
 
 .form-element:focus {
   color: #495057;
+  /*focus olunca da yazi darklasiyor...*/
   background-color: #fff;
   border-color: #80bdff;
   outline: 0;
@@ -128,6 +130,7 @@ components are like "mini" layouts. Styles for small, reusable pieces of the sit
 /* hover i incele form-date i mi yoksa digerini mi devreden cikaracaz*/
 .form-date:hover {
   color: #495057;
+  /*renk darklasiyor*/
   background-color: #fff;
   border-color: #80bdff;
   outline: 0;
@@ -135,6 +138,7 @@ components are like "mini" layouts. Styles for small, reusable pieces of the sit
 
 .form-date:focus {
   color: #495057;
+  /*renk darklasiyor*/
   background-color: #fff;
   border-color: #80bdff;
   outline: 0;
@@ -229,10 +233,6 @@ color: #8f130c;
   top: -2rem;
 }
 
-/*
-layout contains styles for different aspects of the site's structural layout (think of areas like nav bars, headers, footers, etc.)
-
-*/
 body {
   font-family: sans-serif;
   background-color: #E6E6E6;
@@ -267,8 +267,12 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: row;
+  color: #6e7375;
 }
 
+/*
+layout contains styles for different aspects of the site's structural layout (think of areas like nav bars, headers, footers, etc.)
+*/
 /* admin-form ise form-content in icinde...*/
 .admin-form {
   width: 100%;
@@ -282,7 +286,6 @@ body {
 .formLabel {
   font-weight: bold;
   font-size: 0.9rem;
-  color: #6e7375;
   margin: 0.3rem 0;
   display: flex;
 }
@@ -361,5 +364,547 @@ body {
   width: 1.3rem;
   height: 1rem;
   margin-top: -.01rem;
+}
+
+textarea, input[type="datetime-local"] {
+  font-family: sans-serif;
+}
+
+/*userPage scss files*/
+* {
+  font-family: "Roboto", sans-serif;
+  /* font-size: 1rem;Bu yazi boyutu en buyuk ekranda oloacak, burasi sliderin boyutunu buyutuyor..icinde var olan font dan dolayidir muhtemelen*/
+  /*Buraya font-size 1.4 rem verince biz artik bu projede 1 rem 1.4 rem olarak kullanilacak demektir...o yuzden burasi cook onemlidir dikkat edlim..*/
+}
+
+/*1700 px or larger*/
+.nav__list-item {
+  height: 6rem;
+  /*Navbar in bu boyutu en buyuk ekran icin olacak*/
+  text-decoration: none;
+  padding: 1rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  color: #fff;
+  margin-left: 1rem;
+}
+
+/*1700 px or larger*/
+@media only screen and (min-width: 1700px) {
+  .nav__list-item {
+    height: 7rem;
+    /*Navbar in bu boyutu en buyuk ekran icin olacak*/
+    padding: 1rem 0;
+    margin-left: 1.5rem;
+  }
+}
+
+.nav__list-item::before {
+  content: "";
+  background-color: #fff;
+  position: absolute;
+  width: 100%;
+  height: 0.1rem;
+  left: 0;
+  bottom: 1.5rem;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .1s ease-in-out;
+  transform-origin: center;
+}
+
+.nav__list-item:hover {
+  color: #fff;
+}
+
+.nav__list-item:hover::before {
+  transition: 0.7s ease-in-out;
+  transform-origin: left;
+  transform: scaleX(1);
+}
+
+.icon-plus:before {
+  content: "\e900";
+  font-size: 1.6rem;
+}
+
+/*1700 px or larger*/
+@media only screen and (min-width: 1700px) {
+  .icon-plus:before {
+    font-size: 2rem;
+  }
+}
+
+.search-btn {
+  border: none;
+  background-color: #fff;
+  padding: .5rem;
+  color: black;
+  border-radius: 0.2rem;
+  cursor: pointer;
+  margin-right: .2rem;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+/*BEST PRACTISE----POSITION RELATIVE ILE BIR ONCEKI KUTUYA GORE TOP,LEFT LERI KULLANARAK YERLESTIRME..*/
+.category_list {
+  position: relative;
+  z-index: 5;
+  top: 0;
+  left: 25%;
+  width: 50%;
+  background-color: #f5f0f0;
+  border: 1px solid #000;
+  border-radius: .4rem;
+  padding-left: .6rem;
+  padding-bottom: 1.3rem;
+  padding-top: .3rem;
+  display: flex;
+  color: black;
+  flex-wrap: wrap;
+}
+
+/* category_list_item da verilen margin-top dan dolyhai sadece padding-bottom verdik*/
+.category_list:after {
+  content: '';
+  position: absolute;
+  left: 18rem;
+  top: -15px;
+  border-style: solid;
+  border-width: 0 15px 15px 15px;
+  border-color: transparent transparent #f5f0f0 transparent;
+}
+
+.fullscreen-header {
+  height: 85vh;
+  /*3be8b0    00aeef*/
+  background-image: linear-gradient(to right top, rgba(59, 232, 176, 0.4), rgba(0, 0, 0, 0.5)), url("/images/hemsedal.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position-x: 90%;
+  background-position-y: bottom;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-top {
+  background-color: #18375a;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  text-align: center;
+  font-size: 1.4rem;
+}
+
+.nav__list {
+  margin-block-end: 0;
+  margin-block-start: 0;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header__title {
+  color: #fff;
+  font-size: 4rem;
+  font-family: 'Lemonada', cursive;
+}
+
+.slider-container {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  width: 100%;
+  background-color: #f5f0f0;
+  position: relative;
+  z-index: 0;
+  margin-bottom: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* eger biz kendimiz width rem i vermezsek en sagda kalan birazcik kucuk kaliyor ve icindeki desgin kayiyor....*/
+.item {
+  width: 100%;
+  height: 30rem;
+  border-radius: 0.4rem;
+  background-color: #fff;
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+  box-shadow: #ddd 0 0 8px 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.cart-image {
+  width: 100%;
+  height: 60%;
+  background-color: orange;
+  background-image: url("https://source.unsplash.com/random/?event,arrangement,natur,child,social");
+  box-sizing: border-box;
+  padding: 1rem;
+  border-top-left-radius: 0.3rem;
+  border-top-right-radius: 0.3rem;
+  /* background-image: url("konsert.jfif"); */
+  background-position: center;
+  /* Center the image */
+  background-repeat: no-repeat;
+  /* Do not repeat the image */
+  background-size: cover;
+  /* Resize the background image to cover the entire container */
+}
+
+.icon-container {
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  /*width,heigh boyutlari ekrana gore degismesi gerekecek*/
+  width: 2.2rem;
+  height: 2.2rem;
+  padding: 0.5rem;
+  border-radius: 50%;
+  color: #de302f;
+  margin-left: 0.2rem;
+}
+
+.fa-solid {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.cart-image {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.cart-calender {
+  width: 100%;
+  height: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cart-calender-date {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #de302f;
+  width: 3rem;
+  height: 3rem;
+  padding: 2rem;
+  border-radius: 20%;
+  color: #fff;
+}
+
+/* yazi rengi cok iyi duruyor....*/
+.cart-calender-day {
+  font-size: 1.6rem;
+  font-weight: 700;
+  /* color: #485273; */
+}
+
+.cart-calender-month {
+  font-size: 0.8rem;
+  line-height: 1.5em;
+  display: block;
+  font-weight: 700;
+  /* color: #de302f; */
+}
+
+/*Bu yazi rengini al bunu cok fazla kullanacagiz*/
+.cart-calender-content {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.8rem;
+  font-weight: 400;
+  /* white-space: nowrap;   yazimizin alt satira dusmesini istemiyorsak bu  sekilde yapabiliriz
+text-overflow:hidden;
+*/
+}
+
+.cart-calender-content > h3 {
+  text-align: center;
+}
+
+.cart-calender-content > div {
+  color: #777777;
+  line-height: 1.78;
+}
+
+.fa-calendar-days,
+.fa-clock,
+.fa-location-dot {
+  font-size: 0.8rem;
+  margin-right: 0.4rem;
+}
+
+.cart-calender-text {
+  margin-bottom: 0.4rem;
+}
+
+.fa-right-long {
+  color: #fff;
+  font-size: 1rem;
+  margin-left: 0.2rem;
+}
+
+.read-more {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #de302f;
+  padding: 0.5rem;
+  width: 30%;
+  border-radius: 0.2rem;
+  text-align: center;
+  margin-bottom: 1.4rem;
+}
+
+.read-more:hover {
+  background-color: #0e385e;
+}
+
+.read-more a:hover {
+  color: #fff;
+}
+
+.read-more a {
+  text-decoration: none;
+  color: #fff;
+}
+
+/*-----*/
+.owl-theme {
+  width: 100%;
+  margin: auto;
+  box-sizing: border-box;
+  padding: 0 18%;
+}
+
+.main-title {
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  border-radius: 1rem;
+  color: #fff;
+  background-color: #A03033;
+  padding: 1rem 4rem;
+}
+
+/*Filter Bar*/
+.filterBar-container {
+  width: 100%;
+  height: 8rem;
+  background-color: #465f7b;
+  padding: 0 15%;
+  color: #fff;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.search-happening-btn {
+  color: #000;
+  margin-left: 10%;
+}
+
+.search-btn {
+  border: none;
+  background-color: #fff;
+  padding: .5rem;
+  color: black;
+  border-radius: 0.2rem;
+  cursor: pointer;
+  margin-right: .2rem;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.filterBar-title {
+  margin-left: -70%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: relative;
+}
+
+.filterBar-title > h2 {
+  background-color: #465f7b;
+  color: #fff;
+  padding: 1rem 1.5rem;
+  border-top-right-radius: 0.3rem;
+  border-top-left-radius: 0.3rem;
+}
+
+.filterBar-container-div {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: .4rem;
+}
+
+.category-month-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.filterBar-container__item {
+  /* padding: 1rem 1rem; */
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+}
+
+.date-title {
+  width: 6.2rem;
+  text-align: right;
+  font-size: 1.2rem;
+  margin-right: .5rem;
+}
+
+.input {
+  width: 100%;
+}
+
+.filterBar-container__item-category {
+  background-color: #fff;
+  padding: .5rem 1.5rem;
+  color: black;
+  border-radius: 0.2rem;
+  cursor: pointer;
+  margin-right: .2rem;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.fa-solid {
+  margin-right: 0.5rem;
+}
+
+.category_list__item {
+  width: 18%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.category_list__item > input {
+  width: 1rem;
+  height: 1rem;
+  margin-right: .2rem;
+  cursor: pointer;
+}
+
+/*Filter btns*/
+.filterBtns-wrapper {
+  padding: 0 18%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.happenings-title {
+  margin: 2rem;
+}
+
+.filterBtns-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  border-top-left-radius: .5rem;
+  border-top-right-radius: .5rem;
+  background-color: #A03033;
+  position: relative;
+}
+
+.filter-btn {
+  padding: 1rem 2rem;
+  cursor: pointer;
+  margin-left: .5rem;
+  border-radius: .5rem;
+  border: none;
+  border: 2px solid #75FF33;
+  font-size: 1.2rem;
+}
+
+.filter-btn:hover {
+  background-color: #75FF33;
+  color: #fff;
+}
+
+/*Happening grids*/
+.happenings {
+  margin-top: 1rem;
+  width: 100%;
+  height: 30rem;
+  padding: 0 18%;
+}
+
+.happening-container {
+  text-align: center;
+  font-size: 2em;
+  color: white;
+  display: grid;
+  grid-template: repeat(2, 28rem)/repeat(auto-fit, minmax(22rem, 1fr));
+  grid-gap: 1rem;
+  grid-auto-rows: 400px;
+}
+
+.box1 {
+  background-color: yellow;
+}
+
+.box2 {
+  background-color: red;
+}
+
+.box3 {
+  background-color: gray;
+}
+
+.box4 {
+  background-color: green;
+}
+
+.box5 {
+  background-color: cyan;
+}
+
+.box6 {
+  background-color: pink;
 }
 /*# sourceMappingURL=main.css.map */
