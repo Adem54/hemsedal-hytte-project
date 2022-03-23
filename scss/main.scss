@@ -2,7 +2,7 @@
 @import "./common/mixins";//Bunu en basa koymamiz gerekebilir
 @import "./common/reset";
 @import "./common/utilities";
-@import "./adminPage/typography";
+@import "./common/typography";
 @import "./adminPage/animations";
 @import "./adminPage/components";
 @import "./adminPage/layouts";
@@ -12,6 +12,8 @@
 @import "./userPage/typography";
 @import "./userPage/animations";
 @import "./userPage/components";
+
 @import "./userPage/layouts";
+
 @import "./userPage/userPage";
 

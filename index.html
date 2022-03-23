@@ -5,6 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+
+    
+    <!--CategoryIcon links-->
+    <link rel="stylesheet" href="icons/categoryIcons/childrenAndFamily/style.css">
+    <link rel="stylesheet" href="icons/categoryIcons/concert/style.css">
+    <link rel="stylesheet" href="icons/categoryIcons/exhibition/style.css">
+    <link rel="stylesheet" href="icons/categoryIcons/familyAndEnjoy/style.css">
+    <link rel="stylesheet" href="icons/categoryIcons/festival/style.css">
+    <link rel="stylesheet" href="icons/categoryIcons/sport/style.css">
+    <link rel="stylesheet" href="icons/categoryIcons/theater/style.css">
    <link rel="stylesheet" href="/css/main.css"> 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -13,6 +23,15 @@
       rel="stylesheet"
     />
  
+
+
+
+  <!--Font-awesome kit code-->
+  <script src="https://kit.fontawesome.com/05902d1e0f.js" crossorigin="anonymous"></script>
+
+
+
+
 <link rel="stylesheet" href="./icons/successCheckBoxIcon/style.css">
 <link rel="stylesheet" href="./icons/createHappeningIcon/style.css">
     <script src="./js/model.js"></script>
@@ -22,32 +41,37 @@
     <script src="./js/user/userView.js"></script>
 
  
-       <!--semantic-ui date-picker -->
-       <link href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css" rel="stylesheet" type="text/css" />
-       <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
-       <script src="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js"></script>
-  
-<!-- Owl Stylesheets- slider carosel -->
-<link rel="stylesheet" href="/owlcarousel/assets/owl.carousel.min.css" />
-<link
-  rel="stylesheet"
-  href="/owlcarousel/assets/owl.theme.default.min.css"
-/>
-  <!--Font-awesome kit code-->
-  <script src="https://kit.fontawesome.com/05902d1e0f.js" crossorigin="anonymous"></script>
+<script src="https://use.fontawesome.com/releases/v5.0.1/js/all.js"></script>
+
+
+
+      <!--semantic-ui date-picker -->
+      <!-- <link href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css" rel="stylesheet" type="text/css" /> -->
+      <!-- <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+      <script src="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js"></script> -->
+     
 
 
   </head>
   <body>
 
-
     <div id="app"></div>
-    <script>
-      //console.log("model_: ",model);
-      updateView();
+
+ 
+    
+
+
+  <!--Jquery sematic-ui date-picker-->
+  <script>
+
+
+updateView();
       function updateView() {
   console.log("updateView guncelleniyor!!!")
         
+ 
+
+
         let { page } = model.app;
 
         switch (page) {
@@ -60,49 +84,72 @@
             break;
         }
       }
-      
-    </script>
 
 
-  <!--Jquery sematic-ui date-picker-->
-  <script>
-    //----BURAYI KULLANABILIIRZ....DATAYI KOLAYCA ALABILIYORUZ....
+    
+</script>
 
 
+
+
+<!-- 
+<script>
+  //----BURAYI KULLANABILIIRZ....DATAYI KOLAYCA ALABILIYORUZ....
+console.log("sematnic-ui date picker burda.....")
 $('#start-date').calendar({
 type: 'date',
 onChange: function (date, text) {
-     var newValue = text;
-    // alert(newValue);
-    //Datalari da burda alabiliris
-    console.log("date: ",date);
-     console.log("newValue: ",newValue);
-    },
+ var newValue = text;
+// alert(newValue);
+//Datalari da burda alabiliris
+console.log("startDATE burasi  onChange calisiyor semantic-ui- index.html icinde ")
+model.inputs.userPage.chosenDateFrom=date;
+//model.inputs.userPage.chosenDateFrom.toISOString().slice(0,10)
+//Bu sekilde tarihi alacagiz....
+console.log("startDate: ",date);
+ console.log("startValue: ",newValue);
+},
 });
+
 
 $('#end-date').calendar({
 type: 'date',
 onChange: function (date, text) {
-     var newValue = text;
-    // alert(newValue);
-    console.log("date: ",date);
-     console.log("newValue: ",newValue);
-    },
+ var newValue = text;
+// alert(newValue);
+console.log("endDATE burasi  onChange calisiyor semantic-ui- index.html icinde ")
+
+model.inputs.userPage.chosenDateTo=newValue;
+
+console.log("endate: ",date);
+ console.log("endValue: ",newValue);
+},
 }); 
 
+$('#month').calendar({
+type: 'month',
+onChange: function (date, text) {
+ var newValue = text;
+// alert(newValue);
+console.log("month burasi  onChange calisiyor semantic-ui- index.html icinde ")
 
-$('#example7').calendar({
-  type: 'month'
+
+model.inputs.userPage.chosenMonth=newValue;
+console.log("month: ",date);
+ console.log("nthValue: ",newValue);
+},
 });
-</script>
 
+
+
+</script> -->
 
       <!-- javascript -->
-      <script src="/owlcarousel/jquery.min.js"></script>
-      <script src="/owlcarousel/owl.carousel.min.js"></script>
+      <!-- <script src="/owlcarousel/jquery.min.js"></script>
+      <script src="/owlcarousel/owl.carousel.min.js"></script> -->
      
       <!--jquery carosel-slider-->
-      <script>
+      <!-- <script>
         $(document).ready(function () {
           var owl = $(".owl-carousel");
           owl.owlCarousel({
@@ -126,7 +173,7 @@ $('#example7').calendar({
         1000:{
             items:3,
             nav:true,
-            loop:false,
+            loop:true,
         }
     }
 
@@ -142,7 +189,10 @@ $('#example7').calendar({
             owl.trigger("stop.owl.autoplay");
           });
         });
-      </script>
+      </script> -->
     
+
+
+  
   </body>
 </html>

@@ -12,11 +12,11 @@
   }
 /*1700 px or larger*/
 @media only screen and (min-width:1700px) {
-    .nav__list-item {
-        height: 7rem;/*Navbar in bu boyutu en buyuk ekran icin olacak*/
-        padding: 1rem 0;
-        margin-left: 1.5rem;
-      }
+  .nav__list-item {
+      height: 7rem;/*Navbar in bu boyutu en buyuk ekran icin olacak*/
+      padding: 1rem 0;
+      margin-left: 1.5rem;
+    }
 }
 
   .nav__list-item::before {
@@ -76,24 +76,60 @@
 
 
    /*BEST PRACTISE----POSITION RELATIVE ILE BIR ONCEKI KUTUYA GORE TOP,LEFT LERI KULLANARAK YERLESTIRME..*/
+
+   
    .category_list  {
-    position: relative;
-    z-index: 5;
- top: 0;
-    left: 25%;
+    position: absolute;//bu isaret baloncugunu gosteriyor kaldirirsak gostermiyor....asagidaki margin left eger position kullnrisak left olacak.
+    margin-left: 22%;
     width: 50%;
     background-color:#f5f0f0 ;
     border: 1px solid #000;
     border-radius: .4rem;
-    padding-left: .6rem;
     padding-bottom: 1.3rem;
     padding-top: .3rem;  
     display: flex;
+    justify-content: center;
+    align-items:center;
     color: black;
     flex-wrap: wrap;
+    
     }
+
+    @media only screen and (min-width:1700px) {
+      .category_list  {
+        position: absolute;//bu isaret baloncugunu gosteriyor kaldirirsak gostermiyor....asagidaki margin left eger position kullnrisak left olacak.
+            margin-left: 21%;
+       
+        }
+  }
     /* category_list_item da verilen margin-top dan dolyhai sadece padding-bottom verdik*/
 
+    .category_list__item {
+      width: 16%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+    white-space: nowrap;
+    max-width: 100%;
+      margin-top: 1rem;
+      margin-right: .2rem;
+     
+      
+      
+      }
+      
+      
+      
+      .category_list__item >input {
+      width: 1rem;
+      height: 1rem;
+      margin:0 .3rem;
+      cursor: pointer;
+      text-align: center;
+     
+      }
+      
+     
 
 
     .category_list:after {
@@ -106,4 +142,47 @@
         border-color: transparent transparent #f5f0f0 transparent;  
     }
     
+
+/*Category icons style*/
+.icon-party-svgrepo-com:before {
+    content: "\e901";
+    font-size: 1.4rem;
+}
+
+.icon-family-svgrepo-com:before {
+content: "\e902";
+font-size: 1.4rem;
+
+}
+
+.icon-two-childs-playing-silhouettes-svgrepo-com:before {
+content: "\e903";
+font-size: 1.4rem;
+
+
+}
+
+.icon-sports_baseball:before {
+content: "\e904";
+font-size: 1.4rem;
+
+}
+
+.icon-music:before {
+    content: "\e911";
+  }
+
+.icon-presentation-exhibition-svgrepo-com:before {
+content: "\e906";
+font-size: 1.4rem;
+
+}
+
+.icon-theater-svgrepo-com:before {
+content: "\e907";
+font-size: 1.4rem;
+}
+
+
+
 

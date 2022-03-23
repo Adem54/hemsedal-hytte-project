@@ -372,6 +372,8 @@ textarea, input[type="datetime-local"] {
 
 /*userPage scss files*/
 * {
+  margin: 0;
+  padding: 0;
   font-family: "Roboto", sans-serif;
   /* font-size: 1rem;Bu yazi boyutu en buyuk ekranda oloacak, burasi sliderin boyutunu buyutuyor..icinde var olan font dan dolayidir muhtemelen*/
   /*Buraya font-size 1.4 rem verince biz artik bu projede 1 rem 1.4 rem olarak kullanilacak demektir...o yuzden burasi cook onemlidir dikkat edlim..*/
@@ -452,23 +454,48 @@ textarea, input[type="datetime-local"] {
 
 /*BEST PRACTISE----POSITION RELATIVE ILE BIR ONCEKI KUTUYA GORE TOP,LEFT LERI KULLANARAK YERLESTIRME..*/
 .category_list {
-  position: relative;
-  z-index: 5;
-  top: 0;
-  left: 25%;
+  position: absolute;
+  margin-left: 22%;
   width: 50%;
   background-color: #f5f0f0;
   border: 1px solid #000;
   border-radius: .4rem;
-  padding-left: .6rem;
   padding-bottom: 1.3rem;
   padding-top: .3rem;
   display: flex;
+  justify-content: center;
+  align-items: center;
   color: black;
   flex-wrap: wrap;
 }
 
+@media only screen and (min-width: 1700px) {
+  .category_list {
+    position: absolute;
+    margin-left: 21%;
+  }
+}
+
 /* category_list_item da verilen margin-top dan dolyhai sadece padding-bottom verdik*/
+.category_list__item {
+  width: 16%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  white-space: nowrap;
+  max-width: 100%;
+  margin-top: 1rem;
+  margin-right: .2rem;
+}
+
+.category_list__item > input {
+  width: 1rem;
+  height: 1rem;
+  margin: 0 .3rem;
+  cursor: pointer;
+  text-align: center;
+}
+
 .category_list:after {
   content: '';
   position: absolute;
@@ -477,6 +504,41 @@ textarea, input[type="datetime-local"] {
   border-style: solid;
   border-width: 0 15px 15px 15px;
   border-color: transparent transparent #f5f0f0 transparent;
+}
+
+/*Category icons style*/
+.icon-party-svgrepo-com:before {
+  content: "\e901";
+  font-size: 1.4rem;
+}
+
+.icon-family-svgrepo-com:before {
+  content: "\e902";
+  font-size: 1.4rem;
+}
+
+.icon-two-childs-playing-silhouettes-svgrepo-com:before {
+  content: "\e903";
+  font-size: 1.4rem;
+}
+
+.icon-sports_baseball:before {
+  content: "\e904";
+  font-size: 1.4rem;
+}
+
+.icon-music:before {
+  content: "\e911";
+}
+
+.icon-presentation-exhibition-svgrepo-com:before {
+  content: "\e906";
+  font-size: 1.4rem;
+}
+
+.icon-theater-svgrepo-com:before {
+  content: "\e907";
+  font-size: 1.4rem;
 }
 
 .fullscreen-header {
@@ -524,22 +586,35 @@ textarea, input[type="datetime-local"] {
   font-family: 'Lemonada', cursive;
 }
 
-.slider-container {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+.main-title {
   width: 100%;
-  background-color: #f5f0f0;
-  position: relative;
-  z-index: 0;
-  margin-bottom: 4rem;
+  text-align: center;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: #fff;
 }
 
-/* eger biz kendimiz width rem i vermezsek en sagda kalan birazcik kucuk kaliyor ve icindeki desgin kayiyor....*/
-.item {
+.main-title > h1 {
+  padding: 1rem 4rem;
+  width: 33%;
+  background-color: #A03033;
+  border-radius: 1rem;
+}
+
+.slider-container {
   width: 100%;
+  padding: 2rem 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.cart-container {
+  min-width: 25rem;
+  margin-left: 1rem;
   height: 30rem;
   border-radius: 0.4rem;
   background-color: #fff;
@@ -574,6 +649,7 @@ textarea, input[type="datetime-local"] {
   background-color: #fff;
   display: flex;
   align-items: center;
+  justify-content: center;
   /*width,heigh boyutlari ekrana gore degismesi gerekecek*/
   width: 2.2rem;
   height: 2.2rem;
@@ -585,7 +661,7 @@ textarea, input[type="datetime-local"] {
 
 .fa-solid {
   font-weight: bold;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
 }
 
 .cart-image {
@@ -599,7 +675,7 @@ textarea, input[type="datetime-local"] {
   width: 100%;
   height: 40%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -611,9 +687,10 @@ textarea, input[type="datetime-local"] {
   background-color: #de302f;
   width: 3rem;
   height: 3rem;
-  padding: 2rem;
+  padding: 1rem;
   border-radius: 20%;
   color: #fff;
+  margin-left: 1rem;
 }
 
 /* yazi rengi cok iyi duruyor....*/
@@ -638,6 +715,7 @@ textarea, input[type="datetime-local"] {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 1rem 0;
   font-size: 0.8rem;
   font-weight: 400;
   /* white-space: nowrap;   yazimizin alt satira dusmesini istemiyorsak bu  sekilde yapabiliriz
@@ -645,7 +723,14 @@ text-overflow:hidden;
 */
 }
 
+.calender-icon {
+  color: #de302f;
+}
+
 .cart-calender-content > h3 {
+  margin-top: -1rem;
+  padding: .6rem 0;
+  width: 90%;
   text-align: center;
 }
 
@@ -694,27 +779,6 @@ text-overflow:hidden;
 .read-more a {
   text-decoration: none;
   color: #fff;
-}
-
-/*-----*/
-.owl-theme {
-  width: 100%;
-  margin: auto;
-  box-sizing: border-box;
-  padding: 0 18%;
-}
-
-.main-title {
-  width: 30%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
-  border-radius: 1rem;
-  color: #fff;
-  background-color: #A03033;
-  padding: 1rem 4rem;
 }
 
 /*Filter Bar*/
@@ -811,21 +875,6 @@ text-overflow:hidden;
   margin-right: 0.5rem;
 }
 
-.category_list__item {
-  width: 18%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  margin-top: 1rem;
-}
-
-.category_list__item > input {
-  width: 1rem;
-  height: 1rem;
-  margin-right: .2rem;
-  cursor: pointer;
-}
-
 /*Filter btns*/
 .filterBtns-wrapper {
   padding: 0 18%;
@@ -869,9 +918,8 @@ text-overflow:hidden;
 /*Happening grids*/
 .happenings {
   margin-top: 1rem;
-  width: 100%;
   height: 30rem;
-  padding: 0 18%;
+  padding: 0 17%;
 }
 
 .happening-container {

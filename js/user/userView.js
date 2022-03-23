@@ -1,12 +1,30 @@
 function updateUserView(){
+
+
+  
+
+   //direk false ise degil de true dan false donmus ise eger clearInterval yap diyebilmen lazm...
+    
+
+
+	// span[1].onclick = ()=>{right_mover();}
+	// span[0].onclick = ()=>{left_mover();}
+
+  
+  
+
+      console.log("model.inputs.userPage.isCategoryBtnClicked> ",model.inputs.userPage.isCategoryBtnClicked)
+
     document.getElementById("app").innerHTML=`  
     ${createHeaderTopHtml()}
 
-${createEkstraPaidSlider()}
+ 
+    ${createEkstraPaidSlider()}
 
-${crateSearchHappeningBar()}
 
-${createMultipleChoiceCategory()}
+${createSearchHappeningBar()}
+
+${model.inputs.userPage.isCategoryBtnClicked ? createMultipleChoiceCategory() : ""}
 
 ${createFilterButtons()}
 
@@ -48,30 +66,42 @@ function createHeaderTopHtml(){
     return headerTop;
 }
 
+
+
 /* getByHappeningPaymentType(model.data.happenings,3); */
+/*   <section class="slider-container">
+    <div class="owl-carousel owl-theme">  */
 function createEkstraPaidSlider(){
     //random picture icindeki ne ile ilgili resmin gelecegini dinamik yapmak icin ? sonraki kisma kategori ismini random bir sekilde getirecegiz....
     let ekstraPaidSlider=``;
     ekstraPaidSlider+=`
+    <div class="slider-title main-title"><h1>Ekstrabetalte Aktiviteter</h1></div>
     <section class="slider-container">
-    <div class="slider-title main-title"><h1>EkstraBetalte Aktiviteter</h1></div>
-    <div class="owl-carousel owl-theme"> 
+  
     `;
 
     let item=``;
-
     let extraPaidHappenings=getHappeningByPaymentType(model.data.happenings,3);
 for(let i=0; i<extraPaidHappenings.length; i++){
     let extraPaidHappening=extraPaidHappenings[i];
-
+    let category=getCategoryById(model.data.categories,extraPaidHappening.categoryId);
+   
+    let categoryTitleInEnglish=translateCategoryTitleToEnglish(category.title);
+    let startDate=extraPaidHappening.happeningStartDate;
+    let endDate=extraPaidHappening.happeningEndDate;
+    let startTime=extraPaidHappening.happeningStartTime;
+    let endTime=extraPaidHappening.happeningEndTime;
+    let startDateAllFormats=getMyAllDateFormats(startDate);
+    let endDateAllFormats=getMyAllDateFormats(endDate);
+  
     item+=
     `
-<div class="item">
+<div class="cart-container">
 <div class="cart-image"
 
 style="
 background-image: url(
-   ${extraPaidHappening.imageUrl || "https://source.unsplash.com/random/?concert"  }
+   ${extraPaidHappening.imageUrl || `https://source.unsplash.com/random/?${categoryTitleInEnglish}`  }
 )
 
 "
@@ -81,14 +111,14 @@ background-image: url(
 <i class="fa-solid fa-bullhorn"></i>
 </div>
 <div class="category-icon icon-container">
-  <i class="fa-solid fa-music"></i>
+  <span class="${category.icon}"></span>
 </div>
 </div>
 
 <div class="cart-calender">
 <div class="cart-calender-date">
-<span class="cart-calender-day">01</span>
-<span class="cart-calender-month"> MAY</span>
+<span class="cart-calender-day">${startDateAllFormats.day}</span>
+<span class="cart-calender-month"> ${startDateAllFormats.monthByShortText.toUpperCase()}</span>
 </div>
 
 <div class="cart-calender-content">
@@ -98,19 +128,19 @@ background-image: url(
 <div>
 
 <div class="cart-calender-text">
-  <i class="fa-solid fa-calendar-days"></i>
+  <i class="fa-solid calender-icon fa-calendar-days"></i>
   <span class="cart-calender-wholeDate"
-    >January 1, 2022 - December 31, 2022</span
+    >${startDateAllFormats.monthByLongText} ${startDateAllFormats.dayByOneDigit}, ${startDateAllFormats.year} - ${endDateAllFormats.monthByLongText} ${endDateAllFormats.dayByOneDigit}, ${endDateAllFormats.year}</span
   >
 </div>
 <div class="cart-calender-text">
-  <i class="fa-solid fa-clock"></i>
-  <span class="cart-calender-time">10:00 AM - 8:00 PM</span>
+  <i class="fa-solid calender-icon fa-clock"></i>
+  <span class="cart-calender-time">${startTime}  - ${endTime}</span>
 </div>
 <div class="cart-calender-text">
-  <i class="fa-solid fa-location-dot"></i>
+  <i class="fa-solid calender-icon fa-location-dot"></i>
   <span class="cart-calender-place"
-    >London Bridge Station, London, UK</span
+    >Hemsedal</span
   >
 </div>
 </div>
@@ -119,7 +149,7 @@ background-image: url(
 </div>
 
 <div class="read-more">
-<a href="">
+<a onclick="readMore()">
 <span>Les mer</span> <i class="fa-solid fa-right-long"></i>
 </a>
 </div>
@@ -127,20 +157,33 @@ background-image: url(
 
     `;
 
+      
+         
+  
+
 }
 
      
-    ekstraPaidSlider+= item+  `</div>
-  </section>
-     `;
+    ekstraPaidSlider+= item+ `
+    </section>
+  
+       `  ;
+    /*
+   
+    */
 
-
+console.log("ekstraPaidSlider:", ekstraPaidSlider);
     
     return ekstraPaidSlider;
 }
 
 
-function crateSearchHappeningBar(){
+
+
+
+
+function createSearchHappeningBar(){
+  
     let searchHappeningBar=``;
     searchHappeningBar+=`
     <div class="filterBar-title"><h2>Søk Happening</h2></div>
@@ -157,7 +200,7 @@ function crateSearchHappeningBar(){
           <div class="ui input left icon">
             <i class="calendar icon"></i>
             <input type="text" placeholder="Start dato"
-            onchange="myFunc(this)"
+           
             >
           </div>
         </div>
@@ -167,10 +210,12 @@ function crateSearchHappeningBar(){
       <div class="month-date-title date-title">
         <span>Måned</span>
       </div>
-    <div class="ui calendar" id="example7">
+    <div class="ui calendar" id="month">
       <div class="ui input left icon">
         <i class=" time icon"></i>
-        <input type="text" placeholder="Time">
+        <input type="text" placeholder="Time"
+        
+        >
       </div>
     </div>
   </div>
@@ -198,23 +243,29 @@ function crateSearchHappeningBar(){
   <div class="category-container">
     <div class="filterBar-container__item  category_filter">
      <span class="category_label date-title"> Kategori</span>
-      <div class="filterBar-container__item-category  category_field_selectBtn  calendar"  >
+      <div class="filterBar-container__item-category  category_field_selectBtn  calendar"  >     `;
        
-      <i class="fa-solid fa-angle-down"></i>
+    let categoryIconBtn=`
+    
+    <a  onclick="model.inputs.userPage.isCategoryBtnClicked=!model.inputs.userPage.isCategoryBtnClicked; updateView() " ><i class="fa-solid fa-angle-down"></i></a>
+    
+    `;
      
-      <span>Count</span>
+      searchHappeningBar+=categoryIconBtn+`  <span>Count</span>
       </div>
     </div>
 
   </div>
 </div>
 </div>
-<div class="search-happening-btn "><button class="search-btn    ">Søk Happening &nbsp &nbsp<i class="fa-solid fa-play"></i></button></div>
+<div class="search-happening-btn "><button class="search-btn   ">Søk Happening &nbsp &nbsp<i class="fa-solid fa-play"></i></button></div>
 
 
 </section>
     
     `;
+
+   
 
     return searchHappeningBar;
 }
@@ -272,7 +323,7 @@ function createFilterButtons(){
 <h1>Happenings</h1>
 </div>
 <div class="filterBtns-container">
-<div><button class="filter-btn">I morgen</button></div>
+<div><button class="filter-btn" onclick="updateView()">I morgen</button></div>
 <div><button class="filter-btn">Denne uka</button></div>
 <div><button class="filter-btn">Denne måneden</button></div>
 </div>
@@ -313,66 +364,22 @@ function createHappeningList(){
 
 
 
-/*
-
-let extraPaidHappenings=getByHappeningPaymentType(model.data.happenings,3);
-    for(let i=0; i<extraPaidHappenings.length; i++){
-        console.log(extraPaidHappenings[i])
-        let extraPaidHappening=extraPaidHappenings[i];
-        ekstraPaidSlider+=` 
-<div class="item">
-<div class="cart-image">
-<div class="announcement-icon icon-container">
-<i class="fa-solid fa-bullhorn"></i>
-</div>
-<div class="category-icon icon-container">
-  <i class="fa-solid fa-music"></i>
-</div>
-</div>
-
-<div class="cart-calender">
-<div class="cart-calender-date">
-<span class="cart-calender-day">01</span>
-<span class="cart-calender-month"> MAY</span>
-</div>
-
-<div class="cart-calender-content">
-<!-- <span class="cart-calender-title">Konsert</span> -->
-<h3>${extraPaidHappening.title}</h3>
-
-<div>
-
-<div class="cart-calender-text">
-  <i class="fa-solid fa-calendar-days"></i>
-  <span class="cart-calender-wholeDate"
-    >January 1, 2022 - December 31, 2022</span
-  >
-</div>
-<div class="cart-calender-text">
-  <i class="fa-solid fa-clock"></i>
-  <span class="cart-calender-time">10:00 AM - 8:00 PM</span>
-</div>
-<div class="cart-calender-text">
-  <i class="fa-solid fa-location-dot"></i>
-  <span class="cart-calender-place"
-    >London Bridge Station, London, UK</span
-  >
-</div>
-</div>
 
 
-</div>
-</div>
 
 
-<div class="read-more">
-<a href="">
-<span>Les mer</span> <i class="fa-solid fa-right-long"></i>
-</a>
-</div>
-</div>
-`;
-    }
 
 
-*/
+// function test(){
+//     console.log("test calisiyor")
+//     model.inputs.userPage.isCategoryBtnClicked=!model.inputs.userPage.isCategoryBtnClicked;
+//     updateUserView();
+// }
+
+
+function readMore(){
+    console.log("Read More: ");
+    updateUserView();
+}
+
+

@@ -1,4 +1,5 @@
 
+
 .fullscreen-header {
     height: 85vh;
     /*3be8b0    00aeef*/
@@ -47,23 +48,48 @@
   
     font-family: 'Lemonada', cursive;
 }
-  .slider-container {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-    width: 100%;
-    background-color: #f5f0f0;
-    position: relative;
-    z-index: 0;
-    margin-bottom: 4rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
 
-  /* eger biz kendimiz width rem i vermezsek en sagda kalan birazcik kucuk kaliyor ve icindeki desgin kayiyor....*/
-  .item {
-    
-    width:100%;
+
+
+.main-title {
+  width: 100%;
+  text-align: center;
+display: flex;
+justify-content: center;
+align-items: center;
+margin-top: 2rem;
+margin-bottom: 1rem;
+color: #fff;
+
+
+}
+
+.main-title>h1{
+  padding:1rem 4rem;
+  width: 33%;
+background-color: #A03033;
+border-radius: 1rem;
+
+
+  
+}
+
+
+.slider-container {
+width: 100%;
+padding: 2rem 0;
+  
+display: flex;
+justify-content: center;
+flex-wrap: wrap;
+
+}
+
+//   //Bu bizim image-cart imizdir.....
+//   /* eger biz kendimiz width rem i vermezsek en sagda kalan birazcik kucuk kaliyor ve icindeki desgin kayiyor....*/
+  .cart-container {
+ min-width: 25rem;
+ margin-left: 1rem;
     height: 30rem;
     border-radius: 0.4rem;
     background-color: #fff;
@@ -84,8 +110,7 @@
     width: 100%;
     height: 60%;
     background-color: orange;
-
-   background-image: url("https://source.unsplash.com/random/?event,arrangement,natur,child,social");
+    background-image: url("https://source.unsplash.com/random/?event,arrangement,natur,child,social");
     box-sizing: border-box;
     padding: 1rem;
     border-top-left-radius: 0.3rem;
@@ -101,6 +126,7 @@
     background-color: #fff;
     display: flex;
 align-items: center;
+justify-content: center;
 /*width,heigh boyutlari ekrana gore degismesi gerekecek*/
     width: 2.2rem;
     height: 2.2rem;
@@ -114,7 +140,7 @@ align-items: center;
 
   .fa-solid {
     font-weight: bold;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
   }
 
   .cart-image {
@@ -122,16 +148,18 @@ align-items: center;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-end;
+    
   }
 
 
   .cart-calender {
-    width: 100%;
-   
+    width: 100%;   
     height: 40%;
     display: flex;
-    justify-content:center;
+    justify-content:space-between;
     align-items: center;
+    
+    
     
   }
 
@@ -144,9 +172,10 @@ align-items: center;
     background-color: #de302f;
     width: 3rem;
     height: 3rem;
-    padding: 2rem;
+    padding: 1rem;
     border-radius: 20%;
     color: #fff;
+    margin-left: 1rem;
   }
 
   /* yazi rengi cok iyi duruyor....*/
@@ -172,7 +201,7 @@ width: 80%;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
+    padding: 1rem 0;
     font-size: 0.8rem;
     font-weight: 400;
     /* white-space: nowrap;   yazimizin alt satira dusmesini istemiyorsak bu  sekilde yapabiliriz
@@ -180,7 +209,15 @@ text-overflow:hidden;
 */
   }
 
+  .calender-icon{
+   color: #de302f;
+
+  }
+
   .cart-calender-content>h3 {
+    margin-top: -1rem;
+    padding: .6rem 0;
+    width: 90%;
     text-align: center;
     // white-space: nowrap;
   }
@@ -231,28 +268,9 @@ text-overflow:hidden;
   }
 
 
-  /*-----*/
-  .owl-theme {
-    width: 100%;
-    margin: auto;
-    box-sizing: border-box;
-    padding: 0 18%;
-  }
+ 
 
-  .main-title {
-      width: 30%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-    border-radius: 1rem;
-    color: #fff;
-    
-    background-color: #A03033;
-    padding:1rem 4rem;
-  }
-
+ 
 /*Filter Bar*/
 
 .filterBar-container {
@@ -285,8 +303,8 @@ text-overflow:hidden;
    }
    
    .filterBar-title {
-      margin-left: -70%; 
-     display: flex;
+    margin-left: -70%; 
+    display: flex;
      justify-content: space-around;
      align-items: center;
      position: relative;
@@ -376,25 +394,6 @@ text-overflow:hidden;
    
    
  
-   .category_list__item {
-   width: 18%;
-   display: flex;
-   justify-content: flex-start;
-   align-items: center;
-   margin-top: 1rem;
-   
-   
-   }
-   
-   
-   
-   .category_list__item >input {
-   width: 1rem;
-   height: 1rem;
-   margin-right: .2rem;
-   cursor: pointer;
-   }
-   
   
 
      
@@ -430,7 +429,6 @@ text-overflow:hidden;
        padding:1rem 2rem;
        cursor: pointer;
        margin-left: .5rem;
-       
        border-radius: .5rem;
        border: none;
        border: 2px solid #75FF33 ;
@@ -447,9 +445,9 @@ text-overflow:hidden;
    
    .happenings {
    margin-top: 1rem;
-     width: 100%;
+    
      height: 30rem;
-     padding:0 18%;
+     padding:0 17%;
    }
    
    
