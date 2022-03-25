@@ -1,7 +1,9 @@
 
 
+
 .fullscreen-header {
     height: 85vh;
+    
     /*3be8b0    00aeef*/
     background-image:linear-gradient(to right top,rgba(#3be8b0, .4) ,rgba(#000,.5)), url("/images/hemsedal.jpg");
     background-repeat: no-repeat;
@@ -26,8 +28,14 @@
     right: 0;
     z-index: 1;
     text-align: center;  
-    font-size: 1.4rem;
+    font-size: 1rem;
 
+  }
+
+  @media only screen and (min-width:1700px) {
+    .nav-top {
+      font-size: 1.4rem;
+    }
   }
 
   .nav__list {
@@ -44,8 +52,7 @@
 
   .header__title {
     color: #fff;
-    font-size: 4rem;
-  
+    font-size: 2.5rem;
     font-family: 'Lemonada', cursive;
 }
 
@@ -64,33 +71,42 @@ color: #fff;
 
 }
 
+@media only screen and (min-width:1700px) {
+  .main-title {
+    width: 100%;
+    text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: #fff;
+  
+  
+  }
+}
 .main-title>h1{
   padding:1rem 4rem;
   width: 33%;
 background-color: #A03033;
 border-radius: 1rem;
-
-
   
 }
 
 
 .slider-container {
 width: 100%;
-padding: 2rem 0;
-  
 display: flex;
-justify-content: center;
+justify-content: space-evenly;
+align-items: center;
 flex-wrap: wrap;
-
 }
-
 //   //Bu bizim image-cart imizdir.....
 //   /* eger biz kendimiz width rem i vermezsek en sagda kalan birazcik kucuk kaliyor ve icindeki desgin kayiyor....*/
   .cart-container {
- min-width: 25rem;
- margin-left: 1rem;
-    height: 30rem;
+ width: 22rem;
+ margin:.5rem;
+    height:27rem;
     border-radius: 0.4rem;
     background-color: #fff;
     margin-top:1rem;
@@ -103,7 +119,26 @@ flex-wrap: wrap;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+ 
+  
 
+  }
+
+  @media only screen and (min-width:1700px) {
+    .slider-container { 
+      padding: 1rem;//Bunu oynatma dengesi kaciyor
+      justify-content: center;
+align-items: center;
+flex-wrap: wrap;
+    }
+
+    .cart-container {
+      width: 27rem;
+      margin:.8rem;
+         height:30rem;
+      
+     
+       }
   }
 
   .cart-image {
@@ -275,15 +310,31 @@ text-overflow:hidden;
 
 .filterBar-container {
     width: 100%;
-    height: 8rem;
+    height: 6.6rem;
     background-color: #465f7b;
-    padding:0 15%;
+    padding:0 5%;
+  
     color: #fff;
     display: flex;
     justify-content: flex-start;
     align-items:center;
    }
    
+   @media only screen and (min-width:1700px) {
+    .filterBar-container {
+      width: 100%;
+      height: 8rem;
+      background-color: #465f7b;
+      padding:0 15%;
+    
+      color: #fff;
+      display: flex;
+      justify-content: flex-start;
+      align-items:center;
+     }
+  }
+
+
    .search-happening-btn {
     color: #000;
     margin-left: 10%;
@@ -327,6 +378,7 @@ text-overflow:hidden;
      justify-content: flex-start;
      align-items: center;
    margin-bottom: .4rem;
+
    }
    
    
@@ -335,6 +387,7 @@ text-overflow:hidden;
    display: flex;
    justify-content: flex-start;
    align-items: center;
+
    
    }
    
@@ -357,6 +410,7 @@ text-overflow:hidden;
    text-align: right;
  font-size: 1.2rem;
 
+
  margin-right: .5rem;
    
    }
@@ -365,25 +419,46 @@ text-overflow:hidden;
  
  
    .input {
-   width: 100%;
-   
-
+   width: 80%;
+ 
    }
    
+.date-field {
+  padding:.2rem 1.2rem;
+  border-radius: 0.2rem;
+  border:none;
+  outline: none;
+}
+
+.select-month {
+  width: 166%;
+  padding:.3rem 1.2rem;
   
+
+}
+
+.category-input {
+ min-height: 100%;
+
+
+}
+
+
+
    .filterBar-container__item-category {
+     
    background-color: #fff;
-   padding:.5rem 1.5rem;
+   padding:.3rem 1.2rem;
    color: black;
    border-radius: 0.2rem;
    cursor: pointer;
    margin-right: .2rem;
    display: flex;
-   justify-content:space-evenly;
+   justify-content:space-between;
    align-items:center; 
    }
    
- 
+  
  
    
    .fa-solid{
@@ -454,7 +529,7 @@ text-overflow:hidden;
    .happening-container {
    text-align:center;
    font-size:2em;
-   color:white;
+   color: #000;
    display: grid;
    grid-template: repeat(2 , 28rem) / repeat(auto-fit, minmax(22rem, 1fr));
    grid-gap:1rem;

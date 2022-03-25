@@ -96,7 +96,6 @@ happening.announcementEndDate={name:"",isFieldRequired:false}
 happening.announcementEndTime={name:"",isFieldRequired:false}
 happening.webSiteUrl={name:"",isFieldRequired:false}
 
-
 }
 
 

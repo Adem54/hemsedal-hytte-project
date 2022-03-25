@@ -45,10 +45,6 @@
 
 
 
-      <!--semantic-ui date-picker -->
-      <!-- <link href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css" rel="stylesheet" type="text/css" /> -->
-      <!-- <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
-      <script src="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js"></script> -->
      
 
 
@@ -90,109 +86,11 @@ updateView();
 </script>
 
 
-
-
-<!-- 
-<script>
-  //----BURAYI KULLANABILIIRZ....DATAYI KOLAYCA ALABILIYORUZ....
-console.log("sematnic-ui date picker burda.....")
-$('#start-date').calendar({
-type: 'date',
-onChange: function (date, text) {
- var newValue = text;
-// alert(newValue);
-//Datalari da burda alabiliris
-console.log("startDATE burasi  onChange calisiyor semantic-ui- index.html icinde ")
-model.inputs.userPage.chosenDateFrom=date;
-//model.inputs.userPage.chosenDateFrom.toISOString().slice(0,10)
-//Bu sekilde tarihi alacagiz....
-console.log("startDate: ",date);
- console.log("startValue: ",newValue);
-},
-});
-
-
-$('#end-date').calendar({
-type: 'date',
-onChange: function (date, text) {
- var newValue = text;
-// alert(newValue);
-console.log("endDATE burasi  onChange calisiyor semantic-ui- index.html icinde ")
-
-model.inputs.userPage.chosenDateTo=newValue;
-
-console.log("endate: ",date);
- console.log("endValue: ",newValue);
-},
-}); 
-
-$('#month').calendar({
-type: 'month',
-onChange: function (date, text) {
- var newValue = text;
-// alert(newValue);
-console.log("month burasi  onChange calisiyor semantic-ui- index.html icinde ")
-
-
-model.inputs.userPage.chosenMonth=newValue;
-console.log("month: ",date);
- console.log("nthValue: ",newValue);
-},
-});
-
-
-
-</script> -->
-
-      <!-- javascript -->
-      <!-- <script src="/owlcarousel/jquery.min.js"></script>
-      <script src="/owlcarousel/owl.carousel.min.js"></script> -->
-     
-      <!--jquery carosel-slider-->
-      <!-- <script>
-        $(document).ready(function () {
-          var owl = $(".owl-carousel");
-          owl.owlCarousel({
-            items: 3,
-            loop: true,
-            margin: 10,
-  
-            autoplay: true,
-            autoplayTimeout: 3000,
-            autoplayHoverPause: true,
-            responsiveClass:true,
-            responsive:{
-        0:{
-            items:1,
-            nav:true
-        },
-        600:{
-            items:3,
-            nav:false
-        },
-        1000:{
-            items:3,
-            nav:true,
-            loop:true,
-        }
-    }
-
-          });
-  
-          owl.on("changed.owl.carousel", function (event) {
-            // console.log("Test!!");//Burasi tetiklenebiliyor
-          });
-          $(".play").on("click", function () {
-            owl.trigger("play.owl.autoplay", [1000]);
-          });
-          $(".stop").on("click", function () {
-            owl.trigger("stop.owl.autoplay");
-          });
-        });
-      </script> -->
-    
-
-
-  
-  </body>
+</body>
 </html>
+
+
+
+
+  
+

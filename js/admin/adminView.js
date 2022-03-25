@@ -120,7 +120,7 @@ model.inputs.adminPage.happening.imageSrc.name=imageUrl;
 }
 
 function createMainCategoryHtml(){
-const {categories}=model.data;
+const {categories}=model.inputs.userPage;
 let happeningMainCategory=``;
 happeningMainCategory+=`
 <div class="happeningformRow happeningMainCategory">

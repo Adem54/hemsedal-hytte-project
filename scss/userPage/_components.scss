@@ -1,5 +1,5 @@
 .nav__list-item {
-    height: 6rem;/*Navbar in bu boyutu en buyuk ekran icin olacak*/
+    height: 3rem;/*Navbar in bu boyutu en buyuk ekran icin olacak*/
     text-decoration: none;
     padding: 1rem 0;
     display: flex;
@@ -13,7 +13,7 @@
 /*1700 px or larger*/
 @media only screen and (min-width:1700px) {
   .nav__list-item {
-      height: 7rem;/*Navbar in bu boyutu en buyuk ekran icin olacak*/
+      height: 4.5rem;/*Navbar in bu boyutu en buyuk ekran icin olacak*/
       padding: 1rem 0;
       margin-left: 1.5rem;
     }
@@ -80,8 +80,9 @@
    
    .category_list  {
     position: absolute;//bu isaret baloncugunu gosteriyor kaldirirsak gostermiyor....asagidaki margin left eger position kullnrisak left olacak.
-    margin-left: 22%;
+    // margin-left: 5%;
     width: 50%;
+    left: 27%;
     background-color:#f5f0f0 ;
     border: 1px solid #000;
     border-radius: .4rem;
@@ -98,7 +99,7 @@
     @media only screen and (min-width:1700px) {
       .category_list  {
         position: absolute;//bu isaret baloncugunu gosteriyor kaldirirsak gostermiyor....asagidaki margin left eger position kullnrisak left olacak.
-            margin-left: 21%;
+            // margin-left: 21%;
        
         }
   }
@@ -112,10 +113,9 @@
     white-space: nowrap;
     max-width: 100%;
       margin-top: 1rem;
-      margin-right: .2rem;
+      margin-right: 1.8rem;
+      font-size: .94rem;
      
-      
-      
       }
       
       
@@ -126,6 +126,7 @@
       margin:0 .3rem;
       cursor: pointer;
       text-align: center;
+  
      
       }
       
