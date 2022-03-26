@@ -60,19 +60,6 @@
   }
 }
 
-.search-btn {
-    border: none;
-    background-color: #fff;
-    padding:.5rem ;
-    color: black;
-    border-radius: 0.2rem;
-    cursor: pointer;
-    margin-right: .2rem;
-    display: flex;
-    justify-content:space-evenly;
-    align-items:center; 
-      
-}
 
 
    /*BEST PRACTISE----POSITION RELATIVE ILE BIR ONCEKI KUTUYA GORE TOP,LEFT LERI KULLANARAK YERLESTIRME..*/
@@ -81,8 +68,10 @@
    .category_list  {
     position: absolute;//bu isaret baloncugunu gosteriyor kaldirirsak gostermiyor....asagidaki margin left eger position kullnrisak left olacak.
     // margin-left: 5%;
-    width: 50%;
-    left: 27%;
+    width: 64%;
+    left: 40%;
+    // margin-top: -1rem;
+    z-index: 5;
     background-color:#f5f0f0 ;
     border: 1px solid #000;
     border-radius: .4rem;
@@ -94,12 +83,16 @@
     color: black;
     flex-wrap: wrap;
     
+    
     }
 
     @media only screen and (min-width:1700px) {
       .category_list  {
         position: absolute;//bu isaret baloncugunu gosteriyor kaldirirsak gostermiyor....asagidaki margin left eger position kullnrisak left olacak.
             // margin-left: 21%;
+    width: 50%;
+    left: 45%;
+
        
         }
   }
@@ -111,14 +104,26 @@
       justify-content: flex-start;
       align-items: center;
     white-space: nowrap;
-    max-width: 100%;
       margin-top: 1rem;
-      margin-right: 1.8rem;
-      font-size: .94rem;
+      margin-right: 1.5rem;
+      font-size: .8rem;
+      
      
       }
       
-      
+      @media only screen and (min-width:1700px) {
+        .category_list__item {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+        white-space: nowrap;
+          margin-top: 1rem;
+          margin-right: 1.8rem;
+          font-size: .94rem;
+          
+         
+          }
+    }
       
       .category_list__item >input {
       width: 1rem;
@@ -132,17 +137,22 @@
       
      
 
-
     .category_list:after {
         content: '';
         position:absolute;
-        left: 18rem;
+        left: 28rem;
         top:-15px;
         border-style: solid;
         border-width: 0 15px 15px 15px;;
         border-color: transparent transparent #f5f0f0 transparent;  
     }
     
+    @media only screen and (min-width:1700px) {
+      .category_list:after { 
+        left: 20rem;
+       
+    }
+  }
 
 /*Category icons style*/
 .icon-party-svgrepo-com:before {
@@ -186,4 +196,128 @@ font-size: 1.4rem;
 
 
 
+//READMORE-MODAL
+.modal {
+  width: 100%;
+  padding: .4rem;
+  height: 60%;
+  height: 40rem;
+  display: flex;
+  justify-content: center;
+  background-color: #F9F9F9;
+  align-items: center;
+  position: relative;
+  // top: 0;
+  z-index: 5;
+  transition: all;
+  transition-delay: 2s;
+}
 
+
+.modal-wrapper {
+  width: 85%;
+  height: 75%;
+  // background-color: #F4F0E7;
+  background-color: #fff;
+  border-radius: 1rem;
+  display: flex;
+  // box-shadow: 0 0 15px 0 rgba(40 61 88 / 7%);
+  box-shadow: 0 0 1rem 0 rgba(40 ,61,88,.7); 
+  transition: 1s;
+}
+.modal-image {
+  width: 40%;
+  height: 100%;
+  background-color: orange;
+  background-image: url("https://source.unsplash.com/random/?event,arrangement,natur,child,social");
+  box-sizing: border-box;
+  padding: 1rem;
+  border-top-left-radius: 0.3rem;
+  border-bottom-left-radius: 0.3rem;
+
+  /* background-image: url("konsert.jfif"); */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
+}
+
+
+.modal-description {
+  width: 60%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 1rem;
+  border: 1px;
+  font-size: .9rem;
+  background-color: #fff;
+  border-top-right-radius: 0.3rem;
+  border-bottom-right-radius: 0.3rem;
+  
+
+  
+}
+
+.cancel-icon {
+  position:absolute;
+  right:.5rem;
+  top:.5rem;
+  z-index:100;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.cancel-icon a {
+  text-decoration: none;
+}
+.icon-cross:before {
+  content: "\ea0f";
+display: inline-block;
+color: #0e385e;
+
+  
+}
+
+.icon-cross:hover::before {
+display: inline-block;
+  color: red;  
+}
+
+
+
+.modal-description__title {
+  width: 100%;
+  height: 25%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+ 
+
+}
+.small-info {
+  display: flex;
+  flex-direction: column;
+  // font-weight: bold;
+  
+  color: #333;
+  
+}
+.modal-description__text {
+  margin-top: 1rem;
+  width: 100%;
+  height: 75%;
+  display: flex;
+  justify-content: center;
+  color: #444444;
+  color: #828c96;
+
+  
+}

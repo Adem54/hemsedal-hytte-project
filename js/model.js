@@ -35,32 +35,36 @@ const model={
             webSiteUrl:{name:"",isFieldRequired:false},
              
             },
-            isSubmitted:false,
-            isFocused:{
-                title:false,
-            },
-            isBlured:{
-                title:false,
-            },
-            isOnInput:{
-                title:false,
-            },
-            isWarningMessage:{
-                title:false,
-            },
-            isOnChange:{
-                title:false,
-            }
+            // isSubmitted:false,
+            // isFocused:{
+            //     title:false,
+            // },
+            // isBlured:{
+            //     title:false,
+            // },
+            // isOnInput:{
+            //     title:false,
+            // },
+            // isWarningMessage:{
+            //     title:false,
+            // },
+            // isOnChange:{
+            //     title:false,
+            // }
             
         
         },
         userPage:{
+            //input date-picker sadece 2022-03-29T10:01 bu formatta calisiyor buna bir cozum dusunelim....
             chosenDateFrom:"",//filtering
             chosenDateTo:"",//filtering
             chosenMonth:"",//buna gore secilen 
             isCategoryBtnClicked:false,//megamenu mantiginda category olusturmak icin bunu aliriz birkere
             isSelectedAll:false,
-            isLesMerBtnClicked:true,
+            isReadMoreExtraPaidBtnClicked:false,
+            isReadMoreNoneExtraPaidBtnClicked:false,
+
+            clickedHappeningId:"",
             filteredData:[],//Bunun cok bir espirisi yok kaldirmamiz gerekiyor
 
             filterBtnState:"this-month",

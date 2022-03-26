@@ -43,8 +43,15 @@ function getMyAllDateFormats(date){
     }
 }
 
-function translateCategoryTitleToEnglish(title="event"){
 
+function doFirstLetterUpper(text){
+    let firstLetter=text[0].toUpperCase();
+let restOfText=text.slice(1);
+let result=firstLetter+restOfText;
+return result;
+}
+
+function translateCategoryTitleToEnglish(title="event"){
 switch (title) {
     case "Familie og moro":
         return "family,fun,happy";
@@ -90,6 +97,11 @@ function toggleCategorySelected(id){
 
 updateView();
 
+}
+
+function findElementById(array,id){
+    let element=array.find(item=>item.id===parseInt(id));
+    return element;
 }
 
 
@@ -169,7 +181,7 @@ return {
 }
 
 
-function getDateOneWeekLater(dayNumber){
+function getDateSomeDaysLater(dayNumber){
 let now = new Date(); 
 let currentDate=now.toISOString().slice(0,10);
 let myFutureDate=now.setDate(now. getDate() +  dayNumber); 
@@ -210,19 +222,19 @@ function filterByEndDateAndCategory(happenings,categories,endDate){
 //Unutmayalim bizim search islemindeki happenings dedgimiz extrabetalt disinda kalan happenigs ler cunku extra betalt happenings leri biz en ustte listeledik
 function searchHappenings(happenings,categories,startDate,endDate){
     //starDate secilmis mi onu cek et
-  console.log("searchHappening calisiyor")
 
- 
-
-  console.log("filteredSTate; ",model.inputs.userPage.filterBtnState);
 if(model.inputs.userPage.filterBtnState=="this-month"){
     let {currentDate,oneMonthLaterDate}=getCurrentAndOneMonthLaterDates();
+    // model.inputs.userPage.chosenDateFrom=currentDate;
+    // model.inputs.userPage.chosenDateTo=oneMonthLaterDate;
+    
+
      return  getDateBetweenTwoDates(happenings,currentDate,oneMonthLaterDate);
 }else if(model.inputs.userPage.filterBtnState=="this-week"){
-    let {currentDate,futureDate}=getDateOneWeekLater(7);
+    let {currentDate,futureDate}=getDateSomeDaysLater(7);
      return  getDateBetweenTwoDates(happenings,currentDate,futureDate);
 }else if(model.inputs.userPage.filterBtnState=="tomorrow"){
-    let {currentDate,futureDate}=getDateOneWeekLater(1);
+    let {currentDate,futureDate}=getDateSomeDaysLater(1);
     //Som default får vi en date en måneds videre
     
     console.log("getDateBetweenTwoDates: ",getDateBetweenTwoDates(happenings,currentDate,futureDate))
@@ -253,11 +265,16 @@ if(model.inputs.userPage.filterBtnState=="this-month"){
     else {
         let {currentDate,oneMonthLaterDate}=getCurrentAndOneMonthLaterDates();
        //Som default får vi en date en måneds videre
+    //    model.inputs.userPage.chosenDateFrom=currentDate;
+    //    model.inputs.userPage.chosenDateTo=oneMonthLaterDate;
+      
         return  getDateBetweenTwoDates(happenings,currentDate,oneMonthLaterDate);
     }
      
     
 }
+
+
 
 //hvis ingen kategori som er valgt,kommer alle kategorier som selectedAll..
 function isAnyCategoryChecked(categories){
