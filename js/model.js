@@ -21,7 +21,7 @@ const model={
             happening:{
                  title:{name:"", isFieldRequired:true, isValidate:false},
                 description:{name:"", isFieldRequired:false},
-                imageSrc:{name:"",isFieldRequired:false},
+                imageUrl:{name:"",isFieldRequired:false},
                 categoryId:{name:null, isFieldRequired:true,isValidate:false},
                 paymentTypeId:{name:null,isFieldRequired:true,isValidate:false},//gratis,betalt,ekstrabetalt
                 happeningStartDate:{name:"",isFieldRequired:true,isValidate:false},

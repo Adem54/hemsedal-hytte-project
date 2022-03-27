@@ -63,7 +63,12 @@ function createEkstraPaidSlider() {
   //random picture icindeki ne ile ilgili resmin gelecegini dinamik yapmak icin ? sonraki kisma kategori ismini random bir sekilde getirecegiz....
   let ekstraPaidSlider = ``;
   ekstraPaidSlider += `
-    <div class="slider-title main-title"><h1>Ekstrabetalte Aktiviteter</h1></div>
+    <div class="slider-title main-title">
+    <h1>Ekstrabetalte Aktiviteter</h1>
+    
+  
+    
+    </div>
     <section class="slider-container extraPaid-container">
     ${createReadMoreModal1()}
     `;
@@ -71,6 +76,8 @@ function createEkstraPaidSlider() {
 
   let item = ``;
   let extraPaidHappenings = getHappeningByPaymentType(getHappeningsFromStorage(), 3);
+
+
   for (let i = 0; i < extraPaidHappenings.length; i++) {
     let extraPaidHappening = extraPaidHappenings[i];
     let category = getCategoryById(
@@ -99,7 +106,7 @@ class="cart-container">
 style="
 background-image: url(
    ${
-     extraPaidHappening.imageSrc ||
+     extraPaidHappening.imageUrl ||
      `https://source.unsplash.com/random/?${categoryTitleInEnglish}`
    }
 )
@@ -414,7 +421,6 @@ function createHappeningList() {
     chosenDateTo
   );
   
-  console.log("getFilterdDateA;: ", getFilteredData);
 
   let happeningList = ``;
   /*  
@@ -441,7 +447,7 @@ ${createReadMoreModal2()}
     let happening = getFilteredData[i];
     console.log("happening: ",happening);
 
-    console.log("happeningsUrl: ",happening.imageSrc);
+    console.log("happeningsUrl: ",happening.imageUrl);
     let category = getCategoryById(
       model.inputs.userPage.categories,
       happening.categoryId
@@ -463,7 +469,7 @@ ${createReadMoreModal2()}
 style="
 background-image: url(
 ${
-  happening.imageSrc ||
+  happening.imageUrl ||
   `https://source.unsplash.com/random/?${categoryTitleInEnglish}`
 }
 )

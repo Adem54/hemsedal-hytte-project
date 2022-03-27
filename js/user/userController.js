@@ -361,3 +361,6 @@ function getHappeningsByCheckedCategory(happenings, categories) {
 //   console.log("filteredData month filtresi :",model.inputs.userPage.filteredData,)
 //   updateView();
 // }
+
+
+

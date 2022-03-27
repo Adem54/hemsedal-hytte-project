@@ -67,8 +67,34 @@ align-items: center;
 margin-top: 2rem;
 margin-bottom: 1rem;
 color: #fff;
+position: relative;
 
 
+}
+
+.next-previous {
+  color: #000;
+  position: absolute;
+  right: 2rem;
+}
+
+.next-previous span {
+  font-size: 3.4rem;
+  margin: 0 .2rem;
+  cursor: pointer;
+  color: #555;
+  padding: 1rem;
+   width: 2rem;
+  height: 2rem;
+  display: inline-block;
+  line-height: 1.2rem;
+  text-align: center;
+  border-radius: .2rem;
+}
+
+.next-previous span:hover {
+  background: #222;
+  color: white;
 }
 
 @media only screen and (min-width:1700px) {
@@ -99,22 +125,14 @@ width: 100%;
 display: flex;
 justify-content: space-evenly;
 align-items: center;
-flex-wrap: wrap;
+ flex-wrap: wrap;
 position: relative;
 
 
 
 }
-.extraPaid-container {
-position: relative;
 
 
-  
-}
-
-#3{
-  background-color:aquamarine;
-}
 
 //   //Bu bizim image-cart imizdir.....
 //   /* eger biz kendimiz width rem i vermezsek en sagda kalan birazcik kucuk kaliyor ve icindeki desgin kayiyor....*/
@@ -126,9 +144,6 @@ position: relative;
     background-color: #fff;
     margin-top:1rem;
     margin-bottom: 3rem;
-//card-container i item icine yaziyoruz
-  // width: 23rem;
-  // height: 27rem;
   box-shadow: #ddd 0 0 8px 5px;
   display: flex;
   flex-direction: column;

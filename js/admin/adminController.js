@@ -81,7 +81,7 @@ function cleanInputFields(){
   //Daha pratik temizleyebilir miyiz
 happening.title={name:"",isFieldRequired:true,isValidate:false}
 happening.description={name:"",isFieldRequired:false}
-happening.imageSrc={name:"",isFieldRequired:false};
+happening.imageUrl={name:"",isFieldRequired:false};
 happening.categoryId={name:null, isFieldRequired:true,isValidate:false}
 let paymentType=model.inputs.adminPage.happening.paymentTypeId;
 
@@ -106,20 +106,16 @@ happening.webSiteUrl={name:"",isFieldRequired:false}
 
 
 
-
 function addNewHappening(){
    let id=findLastId(model.data.happenings)+1;
 let newHappening={
     id,...getHappeningValues()
 }
 console.log("newHappening: ", newHappening);
-// localStorage.setItem("happenings",JSON.stringify(newHappening))
+
 addHappeningToStorage(newHappening);
 model.data.happenings.push(newHappening);
 }
-
-
-
 
 
 

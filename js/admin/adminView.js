@@ -104,7 +104,7 @@ happeningImageFile+=`
   <label for="image" class="formLabel labelText ">Legg til bilde</label>
    <input id="image" name="image" class="form-element input-top-mrgn image"   type="file"
    onchange="readFile(event)"
-   value="${model.inputs.adminPage.happening.imageSrc.name}"
+   value="${model.inputs.adminPage.happening.imageUrl.name}"
    >
 </div>
 `;
@@ -117,14 +117,14 @@ let imageUrl=URL.createObjectURL(event.target.files[0]);
 console.log("imageUrl: ", imageUrl); 
 // let newUrl=imageUrl.replace('blob:','');
 // console.log("newUrl: ", newUrl);
-model.inputs.adminPage.happening.imageSrc.name=imageUrl;
+model.inputs.adminPage.happening.imageUrl.name=imageUrl;
 //imageFile a atadgiimz url i herhangi bir image in src sine atayarak onu gosterebiliriz...
 
 let reader=new FileReader();
 reader.addEventListener("load", ()=>{
   let uploaded_image=reader.result;
   console.log("uploaded_image: ", uploaded_image);
-  model.inputs.adminPage.happening.imageSrc.name=uploaded_image;
+  model.inputs.adminPage.happening.imageUrl.name=uploaded_image;
 
 })
 reader.readAsDataURL(event.target.files[0]);
