@@ -8,7 +8,7 @@
 const model={
 
     app:{
-        page:"user",
+        page:"admin",
         currentUser:{
             firstName:"Olav",
             lastName:"Johansen",
@@ -35,7 +35,7 @@ const model={
             webSiteUrl:{name:"",isFieldRequired:false},
              
             },
-            // isSubmitted:false,
+             isSubmitted:false,
             // isFocused:{
             //     title:false,
             // },
@@ -75,10 +75,11 @@ const model={
     
     },
 
+
     data:{
       
         //Vi skal holde alle kategorier
-        paymentTypes:[{id:1,title:"gratis",isChecked:false,},{id:2,title:"betalt",isChecked:false},{id:3,title:"ekstra-betalt",isChecked:false}],
+        paymentTypes:[{id:1,title:"gratis",isChecked:false},{id:2,title:"betalt",isChecked:false},{id:3,title:"ekstra-betalt",isChecked:false}],
         happenings:[{
             id:1,
             title:"Pølsefest",
@@ -102,7 +103,7 @@ const model={
             imageUrl:"https://tellusdmsmedia.newmindmedia.com/wsimgs/237234823_4576573625727427_7642383865876437128_n_255055228.jpg",
             categoryId:2,
             paymentTypeId:2,
-            happeningStartDate:"2022-03-25",
+            happeningStartDate:"2022-03-28",
             happeningStartTime:"15:00",
             happeningEndDate:"2022-04-17",
             happeningEndTime:"15:55",
@@ -134,7 +135,7 @@ const model={
             imageUrl:"https://assets.simpleviewcms.com/simpleview/image/fetch/c_limit,f_jpg,q_64,w_1200/https://media.newmindmedia.com/TellUs/image/%3Ffile%3DOslo_Internasjonale_Kirkemusikkfestival_343704660.jpg%26dh%3D533%26dw%3D800%26cropX%3D384%26cropY%3D0%26cropH%3D1104%26cropW%3D1657%26t%3D4&.jpg",
             categoryId:3,
             paymentTypeId:2,
-            happeningStartDate:"2022-03-27",
+            happeningStartDate:"2022-03-28",
             happeningStartTime:"11:55",
             happeningEndDate:"2022-04-04",
             happeningEndTime:"15:00",

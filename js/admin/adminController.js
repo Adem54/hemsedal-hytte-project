@@ -84,7 +84,13 @@ happening.description={name:"",isFieldRequired:false}
 happening.imageSrc={name:"",isFieldRequired:false};
 happening.categoryId={name:null, isFieldRequired:true,isValidate:false}
 let paymentType=model.inputs.adminPage.happening.paymentTypeId;
-model.data.paymentTypes=model.data.paymentTypes.map(payment=>payment.id=paymentType.name ? {...payment,isChecked:false} : payment);
+
+//Eger paymentType bos iken de gelip tiklanirsa o zaman map kullandijmgiz icin ve id gelmedigi icin problem yasariz..
+if(paymentType.name){ 
+  model.data.paymentTypes=model.data.paymentTypes.map(payment=>payment.id=paymentType.name ? {id:payment.id,title:payment.title,isChecked:false} : payment);
+ 
+}
+
 happening.paymentTypeId={name:null,isFieldRequired:true,isValidate:false};//gratis,betalt,ekstrabetalt
 happening.happeningStartDate={name:"",isFieldRequired:true,isValidate:false}
 happening.happeningStartTime={name:"",isFieldRequired:true,isValidate:false}
@@ -99,14 +105,23 @@ happening.webSiteUrl={name:"",isFieldRequired:false}
 }
 
 
+
+
 function addNewHappening(){
    let id=findLastId(model.data.happenings)+1;
 let newHappening={
     id,...getHappeningValues()
 }
 console.log("newHappening: ", newHappening);
+// localStorage.setItem("happenings",JSON.stringify(newHappening))
+addHappeningToStorage(newHappening);
 model.data.happenings.push(newHappening);
 }
+
+
+
+
+
 
 function getHappeningValues(){
   let {happening}=model.inputs.adminPage;

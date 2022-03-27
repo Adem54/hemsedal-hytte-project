@@ -200,23 +200,24 @@ font-size: 1.4rem;
 .modal {
   width: 100%;
   padding: .4rem;
-  height: 60%;
   height: 40rem;
-  display: flex;
+   display: flex;
   justify-content: center;
-  background-color: #F9F9F9;
+
+  background-color:#0e385e;
   align-items: center;
   position: relative;
+  border-radius:.5rem ;
   // top: 0;
   z-index: 5;
   transition: all;
-  transition-delay: 2s;
+  transition-delay: 1s;
 }
 
 
 .modal-wrapper {
-  width: 85%;
-  height: 75%;
+  width: 90%;
+  height: 85%;
   // background-color: #F4F0E7;
   background-color: #fff;
   border-radius: 1rem;

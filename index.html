@@ -36,6 +36,7 @@
 <link rel="stylesheet" href="./icons/successCheckBoxIcon/style.css">
 <link rel="stylesheet" href="./icons/createHappeningIcon/style.css">
     <script src="./js/model.js"></script>
+    <script src="js/common.js"></script>
     <script src="./js/admin/adminController.js"></script>
     <script src="./js/admin/adminView.js"></script>
     <script src="./js/user/userController.js"></script>
@@ -84,7 +85,7 @@ updateView();
       }
 
    
-
+      localStorage.setItem("happenings",JSON.stringify(model.data.happenings));
       
 </script>
 

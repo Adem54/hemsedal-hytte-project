@@ -58,21 +58,19 @@ function createHeaderTopHtml() {
   return headerTop;
 }
 
-/* getByHappeningPaymentType(model.data.happenings,3); */
-/*   <section class="slider-container">
-    <div class="owl-carousel owl-theme">  */
+
 function createEkstraPaidSlider() {
   //random picture icindeki ne ile ilgili resmin gelecegini dinamik yapmak icin ? sonraki kisma kategori ismini random bir sekilde getirecegiz....
   let ekstraPaidSlider = ``;
   ekstraPaidSlider += `
     <div class="slider-title main-title"><h1>Ekstrabetalte Aktiviteter</h1></div>
     <section class="slider-container extraPaid-container">
-    ${model.inputs.userPage.isReadMoreExtraPaidBtnClicked ? createReadMoreModal() : ""}
+    ${createReadMoreModal1()}
     `;
 
 
   let item = ``;
-  let extraPaidHappenings = getHappeningByPaymentType(model.data.happenings, 3);
+  let extraPaidHappenings = getHappeningByPaymentType(getHappeningsFromStorage(), 3);
   for (let i = 0; i < extraPaidHappenings.length; i++) {
     let extraPaidHappening = extraPaidHappenings[i];
     let category = getCategoryById(
@@ -91,6 +89,7 @@ function createEkstraPaidSlider() {
     let endDateAllFormats = getMyAllDateFormats(endDate);
 
     item += `
+
 <div 
 id="${extraPaidHappening.id}"
 class="cart-container">
@@ -100,7 +99,7 @@ class="cart-container">
 style="
 background-image: url(
    ${
-     extraPaidHappening.imageUrl ||
+     extraPaidHappening.imageSrc ||
      `https://source.unsplash.com/random/?${categoryTitleInEnglish}`
    }
 )
@@ -115,6 +114,8 @@ background-image: url(
   <span class="${category.icon}"></span>
 </div>
 </div>
+
+
 
 <div class="cart-calender">
 <div class="cart-calender-date">
@@ -178,6 +179,8 @@ background-image: url(
 }
 
 function createSearchHappeningBar() {
+  //Input value yi guncel tutuyoruz bu sekilde hangi tarih filtresi secilirse o value ye yaziliyor
+  getStartEndDateCurrentValue();
   const now = new Date();
   now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
   let searchHappeningBar = ``;
@@ -252,7 +255,6 @@ function createSearchHappeningBar() {
   // </div>
 
   //     `;
-
 
   searchHappeningBar +=
     monthSelectOptionField +
@@ -398,10 +400,11 @@ class="filter-btn">Denne måneden</button></div>
 }
 
 function createHappeningList() {
+
   let { categories } = model.inputs.userPage;
   let { chosenDateFrom, chosenDateTo } = model.inputs.userPage;
   let happeningsWithoutExtraPaid = getHappeningAsideFromExtraPaid(
-    model.data.happenings
+    getHappeningsFromStorage()
   );
   //searchHappenings working fra begynnelsen
   let getFilteredData = searchHappenings(
@@ -410,6 +413,8 @@ function createHappeningList() {
     chosenDateFrom,
     chosenDateTo
   );
+  
+  console.log("getFilterdDateA;: ", getFilteredData);
 
   let happeningList = ``;
   /*  
@@ -419,7 +424,7 @@ function createHappeningList() {
    
 <section class="happenings">
 <div class="container1 slider-container nonExtraPaidContainer ">
-${model.inputs.userPage.isReadMoreNoneExtraPaidBtnClicked ? createReadMoreModal() : ""}
+${createReadMoreModal2()}
 
 `;
 
@@ -434,6 +439,9 @@ ${model.inputs.userPage.isReadMoreNoneExtraPaidBtnClicked ? createReadMoreModal(
 
   for (let i = 0; i < getFilteredData.length; i++) {
     let happening = getFilteredData[i];
+    console.log("happening: ",happening);
+
+    console.log("happeningsUrl: ",happening.imageSrc);
     let category = getCategoryById(
       model.inputs.userPage.categories,
       happening.categoryId
@@ -448,7 +456,6 @@ ${model.inputs.userPage.isReadMoreNoneExtraPaidBtnClicked ? createReadMoreModal(
     let endTime = happening.happeningEndTime;
     let startDateAllFormats = getMyAllDateFormats(startDate);
     let endDateAllFormats = getMyAllDateFormats(endDate);
-
     happeningsDiv += `
 <div id="${happening.id}" class="cart-container">
 <div class="cart-image"
@@ -456,7 +463,7 @@ ${model.inputs.userPage.isReadMoreNoneExtraPaidBtnClicked ? createReadMoreModal(
 style="
 background-image: url(
 ${
-  happening.imageUrl ||
+  happening.imageSrc ||
   `https://source.unsplash.com/random/?${categoryTitleInEnglish}`
 }
 )
@@ -526,7 +533,95 @@ ${
   return happeningList;
 }
 
-function createReadMoreModal() {
+function createReadMoreModal1() {
+  let readMoreModal = ``;
+  //kommer begynnelsen med ingen id 
+if(!model.inputs.userPage.clickedHappeningId)return readMoreModal;
+  let happeningId=model.inputs.userPage.clickedHappeningId;
+  let happening = findElementById(
+    model.data.happenings,
+    parseInt(happeningId)
+  );
+
+  let category = getCategoryById(
+    model.inputs.userPage.categories,
+    happening.categoryId
+  );
+  let categoryTitleInEnglish = translateCategoryTitleToEnglish(category.title);
+
+
+  let {
+    monthByToDigit,
+    monthByShortText,
+    year,
+    day
+  } = getMyAllDateFormats(happening.happeningStartDate);
+
+  let {
+    monthByToDigit:monthEndToDigit,
+    monthByShortText:monthEndShortText,
+    year:yearEndDate,
+    day:endDay
+  } = getMyAllDateFormats(happening.happeningEndDate);
+  let monthStartDate=doFirstLetterUpper(monthByShortText);
+let monthEndDate=doFirstLetterUpper(monthEndShortText);
+
+  readMoreModal += `
+  <section
+  style="
+  display:${model.inputs.userPage.isReadMoreExtraPaidBtnClicked ? 'flex' : 'none'};
+  position:absolute;
+  top:${document.getElementById(happeningId)?.offsetTop-130}px;
+ 
+  "
+  
+  class="modal">
+  <div class="modal-wrapper">
+  <div class="modal-image"
+  style="
+background-image: url(
+   ${
+     happening.imageUrl ||
+     `https://source.unsplash.com/random/?${categoryTitleInEnglish}`
+   }
+)
+
+"
+  >Image</div>
+  <div class="modal-description">
+      <div class="cancel-icon"><a href="#"  onclick="cancelModal()
+      " > 
+      <span class="icon-cross"></span>
+      </a></div>
+
+      <div class="modal-description__title">
+      <h1>
+      ${happening.title}</div>
+      </h1>
+      <div class="small-info">
+      <div> <span> Type:${category.title}</span></div>
+    
+      <div><span>Start dato:${day} ${monthStartDate} ${year} ${happening.happeningStartTime}
+      </span></div>
+<div> <span>Slutt dato:${endDay} ${monthEndDate} ${yearEndDate} ${happening.happeningEndTime}</span></div>     
+<div><span>Sted: Hemsedal</span></div>
+</div>
+      <div class="modal-description__text">${happening.description} </div>
+      
+  </div>
+</div>
+</section>
+  
+  `;
+
+    return readMoreModal;
+}
+//Read-more olunca display block 
+
+function createReadMoreModal2() {
+    //kommer begynnelsen med ingen id 
+    let readMoreModal = ``;
+if(!model.inputs.userPage.clickedHappeningId)return readMoreModal;
   let happeningId=model.inputs.userPage.clickedHappeningId;
   let happening = findElementById(
     model.data.happenings,
@@ -555,15 +650,15 @@ let a= 120;
   } = getMyAllDateFormats(happening.happeningEndDate);
   let monthStartDate=doFirstLetterUpper(monthByShortText);
 let monthEndDate=doFirstLetterUpper(monthEndShortText);
-  let readMoreModal = ``;
+
   readMoreModal += `
   <section
   style="
-  
+  display:${model.inputs.userPage.isReadMoreNoneExtraPaidBtnClicked ? 'flex' : 'none'};
   position:absolute;
   top:${document.getElementById(happeningId)?.offsetTop-130}px;
   left:1rem;
-  background-color:orange;
+  
   
   "
   
@@ -608,19 +703,19 @@ background-image: url(
 
   return readMoreModal;
 }
-//Read-more olunca display block 
+
 function cancelModal() {
   console.log("Cancel Modal");
   model.inputs.userPage.isReadMoreExtraPaidBtnClicked = false;
   model.inputs.userPage.isReadMoreNoneExtraPaidBtnClicked = false;
-  model.inputs.userPage.clickedHappeningId="";
+  // model.inputs.userPage.clickedHappeningId="";
   updateView();
 }
 
 function readMore(happeningId) {
 console.log("heppnginId: ",typeof happeningId)
- console.log("cart-container div elementLeft:  ", document.getElementById(happeningId).offsetLeft);
-  console.log("cart-container div elementTop:  ", document.getElementById(happeningId).offsetTop);
+//  console.log("cart-container div elementLeft:  ", document.getElementById(happeningId).offsetLeft);
+//   console.log("cart-container div elementTop:  ", document.getElementById(happeningId).offsetTop);
   //Eger extrapaid ise isReadMoreExtraPaidi true yap.. degilse digerini
   let happening=findElementById(model.data.happenings,happeningId);
   let {paymentTypeId}=happening;

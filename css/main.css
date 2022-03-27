@@ -67,12 +67,41 @@ Component olarak tuttugumuz yapilarimiz olan carosel, slider,card,icon,button,ti
 components are like "mini" layouts. Styles for small, reusable pieces of the site should reside here (think buttons, forms, profile pictures, etc.)
 */
 .btnUserPage {
-  background-color: orange;
-  border-radius: 0.4rem;
+  font-size: .9333em;
+  line-height: 1.2857em;
+  font-weight: 700;
+  border: none;
   font-size: 1rem;
   font-family: "Source Sans Pro", sans-serif;
-  padding: 0.4rem 1.4rem;
   cursor: pointer;
+  color: #fff;
+}
+
+.clean-btn {
+  background-color: #ff6600;
+  border-radius: 0.4rem;
+  border: 1px solid;
+  padding: .46rem;
+}
+
+.btnUserPage a {
+  text-decoration: none;
+  color: #fff;
+  padding: .5rem;
+  border: 1px solid;
+  background-color: #ff6600;
+  border-radius: 0.4rem;
+}
+
+.btnUserPage a:hover {
+  color: #ff6600;
+  background-color: #fff;
+}
+
+.clean-btn:hover {
+  color: #ff6600;
+  background-color: #fff;
+  border-color: #ff6600;
 }
 
 .form-element, .form-date {
@@ -204,13 +233,21 @@ components are like "mini" layouts. Styles for small, reusable pieces of the sit
   top: 1.5rem;
   text-align: center;
   font-size: 1.6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
+  background-color: #d276df;
+  color: darkblue;
+  font-weight: 700;
+  font-size: 2rem;
 }
 
 /* islemler bitince danger kismini sil... */
 .error-alert {
   background-color: #f7a7a3;
-  border-left: .3rem solid #8f130c;
+  border: 1px solid;
+  padding: 2rem 0;
 }
 
 /* .error-alert .close {
@@ -219,13 +256,14 @@ color: #8f130c;
 } */
 .success-alert {
   background-color: #a8f0c6;
-  border-left: .3rem solid #178344;
+  border: 1px solid;
+  padding: 2rem 0;
 }
 
 /* .success-alert .close*/
-.close {
-  border-color: #178344;
-  color: #178344;
+.close:hover {
+  color: red;
+  background-color: darkblue;
 }
 
 .alert-message {
@@ -258,6 +296,7 @@ body {
   margin: 1rem 0;
   background-color: #007bff;
   border-radius: 0.4rem;
+  padding: 1rem 0;
 }
 
 /*header-form-content display flex column  altinda */
@@ -552,21 +591,21 @@ textarea, input[type="datetime-local"] {
 .modal {
   width: 100%;
   padding: .4rem;
-  height: 60%;
   height: 40rem;
   display: flex;
   justify-content: center;
-  background-color: #F9F9F9;
+  background-color: #0e385e;
   align-items: center;
   position: relative;
+  border-radius: .5rem;
   z-index: 5;
   transition: all;
-  transition-delay: 2s;
+  transition-delay: 1s;
 }
 
 .modal-wrapper {
-  width: 85%;
-  height: 75%;
+  width: 90%;
+  height: 85%;
   background-color: #fff;
   border-radius: 1rem;
   display: flex;
@@ -804,6 +843,7 @@ textarea, input[type="datetime-local"] {
   /* Do not repeat the image */
   background-size: cover;
   /* Resize the background image to cover the entire container */
+  transition: .5s ease;
 }
 
 .icon-container {

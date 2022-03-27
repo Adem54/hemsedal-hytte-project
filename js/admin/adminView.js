@@ -9,9 +9,9 @@ function updateAdminView(){
   </div>
   <div class="header">
   <h3>Welcome to Admin Page</h3>
-  <button  class="btnUserPage" onclick="cleanInputFields(); updateView()" >Clean Form Fields</button>
+  <button  class="btnUserPage clean-btn" onclick="cleanInputFields(); updateView()" >Clean Form Fields</button>
   <button 
-  class="btnUserPage"
+  class="btnUserPage "
   onclick="model.app.page='user'; updateView()"
   ><a id="adminPage" href="#userPage">  Tilbake til Bruker Side </a></button>
   
@@ -114,9 +114,21 @@ return happeningImageFile;
 
 function readFile(event){
 let imageUrl=URL.createObjectURL(event.target.files[0]);
-console.log("imageUrl: ",typeof imageUrl); 
+console.log("imageUrl: ", imageUrl); 
+// let newUrl=imageUrl.replace('blob:','');
+// console.log("newUrl: ", newUrl);
 model.inputs.adminPage.happening.imageSrc.name=imageUrl;
 //imageFile a atadgiimz url i herhangi bir image in src sine atayarak onu gosterebiliriz...
+
+let reader=new FileReader();
+reader.addEventListener("load", ()=>{
+  let uploaded_image=reader.result;
+  console.log("uploaded_image: ", uploaded_image);
+  model.inputs.adminPage.happening.imageSrc.name=uploaded_image;
+
+})
+reader.readAsDataURL(event.target.files[0]);
+
 }
 
 function createMainCategoryHtml(){
@@ -153,6 +165,8 @@ return happeningMainCategory;
 //Submit butonu tiklanmis ise ve radio buttonlar dan tiklanan yani isSelected true olan var ise o zaman sucess style ve icon mesaji ver....
 createPaymentCategoryHtml()
 function createPaymentCategoryHtml(){
+
+ 
 let { paymentTypes}=model.data;
 let paymentCategory=``;
 paymentCategory+=`
