@@ -69,6 +69,7 @@ function createEkstraPaidSlider() {
   
     
     </div>
+    <section class="happenings">
     <section class="slider-container extraPaid-container">
     ${createReadMoreModal1()}
     `;
@@ -175,7 +176,7 @@ background-image: url(
     item +
     `
 
-    </section>
+    </section> </section>
   
        `;
   /*
@@ -387,17 +388,19 @@ function createFilterButtons() {
 <h1>Happenings</h1>
 </div>
 <div class="filterBtns-container">
-<div><button class="filter-btn"
+<div><button
+
+class="filter-btn ${model.inputs.userPage.filterBtnState=='tomorrow' ? 'active' : ''} "
  onclick="model.inputs.userPage.filterBtnState='tomorrow';
  updateView()">I morgen</button></div>
 <div><button
 onclick="model.inputs.userPage.filterBtnState='this-week';
  updateView()"
-class="filter-btn">Denne uka</button></div>
+class="filter-btn  ${model.inputs.userPage.filterBtnState=='this-week' ? 'active' : ''}">Denne uka</button></div>
 <div><button
 onclick="model.inputs.userPage.filterBtnState='this-month';
  updateView()"
-class="filter-btn">Denne måneden</button></div>
+class="filter-btn ${model.inputs.userPage.filterBtnState=='this-month' ? 'active' : ''} ">Denne måneden</button></div>
 </div>
 </div>
     
@@ -581,7 +584,7 @@ let monthEndDate=doFirstLetterUpper(monthEndShortText);
  
   "
   
-  class="modal">
+  class="modal modal1">
   <div class="modal-wrapper">
   <div class="modal-image"
   style="
@@ -593,7 +596,14 @@ background-image: url(
 )
 
 "
-  >Image</div>
+  >  
+  <section class="modal-date"> 
+  <div class="modal-date__day">${day}</div>
+  <div class="modal-date__mon-year">
+  ${monthStartDate} ${year}
+  </div>
+  </section>
+  </div>
   <div class="modal-description">
       <div class="cancel-icon"><a href="#"  onclick="cancelModal()
       " > 
@@ -668,7 +678,7 @@ let monthEndDate=doFirstLetterUpper(monthEndShortText);
   
   "
   
-  class="modal">
+  class="modal modal2">
   <div class="modal-wrapper">
   <div class="modal-image"
   style="
@@ -680,7 +690,15 @@ background-image: url(
 )
 
 "
-  >Image</div>
+  >
+  <section class="modal-date"> 
+  <div class="modal-date__day">${day}</div>
+  <div class="modal-date__mon-year">
+  ${monthStartDate} ${year}
+  </div>
+  </section>
+  
+  </div>
   <div class="modal-description">
       <div class="cancel-icon"><a href="#"  onclick="cancelModal()
       " > 

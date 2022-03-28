@@ -8,7 +8,7 @@
 const model={
 
     app:{
-        page:"admin",
+        page:"user",
         currentUser:{
             firstName:"Olav",
             lastName:"Johansen",
@@ -61,7 +61,7 @@ const model={
             chosenMonth:"",//buna gore secilen 
             isCategoryBtnClicked:false,//megamenu mantiginda category olusturmak icin bunu aliriz birkere
             isSelectedAll:false,
-            isReadMoreExtraPaidBtnClicked:false,
+            isReadMoreExtraPaidBtnClicked:true,
             isReadMoreNoneExtraPaidBtnClicked:false,
 
             clickedHappeningId:"",
@@ -103,7 +103,7 @@ const model={
             imageUrl:"https://tellusdmsmedia.newmindmedia.com/wsimgs/237234823_4576573625727427_7642383865876437128_n_255055228.jpg",
             categoryId:2,
             paymentTypeId:2,
-            happeningStartDate:"2022-03-28",
+            happeningStartDate:"2022-04-03",
             happeningStartTime:"15:00",
             happeningEndDate:"2022-04-17",
             happeningEndTime:"15:55",
