@@ -8,12 +8,12 @@ function updateAdminView(){
   ${model.inputs.adminPage.isSubmitted && checkAllRequiredFields(model.inputs.adminPage.happening) ? createAlertMessage("success","Innsendingproesess er vellykket") : ""}
   </div>
   <div class="header">
-  <h3>Welcome to Admin Page</h3>
+  
   <button  class="btnUserPage clean-btn" onclick="cleanInputFields(); updateView()" >Clean Form Fields</button>
   <button 
   class="btnUserPage "
   onclick="model.app.page='user'; updateView()"
-  ><a id="adminPage" href="#userPage">  Tilbake til Bruker Side </a></button>
+  >  Tilbake til Bruker Side </button>
   
   </div>
 
@@ -112,6 +112,7 @@ happeningImageFile+=`
 return happeningImageFile;
 }
 
+
 function readFile(event){
 let imageUrl=URL.createObjectURL(event.target.files[0]);
 console.log("imageUrl: ", imageUrl); 
@@ -119,12 +120,12 @@ console.log("imageUrl: ", imageUrl);
 // console.log("newUrl: ", newUrl);
 model.inputs.adminPage.happening.imageUrl.name=imageUrl;
 //imageFile a atadgiimz url i herhangi bir image in src sine atayarak onu gosterebiliriz...
-
 let reader=new FileReader();
 reader.addEventListener("load", ()=>{
   let uploaded_image=reader.result;
   console.log("uploaded_image: ", uploaded_image);
   model.inputs.adminPage.happening.imageUrl.name=uploaded_image;
+  //Bunu ise background-image:url() icinde kullanabiliyoruz
 
 })
 reader.readAsDataURL(event.target.files[0]);
@@ -163,7 +164,7 @@ return happeningMainCategory;
 }
 
 //Submit butonu tiklanmis ise ve radio buttonlar dan tiklanan yani isSelected true olan var ise o zaman sucess style ve icon mesaji ver....
-createPaymentCategoryHtml()
+
 function createPaymentCategoryHtml(){
 
  
@@ -223,7 +224,7 @@ now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
 // console.log("localTime; ", now.toLocaleTimeString("nb-no").slice(0,5))
 let happeningDate=``;
 happeningDate+=`
-<label  class="formLabel "><span class="requiredStar">*</span><span >Happening start-end dato og klokkaslett</span></label>
+<label  class="formLabel"><span class="requiredStar">*</span><span >Happening start-end dato og klokkaslett</span></label>
 <div class="happeningformRow  happeningDate form-element input-top-mrgn">
 
 <div class="happeningDateSection">

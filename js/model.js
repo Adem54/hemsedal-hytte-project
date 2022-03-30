@@ -61,15 +61,14 @@ const model={
             chosenMonth:"",//buna gore secilen 
             isCategoryBtnClicked:false,//megamenu mantiginda category olusturmak icin bunu aliriz birkere
             isSelectedAll:false,
-            isReadMoreExtraPaidBtnClicked:true,
+            isReadMoreExtraPaidBtnClicked:false,
             isReadMoreNoneExtraPaidBtnClicked:false,
-
             clickedHappeningId:"",
             filteredData:[],//Bunun cok bir espirisi yok kaldirmamiz gerekiyor
-
             filterBtnState:"this-month",
           /*categories datasi burda olacakti...bunu dusunelim...cunku degisken ve on tarafta kullanici ile etkilesim ile bir dinamizm sagliyor ve onu kullaniyoruz...dolayisi ile burda olacakti... */
-            categories:[{id:1,title:"Familie og moro", isSelected:false,icon:"icon-family-svgrepo-com"},{id:2,title:"Barn og familie", isSelected:false,icon:"icon-two-childs-playing-silhouettes-svgrepo-com"},{id:3,title:"Festival", isSelected:false,icon:"icon-party-svgrepo-com"},{id:4,title:"Sport", isSelected:false,icon:"icon-sports_baseball"},{id:5,title:"Konsert", isSelected:false,icon:"icon-music"},{id:6,title:"Utstilling", isSelected:false,icon:"icon-presentation-exhibition-svgrepo-com"},{id:7,title:"Teater", isSelected:false, icon:"icon-theater-svgrepo-com"}]
+            categories:[{id:1,title:"Familie og moro", isSelected:false,icon:"icon-family-svgrepo-com"},{id:2,title:"Barn og familie", isSelected:false,icon:"icon-two-childs-playing-silhouettes-svgrepo-com"},{id:3,title:"Festival", isSelected:false,icon:"icon-party-svgrepo-com"},{id:4,title:"Sport", isSelected:false,icon:"icon-sports_baseball"},{id:5,title:"Konsert", isSelected:false,icon:"icon-music"},{id:6,title:"Utstilling", isSelected:false,icon:"icon-presentation-exhibition-svgrepo-com"},{id:7,title:"Teater", isSelected:false, icon:"icon-theater-svgrepo-com"}],
+            isMobilToggleMenu:false,
             
         }
     
@@ -87,7 +86,7 @@ const model={
             imageUrl:"https://images.prismic.io/govegan-no/0563de89-6f60-4d31-923d-601de225a288_1sq.png?auto=compress,format&w=800",
             categoryId:1,
             paymentTypeId:1,
-            happeningStartDate:"2022-04-15",
+            happeningStartDate:"2022-03-30",
             happeningStartTime:"11:55",
             happeningEndDate:"2022-04-18",
             happeningEndTime:"15:55",
@@ -119,7 +118,7 @@ const model={
             imageUrl:"",
             categoryId:3,
             paymentTypeId:3,
-            happeningStartDate:"2022-05-26",
+            happeningStartDate:"2022-04-15",
             happeningStartTime:"09:00",
             happeningEndDate:"2022-05-27",
             happeningEndTime:"15:00",
@@ -135,7 +134,7 @@ const model={
             imageUrl:"https://assets.simpleviewcms.com/simpleview/image/fetch/c_limit,f_jpg,q_64,w_1200/https://media.newmindmedia.com/TellUs/image/%3Ffile%3DOslo_Internasjonale_Kirkemusikkfestival_343704660.jpg%26dh%3D533%26dw%3D800%26cropX%3D384%26cropY%3D0%26cropH%3D1104%26cropW%3D1657%26t%3D4&.jpg",
             categoryId:3,
             paymentTypeId:2,
-            happeningStartDate:"2022-03-28",
+            happeningStartDate:"2022-04-08",
             happeningStartTime:"11:55",
             happeningEndDate:"2022-04-04",
             happeningEndTime:"15:00",
@@ -167,7 +166,7 @@ const model={
             imageUrl:"https://assets.simpleviewcms.com/simpleview/image/fetch/c_limit,f_jpg,q_64,w_587/https://media.newmindmedia.com/TellUs/image/%3Ffile%3DBryggens_Museum_fra_Clarion_1778912763.jpg%26dh%3D307%26dw%3D800%26cropX%3D0%26cropY%3D848%26cropH%3D1153%26cropW%3D3000%26t%3D4",
             categoryId:6,
             paymentTypeId:1,
-            happeningStartDate:"2022-04-26",
+            happeningStartDate:"2022-04-15",
             happeningStartTime:"11:00",
             happeningEndDate:"2022-04-26",
             happeningEndTime:"14:00",
@@ -183,7 +182,7 @@ const model={
             imageUrl:"https://www.transosterdalen.no/wp-content/uploads/2022/02/stisyklister.jpg",
             categoryId:4,
             paymentTypeId:1,
-            happeningStartDate:"2022-04-12",
+            happeningStartDate:"2022-03-31",
             happeningStartTime:"13:00",
             happeningEndDate:"2022-04-15",
             happeningEndTime:"16:30",
@@ -199,13 +198,13 @@ const model={
             imageUrl:"https://premium.vgc.no/v2/images/96cfb043-35c7-4d03-9e33-b439232cabeb?fit=crop&format=auto&h=1536&tight=true&w=2048&s=aab28fd0a8749e715daff885b9c44998a4c3bd19",
             categoryId:7,
             paymentTypeId:3,
-            happeningStartDate:"2022-04-24",
+            happeningStartDate:"2022-04-29",
             happeningStartTime:"16:00",
             happeningEndDate:"2022-04-25",
             happeningEndTime:"19:30",
             announcementStartDate:"2022-04-01",
             announcementStartTime:"",
-            announcementEndDate:"2022-04-18",
+            announcementEndDate:"2022-05-10",
             announcementEndTime:"",
             webSiteUrl:"https://blogg.millsproffpartner.no/slik-lager-du-p%C3%B8lsefesten-ingen-glemmer",
         },{
@@ -231,7 +230,7 @@ const model={
             imageUrl:"https://g.acdn.no/obscura/API/dynamic/r1/nadp/tr_1000_2000_s_f/0000/2019/08/01/3423822639/1/original/8554188.jpg?chk=B57795",
             categoryId:5,
             paymentTypeId:3,
-            happeningStartDate:"2022-04-17",
+            happeningStartDate:"2022-05-17",
             happeningStartTime:"20:00",
             happeningEndDate:"2022-04-17",
             happeningEndTime:"22:30",

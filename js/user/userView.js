@@ -1,12 +1,8 @@
 function updateUserView() {
-  
-
+   const scrollPosition = document.body.scrollTop;
   document.getElementById("app").innerHTML = `  
     ${createHeaderTopHtml()}
-
- 
     ${createEkstraPaidSlider()}
-
 
 ${createSearchHappeningBar()}
 
@@ -17,13 +13,11 @@ ${
 }
 
 ${createFilterButtons()}
-
-
-
 ${createHappeningList()}
 
     `;
-  
+  //  document.body.scrollTop = getYPosition();
+  // console.log("positionCheck:; ", getYPosition());
    
 }
 
@@ -32,10 +26,14 @@ function createHeaderTopHtml() {
   headerTop += `
     <header class="fullscreen-header">
     <nav class="nav nav-top">
+ 
       <figure class="nav__list">
         <a href="" class="nav__list-item"> Hemsedal-logo</a>
       </figure>
-      <ul class="nav__list">
+      <ul class="nav__list nav-menu  
+      ${model.inputs.userPage.isMobilToggleMenu ? 'responsive' : ''}
+      
+      ">
         <li><a class="nav__list-item" href="">Hjem</a></li>
         <li>
           <a class="nav__list-item create-happening-btn " href="#adminPage"
@@ -46,37 +44,41 @@ function createHeaderTopHtml() {
         </li>
         <li><a class="nav__list-item" href="">Logg in</a></li>
       </ul>
+      
+      <a class="nav-mobil-icon" onclick="showMobilMenu()"><i class="fa-solid fa-bars"></i></a>
     </nav>
-    
     <h1 class="header__title">HVA SKJER I HEMSEDAL!</h1>
  
-
-   
   </header>
     
     `;
   return headerTop;
 }
 
+function showMobilMenu(){
+  console.log("responsive Mobil Menu")
+  model.inputs.userPage.isMobilToggleMenu=!model.inputs.userPage.isMobilToggleMenu;
+  updateView();
+}
 
 function createEkstraPaidSlider() {
   //random picture icindeki ne ile ilgili resmin gelecegini dinamik yapmak icin ? sonraki kisma kategori ismini random bir sekilde getirecegiz....
   let ekstraPaidSlider = ``;
   ekstraPaidSlider += `
     <div class="slider-title main-title">
-    <h1>Ekstrabetalte Aktiviteter</h1>
-    
-  
-    
+       <h1>Ekstrabetalte Aktiviteter</h1>
     </div>
     <section class="happenings">
     <section class="slider-container extraPaid-container">
-    ${createReadMoreModal1()}
+${createReadMoreModal() }
+    
     `;
-
-
+/*${createReadMoreModal1()} */
+    let result=getHappeningsFromStorage().sort((a,b)=>{
+      return new Date(a.happeningStartDate)-new Date(b.happeningStartDate)
+    });
   let item = ``;
-  let extraPaidHappenings = getHappeningByPaymentType(getHappeningsFromStorage(), 3);
+  let extraPaidHappenings = getHappeningByPaymentType(result, 3);
 
 
   for (let i = 0; i < extraPaidHappenings.length; i++) {
@@ -92,6 +94,7 @@ function createEkstraPaidSlider() {
     let startDate = extraPaidHappening.happeningStartDate;
     let endDate = extraPaidHappening.happeningEndDate;
     let startTime = extraPaidHappening.happeningStartTime;
+  
     let endTime = extraPaidHappening.happeningEndTime;
     let startDateAllFormats = getMyAllDateFormats(startDate);
     let endDateAllFormats = getMyAllDateFormats(endDate);
@@ -195,7 +198,7 @@ function createSearchHappeningBar() {
   searchHappeningBar += `
     <div class="filterBar-title"><h2>Søk Happening</h2></div>
 <section class="filterBar-container">
- <div></div>
+
 <div class="filterBar-subcontainer">
   <div class="filterBar-container-div">
     <div class="filterBar-container__item">
@@ -276,7 +279,7 @@ function createSearchHappeningBar() {
   </div>
     
     <div class="ui calendar end-date" id="end-date">
-      <div class="ui  ">
+      <div class="ui">
         <i class="calendar icon"></i>
         <input
         min="${now.toISOString().slice(0, 16)}"
@@ -413,8 +416,14 @@ function createHappeningList() {
 
   let { categories } = model.inputs.userPage;
   let { chosenDateFrom, chosenDateTo } = model.inputs.userPage;
+  let result=getHappeningsFromStorage().sort((a,b)=>{
+    return new Date(a.happeningStartDate)-new Date(b.happeningStartDate)
+  });
+  
+  
+
   let happeningsWithoutExtraPaid = getHappeningAsideFromExtraPaid(
-    getHappeningsFromStorage()
+    result
   );
   //searchHappenings working fra begynnelsen
   let getFilteredData = searchHappenings(
@@ -433,9 +442,10 @@ function createHappeningList() {
    
 <section class="happenings">
 <div class="container1 slider-container nonExtraPaidContainer ">
-${createReadMoreModal2()}
+${createReadMoreModal() }
 
 `;
+
 
   let happeningsDiv = ``;
 
@@ -448,9 +458,7 @@ ${createReadMoreModal2()}
 
   for (let i = 0; i < getFilteredData.length; i++) {
     let happening = getFilteredData[i];
-    console.log("happening: ",happening);
-
-    console.log("happeningsUrl: ",happening.imageUrl);
+  
     let category = getCategoryById(
       model.inputs.userPage.categories,
       happening.categoryId
@@ -583,7 +591,7 @@ let monthEndDate=doFirstLetterUpper(monthEndShortText);
   top:${document.getElementById(happeningId)?.offsetTop-130}px;
  
   "
-  
+  onclick
   class="modal modal1">
   <div class="modal-wrapper">
   <div class="modal-image"
@@ -634,10 +642,12 @@ background-image: url(
 }
 //Read-more olunca display block 
 
-function createReadMoreModal2() {
+function createReadMoreModal() {
     //kommer begynnelsen med ingen id 
+console.log("id: ",model.inputs.userPage.clickedHappeningId)
     let readMoreModal = ``;
-if(!model.inputs.userPage.clickedHappeningId)return readMoreModal;
+if(!model.inputs.userPage.clickedHappeningId)  return readMoreModal;  
+
   let happeningId=model.inputs.userPage.clickedHappeningId;
   let happening = findElementById(
     model.data.happenings,
@@ -669,16 +679,11 @@ let monthEndDate=doFirstLetterUpper(monthEndShortText);
 
   readMoreModal += `
   <section
-  style="
-  display:${model.inputs.userPage.isReadMoreNoneExtraPaidBtnClicked ? 'flex' : 'none'};
-  position:absolute;
-  top:${document.getElementById(happeningId)?.offsetTop-130}px;
-  left:1rem;
   
-  
-  "
-  
-  class="modal modal2">
+  onclick="cancelModal()"
+  class="modal
+  ${ model.inputs.userPage.isReadMoreNoneExtraPaidBtnClicked || model.inputs.userPage.isReadMoreExtraPaidBtnClicked? 'modal2' : ''}
+  ">
   <div class="modal-wrapper">
   <div class="modal-image"
   style="
@@ -697,10 +702,10 @@ background-image: url(
   ${monthStartDate} ${year}
   </div>
   </section>
-  
+
   </div>
   <div class="modal-description">
-      <div class="cancel-icon"><a href="#"  onclick="cancelModal()
+      <div class="cancel-icon"><a   onclick="cancelModal()
       " > 
       <span class="icon-cross"></span>
       </a></div>
@@ -728,21 +733,27 @@ background-image: url(
   return readMoreModal;
 }
 
+
+
 function cancelModal() {
   console.log("Cancel Modal");
   model.inputs.userPage.isReadMoreExtraPaidBtnClicked = false;
   model.inputs.userPage.isReadMoreNoneExtraPaidBtnClicked = false;
-  // model.inputs.userPage.clickedHappeningId="";
+ 
   updateView();
+  
 }
 
+
+
 function readMore(happeningId) {
-console.log("heppnginId: ",typeof happeningId)
+console.log("heppnginId: ", happeningId)
 //  console.log("cart-container div elementLeft:  ", document.getElementById(happeningId).offsetLeft);
 //   console.log("cart-container div elementTop:  ", document.getElementById(happeningId).offsetTop);
   //Eger extrapaid ise isReadMoreExtraPaidi true yap.. degilse digerini
   let happening=findElementById(model.data.happenings,happeningId);
   let {paymentTypeId}=happening;
+  console.log("paymetnTypeId: ", paymentTypeId);
   if(paymentTypeId===3){
     model.inputs.userPage.isReadMoreExtraPaidBtnClicked = true;
 

@@ -194,6 +194,7 @@ function getDateSomeDaysLater(dayNumber) {
   let nowDateInputFormat = now.toISOString().slice(0, 16);
 
   let currentDate = now.toISOString().slice(0, 10);
+  console.log("Cekk et..currentDAte; ",currentDate);
   let myFutureDate = now.setDate(now.getDate() + dayNumber);
   let futureDate = new Date(myFutureDate).toISOString().slice(0, 10);
   let futureDateInputFormat = new Date(myFutureDate).toISOString().slice(0, 16);
@@ -260,6 +261,7 @@ function getStartEndDateCurrentValue() {
       model.inputs.userPage.chosenDateFrom = nowDate;
       model.inputs.userPage.chosenDateTo = futureDate;
       break;
+     
 
     default:
       break;
@@ -272,25 +274,22 @@ function getStartEndDateCurrentValue() {
 //Unutmayalim bizim search islemindeki happenings dedgimiz extrabetalt disinda kalan happenigs ler cunku extra betalt happenings leri biz en ustte listeledik
 function searchHappenings(happenings, categories, startDate, endDate) {
   //starDate secilmis mi onu cek et
-console.log("filterBtnState: ", model.inputs.userPage.filterBtnState);
   if (model.inputs.userPage.filterBtnState == "this-month") {
     let { currentDate, oneMonthLaterDate } = getCurrentAndOneMonthLaterDates();
     // model.inputs.userPage.chosenDateFrom=currentDate;
     // model.inputs.userPage.chosenDateTo=oneMonthLaterDate;
-   
-
     return getDateBetweenTwoDates(happenings, currentDate, oneMonthLaterDate);
   } else if (model.inputs.userPage.filterBtnState == "this-week") {
     let { currentDate, futureDate } = getDateSomeDaysLater(7);
+    console.log("currentDate: ",currentDate);
+    console.log("futureDate: ",futureDate);
     return getDateBetweenTwoDates(happenings, currentDate, futureDate);
   } else if (model.inputs.userPage.filterBtnState == "tomorrow") {
     let { currentDate, futureDate } = getDateSomeDaysLater(1);
     //Som default får vi en date en måneds videre
-
-    console.log(
-      "getDateBetweenTwoDates: ",
-      getDateBetweenTwoDates(happenings, currentDate, futureDate)
-    );
+    console.log("currentDate: ",currentDate);
+    console.log("futureDate: ",futureDate);
+    console.log("tomorrow-data: ",getDateBetweenTwoDates(happenings, currentDate, futureDate))
     return getDateBetweenTwoDates(happenings, currentDate, futureDate);
   }
 
@@ -308,6 +307,7 @@ console.log("filterBtnState: ", model.inputs.userPage.filterBtnState);
   } else if (endDate !== "" && isAnyCategoryChecked(categories)) {
     return filterByEndDateAndCategory(happenings, categories, endDate);
   } else if (startDate !== "") {
+     
     return getDateFromStartDate(happenings, startDate);
   } else if (endDate !== "") {
     return getDateToEndDate(happenings, endDate);
@@ -318,7 +318,6 @@ console.log("filterBtnState: ", model.inputs.userPage.filterBtnState);
     //Som default får vi en date en måneds videre
     //    model.inputs.userPage.chosenDateFrom=currentDate;
     //    model.inputs.userPage.chosenDateTo=oneMonthLaterDate;
-
     return getDateBetweenTwoDates(happenings, currentDate, oneMonthLaterDate);
   }
 }

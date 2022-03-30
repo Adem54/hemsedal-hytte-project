@@ -12,10 +12,10 @@ layout contains styles for different aspects of the site's structural layout (th
         width: 100%;
         margin-bottom: 1rem;
       }
+
       .formLabel {
         font-weight: bold;
         font-size: 0.9rem;
-     
         margin: 0.3rem 0;
         display: flex; 
         
@@ -25,13 +25,12 @@ layout contains styles for different aspects of the site's structural layout (th
         margin-bottom: .4rem;
         
       }
-      .formLabelAnnounce{
 
+     
+      .formLabelAnnounce{
         font-weight: bold;
         font-size: 0.9rem;
         color: $primary-font-color;
-    
-       
         display: flex;
       }
       .requiredStar {
@@ -46,7 +45,12 @@ layout contains styles for different aspects of the site's structural layout (th
 
     .happeningDateSection {
       width: 30%;  
-      
+      }
+
+      @media screen and (max-width: 1200px) {
+        .happeningDateSection {
+          width: 44%;  
+          }
       }
       .happeningDateInput {
         display: block;

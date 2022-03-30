@@ -1,7 +1,9 @@
 
 function choosePaymentType(id){
+  //Bir checked a tiklandigi zaman tiklanan true olurken diger geri kalanlarin false olmasi gerekir cunku bu radio buttondir..
     model.data.paymentTypes=model.data.paymentTypes.map((payment,index)=> parseInt(payment.id)==id ? { id:payment.id, title:payment.title  ,isChecked:true } : { id:payment.id, title:payment.title  ,isChecked:false });
 //Silme islemine tiklandigi zaman....checked i false yap...
+//Tiklanan id yi model deki datamiza gonderiyoruz..
     model.inputs.adminPage.happening.paymentTypeId.name=id;
   }
   
@@ -104,22 +106,39 @@ happening.webSiteUrl={name:"",isFieldRequired:false}
 
 }
 
+function getHappeningsFromStorage(){
+  let happenings;
+  if(localStorage.getItem("happenings")==null){
+    happenings=[];
+  }else {
+    happenings=JSON.parse(localStorage.getItem("happenings"));
+  }
+  return happenings;
+}
+
+
+
+function addHappeningToStorage(newHappening){
+let happenings=getHappeningsFromStorage();
+happenings.push(newHappening);
+localStorage.setItem("happenings",JSON.stringify(happenings));
+
+}
 
 
 function addNewHappening(){
    let id=findLastId(model.data.happenings)+1;
 let newHappening={
-    id,...getHappeningValues()
+    id,...getHappeningObject()
 }
 console.log("newHappening: ", newHappening);
-
 addHappeningToStorage(newHappening);
 model.data.happenings.push(newHappening);
 }
 
 
 
-function getHappeningValues(){
+function getHappeningObject(){
   let {happening}=model.inputs.adminPage;
   let eventKeys=Object.keys(happening);
   let eventValues=Object.values(happening);
@@ -150,10 +169,13 @@ function checkAllRequiredFields(happening){
      let happeningValues=Object.values(happening);
      //Tek tek tum happening objesi icndeki zorunlu alanlari kontrol ettik ve isValidate kisminda bir fonksiyon calistirarak o fonksiyojn sonucunu verdik her bir validate ama biz bu islmei su anda 
      happeningValues=happeningValues.map(item=>item.isFieldRequired ? {...item,isValidate:checkInputValue(item.name,item.isValidate)}: item);
-     happeningValuesRequiredFields=happeningValues.filter(item=>item.isFieldRequired);
+
+    
    //Simdi iceriigni degistirdigimiz model happening i guncelleyelim
    model.inputs.adminPage.happening =  Object.assign.apply({}, happeningKeys.map( (v, i) => ( {[v]: happeningValues[i]} ) ) );
  
+   //Tum required olanlari alip onlarin isValidate durumlarini cek edecegiz...
+   let happeningValuesRequiredFields=happeningValues.filter(item=>item.isFieldRequired);
      //Burayi return edecegiz...
      let allinputsCheckResult=happeningValuesRequiredFields.every((item)=>item.isFieldRequired && item.isValidate);
      return allinputsCheckResult;
@@ -173,7 +195,7 @@ function checkAllRequiredFields(happening){
    return isValidate;
    }
    
-   
+   //submit butonu tiklandigi zaman hem error durumu icin hem de success durumu icin kullanacagiz..
    function showValidationStyle(isValidate,errorClass,successClass){
 
      if(!isValidate){
@@ -189,6 +211,7 @@ function checkAllRequiredFields(happening){
    
    //Burda ortak mesaj da yazip sadece input ismini dinamiklestirebiliriz...
    //Alternatif span lari dogrudan input altina koyup class larina style da display none yapip sonra da ornegin isValid false ise o class i degil baska bir class goster diyebiliriz ve bu sekilde bu mesaji gostermis oluruz....
+   //Sadece error durumunda kirmizi renkli mesaj verecegiz...
    function showValidationMessage(isValidate,errorMessage){
      if(!isValidate){
      //  console.log("Error mesaj yazisi gelmesini bekliyoruz...")

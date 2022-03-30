@@ -17,16 +17,50 @@ body {
     background-color:$secondary-color;
     border-radius: 0.4rem;
     padding:1rem 0;
+    
   }
 
+  .form-content {
+    width: 50%;
+    height: 100%;
+@include flexCenter();
+color: $primary-font-color;
+  }
 
-    /*header-form-content display flex column  altinda */
+  @media screen and (max-width: 1200px)  {
+    .container {
+      width: 80%;
+      height: auto;
+      margin: auto;
+      @include flexCenter(column);
+    }
+    .header {
+      width: 90%;
+      @include flexCenter(row,space-around);
+      border-radius: 0.3rem;
+      padding:1rem .2rem;
+    }
     .form-content {
-        width: 50%;
-        height: 100%;
-    @include flexCenter();
-    color: $primary-font-color;
-       
-      }
-
+      width: 90%;   
+    }
+  }
+  @media screen and (max-width: 800px) {
+    .container {
+    width: 100%;
+    height: auto;
+    @include flexCenter(column);
+  }
+    .header {
+      width: 90%;
+      @include flexCenter(row,space-around);
+      border-radius: 0.3rem;
+      padding:1rem .2rem;
+    }
+    .form-content {
+      width: 90%;   
+    }
+  }
+    /*header-form-content display flex column  altinda */
+   
+   
       
