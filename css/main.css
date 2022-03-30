@@ -1002,6 +1002,17 @@ textarea, input[type="datetime-local"] {
   }
 }
 
+.happenings {
+  margin-top: 1rem;
+  padding-right: 2rem;
+  /*
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ 
+ */
+}
+
 .slider-container {
   width: 100%;
   padding: 1rem;
@@ -1034,6 +1045,13 @@ textarea, input[type="datetime-local"] {
 }
 
 @media only screen and (min-width: 1700px) {
+  .happenings {
+    margin-top: 1rem;
+    padding-right: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   .slider-container {
     padding: 1rem;
     justify-content: center;
@@ -1448,13 +1466,5 @@ text-overflow:hidden;
   background-color: #75ff33;
   color: #fff;
   border: 2px solid #000;
-}
-
-.happenings {
-  margin-top: 1rem;
-  padding-right: 2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 /*# sourceMappingURL=main.css.map */

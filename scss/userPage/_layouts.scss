@@ -163,6 +163,20 @@
   }
 }
 
+.happenings {
+  margin-top: 1rem;
+  //Burasi onemli burya dikkat edelim...
+  padding-right: 2rem;
+  
+ /*
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ 
+ */
+}
+
+
 .slider-container {
   width: 100%;
   padding: 1rem; //Bunu oynatma dengesi kaciyor
@@ -201,6 +215,16 @@
 
 }
 @media only screen and (min-width: 1700px) {
+
+  .happenings {
+    margin-top: 1rem;
+    //Burasi onemli burya dikkat edelim...
+    padding-right: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
   .slider-container {
     padding: 1rem; //Bunu oynatma dengesi kaciyor
     justify-content: center;
@@ -644,11 +668,3 @@ text-overflow:hidden;
   border: 2px solid #000;
 }
 
-.happenings {
-  margin-top: 1rem;
-  //Burasi onemli burya dikkat edelim...
-  padding-right: 2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
