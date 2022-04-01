@@ -18,7 +18,7 @@ ${createHappeningList()}
     `;
   //  document.body.scrollTop = getYPosition();
   // console.log("positionCheck:; ", getYPosition());
-   
+  runSlider();
 }
 
 function createHeaderTopHtml() {
@@ -68,8 +68,12 @@ function createEkstraPaidSlider() {
     <div class="slider-title main-title">
        <h1>Ekstrabetalte Aktiviteter</h1>
     </div>
-    <section class="happenings">
-    <section class="slider-container extraPaid-container">
+    <section class="happenings happenings-ekstraPaid">
+    <p class="moveIcons">
+    <span class="span">&#139;</span>
+    <span  class="span">&#155;</span>
+  </p>
+    <section class="extraPaid-container">
 ${createReadMoreModal() }
     
     `;
@@ -103,7 +107,7 @@ ${createReadMoreModal() }
 
 <div 
 id="${extraPaidHappening.id}"
-class="cart-container">
+class=" extraPaid-container-cart ">
 
 <div class="cart-image"
 
@@ -180,11 +184,7 @@ background-image: url(
     `
 
     </section> </section>
-  
        `;
-  /*
-   
-    */
 
   return ekstraPaidSlider;
 }
@@ -201,6 +201,7 @@ function createSearchHappeningBar() {
 
 <div class="filterBar-subcontainer">
   <div class="filterBar-container-div">
+  
     <div class="filterBar-container__item">
       <div class="start-date-title date-title">
         <span>Start dato</span>
@@ -217,84 +218,47 @@ function createSearchHappeningBar() {
                 : (this.value = now.toISOString().slice(0, 16))
             }"
             onchange="model.inputs.userPage.chosenDateFrom=this.value;
-           
             "
             class="input date-field" type="datetime-local" placeholder="Start dato"
-           
             >
-          </div>
-        </div>
+           </div>
+         </div>
       
-    </div>    `;
-
-  let monthSelectOptionField = ``;
-  //     monthSelectOptionField+=`
-  //     <div class="filterBar-container__item">
-  //     <div class="month-date-title date-title">
-  //       <span>Måned</span>
-  //     </div>
-  //   <div class="ui calendar" id="month">
-  //     <div class="ui  ">
-  //       <i class=" time icon"></i>
-
-  //       <select
-  //       onchange="model.inputs.userPage.chosenMonth=this.value;
-  //       model.inputs.userPage.chosenDateFrom='';
-  //       model.inputs.userPage.chosenDateTo='';
-  //       updateView();
-  //       ;
-
-  //       "
-  //       class="select-month date-field" name="cars" id="cars">
-  //       <option selected disabled hidden>Velg måned</option>`;
-
-  //        for(let i=0; i<model.data.months.length; i++){
-  //          let month=model.data.months[i];
-  //          monthSelectOptionField+=`
-  //          <option value="${month}">${month}</option>
-
-  //          `;
-  //        }
-
-  //     monthSelectOptionField+=`
-  //     </select>
-
-  //     </div>
-  //   </div>
-  // </div>
-
-  // </div>
-
-  //     `;
-
-  searchHappeningBar +=
-    monthSelectOptionField +
-    `
-
-<div class="filterBar-container-div">
-
-<div class="filterBar-container__item">
-  <div class="end-date-title date-title">
-    <span>Slutt dato</span>
-  </div>
-    
-    <div class="ui calendar end-date" id="end-date">
-      <div class="ui">
-        <i class="calendar icon"></i>
-        <input
-        min="${now.toISOString().slice(0, 16)}"
-        value="${
-          model.inputs.userPage.chosenDateTo
-            ? model.inputs.userPage.chosenDateTo
-            : (this.value = now.toISOString().slice(0, 16))
-        }"
-        onchange="model.inputs.userPage.chosenDateTo=this.value"
-        class="input date-field" type="datetime-local" placeholder="Slutt dato"
-        
-        >
-      </div>
     </div>
-</div>
+   
+
+    <div class="filterBar-container__item end-date-item ">
+    <div class="end-date-title date-title">
+      <span>Slutt dato</span>
+    </div>
+      
+      <div class="ui calendar end-date" id="end-date">
+        <div class="ui">
+          <i class="calendar icon"></i>
+          <input
+          min="${now.toISOString().slice(0, 16)}"
+          value="${
+            model.inputs.userPage.chosenDateTo
+              ? model.inputs.userPage.chosenDateTo
+              : (this.value = now.toISOString().slice(0, 16))
+          }"
+          onchange="model.inputs.userPage.chosenDateTo=this.value"
+          class="input date-field" type="datetime-local" placeholder="Slutt dato"
+          
+          >
+        </div>
+      </div>
+  </div>
+  </div>
+
+
+        `;
+
+  
+  searchHappeningBar +=
+  
+    `
+    <div class="filterBar-container-div category-searhBtnDiv">
   <div class="category-container">
     <div class="filterBar-container__item  category_filter">
      <span class="category_label date-title"> Kategori</span>
@@ -331,9 +295,12 @@ function createSearchHappeningBar() {
     </div>
 
   </div>
-</div>
-</div>
-<div class="search-happening-btn "><button
+
+
+
+<div class="search-happening-btn ">
+
+<button
 onclick="
  searchHappenings(
     getHappeningAsideFromExtraPaid(model.data.happenings),
@@ -344,6 +311,7 @@ onclick="
  model.inputs.userPage.filterBtnState='';
  updateView()"
 class="search-btn   ">Søk Happening &nbsp &nbsp<i class="fa-solid fa-play"></i></button></div>
+</div>
 </section>
     
     `;

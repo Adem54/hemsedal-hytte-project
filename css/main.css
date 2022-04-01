@@ -641,6 +641,45 @@ textarea, input[type="datetime-local"] {
   }
 }
 
+@media only screen and (min-width: 1000px) {
+  .category_list {
+    position: absolute;
+    width: 52rem;
+    left: 20%;
+  }
+  .category_list__item > input {
+    width: 0.8rem;
+    height: 0.8rem;
+    margin: 0 .3rem;
+  }
+  .category_list:after {
+    content: "";
+    left: 14rem;
+    top: -15px;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .category_list {
+    position: absolute;
+    width: 12rem;
+    left: 15%;
+  }
+  .category_list__item {
+    width: 66%;
+  }
+  .category_list__item > input {
+    width: 0.8rem;
+    height: 0.8rem;
+    margin: 0 0.2rem;
+  }
+  .category_list:after {
+    content: "";
+    left: 5rem;
+    top: -15px;
+  }
+}
+
 @media screen and (max-width: 600px) {
   .category_list {
     position: absolute;
@@ -908,8 +947,8 @@ textarea, input[type="datetime-local"] {
     display: block;
     color: #fff;
     position: absolute;
-    right: 1rem;
-    top: 1rem;
+    right: 2.8rem;
+    top: 1.7rem;
     cursor: pointer;
   }
   .nav-top {
@@ -948,7 +987,6 @@ textarea, input[type="datetime-local"] {
 
 .main-title > h1 {
   padding: 1rem 4rem;
-  width: 33%;
   background-color: #a03033;
   border-radius: 1rem;
 }
@@ -958,7 +996,7 @@ textarea, input[type="datetime-local"] {
     white-space: nowrap;
   }
   .main-title > h1 {
-    width: 60%;
+    min-width: 68%;
     font-size: 1.3rem;
     padding: 1rem 0rem;
   }
@@ -1004,23 +1042,65 @@ textarea, input[type="datetime-local"] {
 
 .happenings {
   margin-top: 1rem;
-  padding-right: 2rem;
-  /*
+  position: relative;
+}
+
+.moveIcons {
+  position: absolute;
+  right: 3rem;
+  top: -1rem;
+  z-index: 5;
+}
+
+.moveIcons span {
+  font-size: 3rem;
+  margin: 0 5px;
+  cursor: pointer;
+  color: #555;
+  width: 2rem;
+  height: 1.6rem;
+  display: inline-block;
+  line-height: 1rem;
+  padding: .5rem 0;
+  text-align: center;
+  border-radius: 3px;
+}
+
+.moveIcons span:hover {
+  background: #222;
+  color: white;
+}
+
+.happenings {
   display: flex;
   justify-content: center;
   align-items: center;
- 
- */
 }
 
 .slider-container {
-  width: 100%;
+  width: 89%;
   padding: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   position: relative;
+}
+
+.extraPaid-container {
+  width: 90%;
+  height: 600px;
+  /*background: red;*/
+  margin: auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+}
+
+.extraPaid-container::-webkit-scrollbar {
+  display: none;
 }
 
 .cart-container {
@@ -1039,30 +1119,268 @@ textarea, input[type="datetime-local"] {
   position: relative;
 }
 
+.extraPaid-container-cart {
+  box-shadow: #2c3e50 0px 0px 15px 0px;
+  margin: .5rem;
+  width: 24rem;
+  /*Burasi onemli...*/
+  min-width: 31.9%;
+  height: 27rem;
+  height: 90%;
+  /*bunu da hazir aldim*/
+  box-shadow: #ddd 0 0 8px 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  /*Bu da cok onemli...*/
+  left: 0;
+  transition: 0.5s;
+}
+
 .cart-container:hover {
   transform: scale(1.05);
   box-shadow: inset 0px 0px 13px -1px rgba(0, 0, 0, 0.18);
 }
 
+.extraPaid-container-cart:hover {
+  transform: scale(1.05);
+  box-shadow: inset 0px 0px 13px -1px rgba(0, 0, 0, 0.18);
+}
+
 @media only screen and (min-width: 1700px) {
-  .happenings {
+  .happenings-ekstraPaid {
     margin-top: 1rem;
     padding-right: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
   }
+  .happenings {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   .slider-container {
+    width: 80%;
     padding: 1rem;
+    display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    width: 80%;
+    position: relative;
   }
   .cart-container {
-    width: 27rem;
+    width: 26rem;
     margin: 0.8rem;
     height: 30rem;
+  }
+  .extraPaid-container {
+    width: 80%;
+  }
+  .extraPaid-container-cart {
+    margin: 1rem;
+    width: 24rem;
+    /*Burasi onemli...*/
+    min-width: 31.4%;
+    /*Bu da cok onemli...*/
+  }
+}
+
+@media only screen and (max-width: 1760px) {
+  .happenings {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .slider-container {
+    width: 90%;
+  }
+  .cart-container {
+    width: 24rem;
+  }
+}
+
+@media only screen and (max-width: 1400px) {
+  .happenings {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .slider-container {
+    width: 96%;
+  }
+  .cart-container {
+    width: 20rem;
+  }
+}
+
+@media only screen and (max-width: 1150px) {
+  .happenings {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .slider-container {
+    width: 100%;
+    padding: 0 0 0rem;
+  }
+  .cart-container {
+    width: 20rem;
+  }
+}
+
+@media only screen and (max-width: 1090px) {
+  .happenings-ekstraPaid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .extraPaid-container {
+    width: 88%;
+  }
+  .extraPaid-container-cart {
+    margin: .9rem;
+    width: 24rem;
+    /*Burasi onemli...*/
+    min-width: 46.5%;
+    /*Bu da cok onemli...*/
+  }
+  .slider-container {
+    width: 100%;
+    padding: 0 0 0 0rem;
+  }
+  .cart-container {
+    width: 22rem;
+  }
+}
+
+@media only screen and (max-width: 930px) {
+  .happenings-ekstraPaid {
+    margin-left: 0rem;
+  }
+  .extraPaid-container {
+    width: 95%;
+  }
+  .extraPaid-container-cart {
+    margin: .9rem;
+    width: 24rem;
+    /*Burasi onemli...*/
+    min-width: 46.2%;
+    /*Bu da cok onemli...*/
+  }
+}
+
+@media only screen and (max-width: 890px) {
+  .happenings-ekstraPaid {
+    margin-left: 0rem;
+  }
+  .extraPaid-container {
+    width: 95%;
+  }
+  .extraPaid-container-cart {
+    margin: 1rem;
+    width: 24rem;
+    /*Burasi onemli...*/
+    min-width: 45.7%;
+    /*Bu da cok onemli...*/
+  }
+}
+
+@media only screen and (max-width: 790px) {
+  .happenings-ekstraPaid {
+    margin-left: 0rem;
+  }
+  .extraPaid-container {
+    width: 98%;
+  }
+  .extraPaid-container-cart {
+    margin: .5rem;
+    width: 24rem;
+    /*Burasi onemli...*/
+    min-width: 47.4%;
+    /*Bu da cok onemli...*/
+  }
+  .slider-container {
+    width: 100%;
+    padding: 0 0 0 0rem;
+    background-color: lightblue;
+  }
+  .cart-container {
+    width: 20rem;
+  }
+}
+
+@media only screen and (max-width: 720px) {
+  .happenings-ekstraPaid {
+    margin-left: 0rem;
+  }
+  .extraPaid-container {
+    width: 72%;
+  }
+  .extraPaid-container-cart {
+    margin: 1rem;
+    width: 24rem;
+    /*Burasi onemli...*/
+    min-width: 92.3%;
+    /*Bu da cok onemli...*/
+  }
+  .slider-container {
+    width: 100%;
+    padding: 0 0 0 0rem;
+  }
+  .cart-container {
+    width: 24rem;
+    height: 32rem;
+  }
+}
+
+@media only screen and (max-width: 680px) {
+  .happenings-ekstraPaid {
+    margin-left: 0rem;
+  }
+  .extraPaid-container {
+    width: 80%;
+  }
+  .extraPaid-container-cart {
+    margin: 1rem;
+    width: 24rem;
+    /*Burasi onemli...*/
+    min-width: 92.5%;
+    /*Bu da cok onemli...*/
+  }
+}
+
+@media only screen and (max-width: 580px) {
+  .happenings-ekstraPaid {
+    margin-left: -.1rem;
+  }
+  .extraPaid-container {
+    width: 88%;
+  }
+  .extraPaid-container-cart {
+    margin: 1rem;
+    width: 24rem;
+    /*Burasi onemli...*/
+    min-width: 92%;
+    /*Bu da cok onemli...*/
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .happenings-ekstraPaid {
+    margin-left: 7.5%;
+  }
+  .extraPaid-container {
+    width: 98%;
+  }
+  .extraPaid-container-cart {
+    margin: 1rem;
+    width: 24rem;
+    /*Burasi onemli...*/
+    min-width: 89.2%;
+    /*Bu da cok onemli...*/
   }
 }
 
@@ -1263,35 +1581,7 @@ text-overflow:hidden;
 
 .search-happening-btn {
   color: #000;
-  margin-left: 10.4%;
-}
-
-@media screen and (max-width: 600px) {
-  .filterBar-container {
-    height: 11.6rem;
-    justify-content: flex-start;
-  }
-  /*Bu icerdeki 2 satirin ilk containeri ve hicbirsey yapmayarak onlarin olagan sekilde alt alta gelmesini sagliyor...
-  .filterBar-subcontainer {}*/
-  .filterBar-container-div {
-    flex-direction: column;
-    margin-bottom: 0.4rem;
-  }
-  .filterBar-container__item {
-    margin-top: .4rem;
-  }
-  .search-happening-btn {
-    color: #000;
-    margin-left: 32.4%;
-  }
-}
-
-@media only screen and (min-width: 1700px) {
-  .filterBar-container {
-    width: 100%;
-    height: 8rem;
-    padding: 0 15%;
-  }
+  margin-left: 18%;
 }
 
 .search-btn {
@@ -1351,6 +1641,95 @@ text-overflow:hidden;
   outline: none;
 }
 
+@media only screen and (max-width: 1500px) {
+  .search-happening-btn {
+    margin-left: 18.5%;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .filterBar-subcontainer {
+    margin-left: 15%;
+  }
+  .search-happening-btn {
+    margin-left: 18.5%;
+  }
+  .filterBar-container__item {
+    margin-top: .4rem;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .filterBar-container {
+    height: 11.6rem;
+    justify-content: flex-start;
+    margin-left: -2.5rem;
+  }
+  .filterBar-container-div {
+    margin-bottom: 0.4rem;
+  }
+  .filterBar-container__item {
+    margin-top: .4rem;
+    margin-left: .5rem;
+  }
+  .end-date-item {
+    margin-left: -4rem;
+  }
+  .date-title {
+    width: 6rem;
+    text-align: right;
+    font-size: 1rem;
+    margin-right: 0.3rem;
+  }
+  .input {
+    width: 65%;
+  }
+  .filterBar-container__item-category {
+    width: 49%;
+    padding: 0.2rem .5rem;
+    color: black;
+  }
+  .category-input {
+    width: 50%;
+  }
+  .date-field {
+    padding: 0.2rem 1.2rem;
+    border-radius: 0.2rem;
+    border: none;
+    outline: none;
+  }
+  .search-happening-btn {
+    color: #000;
+    margin-left: 9.5%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .filterBar-container {
+    height: 11.6rem;
+    justify-content: center;
+  }
+  /*Bu icerdeki 2 satirin ilk containeri ve hicbirsey yapmayarak onlarin olagan sekilde alt alta gelmesini sagliyor...
+  .filterBar-subcontainer {}*/
+  .filterBar-container-div {
+    flex-direction: column;
+  }
+  .filterBar-container__item {
+    margin-bottom: 0.4rem;
+  }
+  .search-happening-btn {
+    color: #000;
+    margin-left: 32.4%;
+  }
+}
+
+@media only screen and (min-width: 1700px) {
+  .filterBar-container {
+    width: 100%;
+    height: 8rem;
+  }
+}
+
 .filterBar-container__item-category {
   background-color: #fff;
   padding: 0.2rem 1.2rem;
@@ -1378,6 +1757,9 @@ text-overflow:hidden;
 }
 
 @media screen and (max-width: 600px) {
+  .end-date-item {
+    margin-left: 0.4rem;
+  }
   .filterBar-title {
     margin-left: -55%;
   }
@@ -1396,6 +1778,10 @@ text-overflow:hidden;
   .input {
     width: 76%;
     font-size: .7rem;
+  }
+  .search-happening-btn {
+    margin-left: 34%;
+    margin-top: .3rem;
   }
   .filterBar-container__item-category {
     width: 38%;

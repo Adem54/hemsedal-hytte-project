@@ -130,6 +130,76 @@
   }
 }
 
+
+
+
+
+@media only screen and (min-width: 1000px){
+ 
+
+
+.category_list {
+  position: absolute; //bu isaret baloncugunu gosteriyor kaldirirsak gostermiyor....asagidaki margin left eger position kullnrisak left olacak.
+  width: 52rem;
+  left: 20%;
+  // margin-top: -1rem;
+
+}
+
+.category_list__item > input {
+  width: 0.8rem;
+  height: 0.8rem;
+  margin: 0 .3rem;
+}
+
+.category_list:after {
+  content: "";
+  left: 14rem;
+  top: -15px;
+}
+ 
+}
+
+
+
+//FILTER BARIN RESPONSIVE LIK DURUMUNU AYARLAYACAGIZ BURDA MOBILDE SONRASINI.....
+@media only screen and (max-width: 1000px) {
+
+  .category_list {
+    position: absolute; //bu isaret baloncugunu gosteriyor kaldirirsak gostermiyor....asagidaki margin left eger position kullnrisak left olacak.
+    width: 12rem;
+    left: 15%;
+    // margin-top: -1rem;
+ 
+  }
+
+  .category_list__item {
+    width: 66%;
+  }
+
+  .category_list__item > input {
+    width: 0.8rem;
+    height: 0.8rem;
+    margin: 0 0.2rem;
+  }
+
+  .category_list:after {
+    content: "";
+    left: 5rem;
+    top: -15px;
+  }
+
+
+}
+
+
+
+
+
+
+
+
+
 @media screen and (max-width: 600px) {
   .category_list {
     position: absolute; //bu isaret baloncugunu gosteriyor kaldirirsak gostermiyor....asagidaki margin left eger position kullnrisak left olacak.
@@ -197,19 +267,6 @@
 
 //READMORE-MODAL
 .modal {
-  // width: 100%;
-  // padding: 0.4rem;
-  // height: 40rem;
-  // display: flex;
-  // justify-content: center;
-  // // background-color:#0e385e;
-  // align-items: center;
-  // position: relative;
-  // border-radius: 0.5rem;
-  // // top: 0;
-  // z-index: 5;
-  // transition: all;
-  // transition-delay: 1s;
 
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */

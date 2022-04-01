@@ -61,13 +61,91 @@
 
   <!--Jquery sematic-ui date-picker-->
   <script>
+function runSlider(){
+  console.log("RunSlider: ")
+      let span=document.getElementsByClassName("span");
+	let cartContainer = document.getElementsByClassName('extraPaid-container-cart');
+  console.log("cartContainer: ",cartContainer);
+  console.log("Number of box: ", cartContainer.length);
+  let numberByBox=cartContainer.length;
+let cartContainer_page=Math.ceil(cartContainer.length/3);
+
+let l=0;
+let movePer = 33.44;//Bu yuzde degisimi gosteriyor
+	let maxMove = (numberByBox-2)*33;//Eger ekranda 3 tane kutu gosterceksek bu eger 4 kutu dusunursek o zamn da 3 cikariiriz...Cunku en son kutuyu gosterdkten sonra basa donmesini istiyoruz yoksa en son kutudan sonra kutu olmasada bosluga dogru donecek bunun olmamasi icin...
+	// mobile_view	
+	let mob_view = window.matchMedia("(max-width: 1090px)");
+
+  if (mob_view.matches || window.innerWidth<1090)
+	 {
+		console.log("Ekran boyutu degisti")
+	 	movePer = 49.5;//Eger ekran degisimi css deki ile cakisrsa uyusursa o zaman 50% oraninda harket etsin demektir
+	 maxMove = (numberByBox-1)*48.5;
+   
+	 }
+   
+ 
+
+   let mob_view2 = window.matchMedia("(max-width: 720px)");
+
+if (mob_view2.matches || window.innerWidth<720)
+ {
+  console.log("Ekran boyutu 600 un altinda")
+   movePer = 98.5;//Eger ekran degisimi css deki ile cakisrsa uyusursa o zaman 50% oraninda harket etsin demektir
+ maxMove = numberByBox*98;
+ }
+
+
+
+   let right_mover = ()=>{
+     console.log("right mover")
+		l = l + movePer;
+    console.log("l: ",l);
+    console.log("movePer: ",movePer)
+		if (cartContainer_page == 1){l = 0; }
+    for(let i=0; i<cartContainer.length; i++)
+		{
+      let item=cartContainer[i];
+     
+			if (l > maxMove){
+        l = l - movePer;//Burayi yapmazsak bos sayfaya dogru donmeye devam eder
+        l=0;
+      }
+			item.style.left = '-' + l + '%';
+    
+		}
+	}
+
+  let left_mover = ()=>{
+		l = l - movePer;
+    console.log("movePer: ",movePer);
+		console.log("l left mover: ", l);
+		if (l<=0){l = 0;}
+		for(const i of cartContainer){
+			if (cartContainer_page>1){
+				i.style.left = '-' + l + '%';
+        console.log("i style left: ", i.style.left);
+			}
+     
+		}
+	}
+
+/* 
+	setInterval(()=>{
+console.log("hello")
+right_mover();
+	},2000)
+*/
+	span[1].onclick = ()=>{right_mover();}
+	span[0].onclick = ()=>{left_mover();}
+      
+    }
+
 
 
 updateView();
       function updateView() {
         
- 
-
 
         let { page } = model.app;
 
@@ -77,9 +155,10 @@ updateView();
           case "admin":
             return updateAdminView();
 
-          default:
-            break;
+         
         }
+
+      
 
        
       }
