@@ -3,285 +3,254 @@ function updateUserView() {
   document.getElementById("app").innerHTML = `  
     ${createHeaderTopHtml()}
     ${createEkstraPaidSlider()}
-
-${createSearchHappeningBar()}
-
-${
-  model.inputs.userPage.isCategoryBtnClicked
-    ? createMultipleChoiceCategory()
-    : ""
-}
-
-${createFilterButtons()}
-${createHappeningList()}
-
+    ${createSearchHappeningBar()}
+    ${
+      model.inputs.userPage.isCategoryBtnClicked
+        ? createMultipleChoiceCategory()
+        : ""
+    }
+    ${createFilterButtons()}
+    ${createHappeningList()}
     `;
-  //  document.body.scrollTop = getYPosition();
-  // console.log("positionCheck:; ", getYPosition());
   runSlider();
 }
 
-function createHeaderTopHtml() {
-  let headerTop = ``;
-  headerTop += `
-    <header class="fullscreen-header">
-    <nav class="nav nav-top">
- 
+
+function createLogo(){
+  return `
       <figure class="nav__list">
-        <a href="" class="nav__list-item"> Hemsedal-logo</a>
+          <a href="" class="nav__list-item"> Hemsedal-logo</a>
       </figure>
-      <ul class="nav__list nav-menu  
-      ${model.inputs.userPage.isMobilToggleMenu ? 'responsive' : ''}
-      
-      ">
-        <li><a class="nav__list-item" href="">Hjem</a></li>
-        <li>
-          <a class="nav__list-item create-happening-btn " href="#adminPage"
-          onclick="model.app.page='admin'; updateView()"
-          >
-            <span class="icon-plus"> </span>
-            <span>Oprett ny happening</span></a>
-        </li>
-        <li><a class="nav__list-item" href="">Logg in</a></li>
-      </ul>
-      
-      <a class="nav-mobil-icon" onclick="showMobilMenu()"><i class="fa-solid fa-bars"></i></a>
-    </nav>
-    <h1 class="header__title">HVA SKJER I HEMSEDAL!</h1>
- 
-  </header>
-    
-    `;
-  return headerTop;
+  `;
 }
 
-function showMobilMenu(){
-  console.log("responsive Mobil Menu")
-  model.inputs.userPage.isMobilToggleMenu=!model.inputs.userPage.isMobilToggleMenu;
-  updateView();
+function navMenu(){
+  return `
+    <ul class="nav__list nav-menu  
+    ${model.inputs.userPage.isMobilToggleMenu ? 'responsive' : ''}
+    ">
+      <li><a class="nav__list-item" href="">Hjem</a></li>
+      <li>
+        <a class="nav__list-item create-happening-btn " href="#adminPage"
+        onclick="model.app.page='admin'; updateView()">
+        <span class="icon-plus"> </span>
+        <span>Oprett ny happening</span></a>
+      </li>
+      <li><a class="nav__list-item" href="">Logg in</a></li>
+    </ul>
+  
+  `;
+}
+
+function createMobilMenu(){
+  return `
+    <a class="nav-mobil-icon" onclick="showMobilMenu()">
+      <i class="fa-solid fa-bars"></i>
+    </a> 
+  `;
+}
+
+
+function createHeaderTopHtml() {
+ return `
+    <header class="fullscreen-header">
+      <nav class="nav nav-top">
+        ${createLogo()}
+        ${navMenu()}
+        ${createMobilMenu()}
+      </nav>
+        <h1 class="header__title">HVA SKJER I HEMSEDAL!</h1>
+    </header>
+     `; 
+}
+
+
+
+
+
+function createIconOnCartImage(icon="fa-solid fa-bullhorn"){
+  return `
+  <div class="icon-container">
+    <i class="${icon}"></i>
+  </div>
+
+  `;
+}
+
+function createEkstraPaidDayAndMonthField(timeUnitName,timeUnitValue){
+      return `
+          <span class="cart-calender-${timeUnitName}  ">${
+            timeUnitValue}
+          </span> 
+      `;       
+}
+
+
+function getCalenderDateField(icon,title){
+  return `
+  <div class="cart-calender-text">
+      <i class="fa-solid calender-icon fa-${icon}"></i>
+      <span class="cart-calender-location-dot">
+      ${title}
+      </span>
+  </div>
+  
+  `;
+}
+
+function createMoveIcon(icon){
+  return ` <span class="span">${icon};</span>`;
 }
 
 function createEkstraPaidSlider() {
-  //random picture icindeki ne ile ilgili resmin gelecegini dinamik yapmak icin ? sonraki kisma kategori ismini random bir sekilde getirecegiz....
-  let ekstraPaidSlider = ``;
-  ekstraPaidSlider += `
+  let ekstraPaidSlider = `
     <div class="slider-title main-title">
        <h1>Ekstrabetalte Aktiviteter</h1>
     </div>
-    <section class="happenings happenings-ekstraPaid">
-    <p class="moveIcons">
-    <span class="span">&#139;</span>
-    <span  class="span">&#155;</span>
-  </p>
-    <section class="extraPaid-container">
-${createReadMoreModal() }
-    
+<section class="happenings happenings-ekstraPaid">
+  <p class="moveIcons">
+  ${createMoveIcon('&#139')}
+  ${createMoveIcon('&#155')}
+  </p>    
+  <section class="extraPaid-container">
+    ${createReadMoreModal() }
     `;
-/*${createReadMoreModal1()} */
-    let result=getHappeningsFromStorage().sort((a,b)=>{
+  let result=getHappeningsFromStorage().sort((a,b)=>{
       return new Date(a.happeningStartDate)-new Date(b.happeningStartDate)
     });
   let item = ``;
   let extraPaidHappenings = getHappeningByPaymentType(result, 3);
-
-
   for (let i = 0; i < extraPaidHappenings.length; i++) {
     let extraPaidHappening = extraPaidHappenings[i];
     let category = getCategoryById(
       model.inputs.userPage.categories,
       extraPaidHappening.categoryId
     );
-
     let categoryTitleInEnglish = translateCategoryTitleToEnglish(
       category.title
     );
     let startDate = extraPaidHappening.happeningStartDate;
     let endDate = extraPaidHappening.happeningEndDate;
     let startTime = extraPaidHappening.happeningStartTime;
-  
     let endTime = extraPaidHappening.happeningEndTime;
     let startDateAllFormats = getMyAllDateFormats(startDate);
     let endDateAllFormats = getMyAllDateFormats(endDate);
-
-    item += `
-
-<div 
-id="${extraPaidHappening.id}"
-class=" extraPaid-container-cart ">
-
-<div class="cart-image"
-
-style="
-background-image: url(
-   ${
-     extraPaidHappening.imageUrl ||
-     `https://source.unsplash.com/random/?${categoryTitleInEnglish}`
-   }
-)
-
-"
-
->
-<div class="announcement-icon icon-container">
-<i class="fa-solid fa-bullhorn"></i>
-</div>
-<div class="category-icon icon-container">
-  <span class="${category.icon}"></span>
-</div>
-</div>
-
-
-
-<div class="cart-calender">
-<div class="cart-calender-date">
-<span class="cart-calender-day">${startDateAllFormats.day}</span>
-<span class="cart-calender-month"> ${startDateAllFormats.monthByShortText.toUpperCase()}</span>
-</div>
-
-<div class="cart-calender-content">
-<!-- <span class="cart-calender-title">Konsert</span> -->
-<h3>${extraPaidHappening.title}</h3>
-
-<div>
-
-<div class="cart-calender-text">
-  <i class="fa-solid calender-icon fa-calendar-days"></i>
-  <span class="cart-calender-wholeDate"
-    >${startDateAllFormats.monthByLongText} ${
+    //Bunlarin aynisini asagida HappeningsListte de kullandik bir kontrol edelim kod tekrari yapmamak icin
+    let startEndTime=`${startTime}  - ${endTime}`;
+    let startEndDays=`
+    ${startDateAllFormats.monthByLongText} ${
       startDateAllFormats.dayByOneDigit
     }, ${startDateAllFormats.year} - ${endDateAllFormats.monthByLongText} ${
       endDateAllFormats.dayByOneDigit
-    }, ${endDateAllFormats.year}</span
-  >
-</div>
-<div class="cart-calender-text">
-  <i class="fa-solid calender-icon fa-clock"></i>
-  <span class="cart-calender-time">${startTime}  - ${endTime}</span>
-</div>
-<div class="cart-calender-text">
-  <i class="fa-solid calender-icon fa-location-dot"></i>
-  <span class="cart-calender-place"
-    >Hemsedal</span
-  >
-</div>
-</div>
+    }, ${endDateAllFormats.year}
+    
+    `;
+    item += `
+        <div 
+          id="${extraPaidHappening.id}"
+          class=" extraPaid-container-cart ">
+          <div class="cart-image"
+          style="
+          background-image: url(
+            ${
+              extraPaidHappening.imageUrl ||
+              `https://source.unsplash.com/random/?${categoryTitleInEnglish}`
+            })"
+         >
+           ${createIconOnCartImage()}
+           ${createIconOnCartImage(category.icon)}
+        </div>
+          <div class="cart-calender">
+            <div class="cart-calender-date">
+            ${createEkstraPaidDayAndMonthField('day',startDateAllFormats.day)}
+            ${createEkstraPaidDayAndMonthField('month',startDateAllFormats.monthByShortText.toUpperCase())}
+            </div>
+              <div class="cart-calender-content">
+                <h3>${extraPaidHappening.title}</h3>
+              <div>
+             ${getCalenderDateField('calendar-days',startEndDays)}
+             ${getCalenderDateField('clock',startEndTime)}
+             ${getCalenderDateField('location-dot','Hemsedal')}
+          </div>
+        </div>
 
-</div>
-</div>
-
-<div class="read-more">
-<a onclick="readMore('${extraPaidHappening.id}')" >
-<span>Les mer</span> <i class="fa-solid fa-right-long"></i>
-</a>
-</div>
-</div>
-
+      </div>
+        ${readMoreBtn(extraPaidHappening.id)}
+   </div>
     `;
   }
-
   ekstraPaidSlider +=
     item +
     `
-
-    </section> </section>
+  </section>
+</section>
        `;
-
   return ekstraPaidSlider;
 }
 
+
+function createDatePicker(startOrEnd,StartOrEndValue){
+  const now = new Date();
+  now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+  return `
+  <div class="filterBar-container__item ${startOrEnd}-date-item">
+    <div class="${startOrEnd}-date-title date-title">
+      <span>${startOrEnd=='start' ? 'Start' : 'Slutt'} dato</span>
+    </div>
+    <div class="ui calendar ${startOrEnd}-date" id="${startOrEnd}-date">
+        <div class="ui">
+          <i class="calendar icon"></i>
+          <input 
+          min="${now.toISOString().slice(0, 16)}"
+          value="${
+            StartOrEndValue
+              ? StartOrEndValue
+              : (this.value = now.toISOString().slice(0, 16))
+          }"
+          onchange="${StartOrEndValue}=this.value;
+          "
+          class="input date-field" type="datetime-local" placeholder="${startOrEnd} dato"
+          >
+        </div>
+    </div>
+ </div>
+  
+  
+  `;
+}
+
 function createSearchHappeningBar() {
-  //Input value yi guncel tutuyoruz bu sekilde hangi tarih filtresi secilirse o value ye yaziliyor
   getStartEndDateCurrentValue();
   const now = new Date();
   now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
   let searchHappeningBar = ``;
   searchHappeningBar += `
-    <div class="filterBar-title"><h2>Søk Happening</h2></div>
+<div class="filterBar-title"><h2>Søk Happening</h2></div>
 <section class="filterBar-container">
-
-<div class="filterBar-subcontainer">
-  <div class="filterBar-container-div">
-  
-    <div class="filterBar-container__item">
-      <div class="start-date-title date-title">
-        <span>Start dato</span>
-      </div>
-        
-        <div class="ui calendar start-date" id="start-date">
-          <div class="ui  ">
-            <i class="calendar icon"></i>
-            <input 
-            min="${now.toISOString().slice(0, 16)}"
-            value="${
-              model.inputs.userPage.chosenDateFrom
-                ? model.inputs.userPage.chosenDateFrom
-                : (this.value = now.toISOString().slice(0, 16))
-            }"
-            onchange="model.inputs.userPage.chosenDateFrom=this.value;
-            "
-            class="input date-field" type="datetime-local" placeholder="Start dato"
-            >
-           </div>
-         </div>
-      
+  <div class="filterBar-subcontainer">
+    <div class="filterBar-container-div">
+      ${createDatePicker('start',model.inputs.userPage.chosenDateFrom)}
+      ${createDatePicker('end',model.inputs.userPage.chosenDateTo)}
     </div>
-   
-
-    <div class="filterBar-container__item end-date-item ">
-    <div class="end-date-title date-title">
-      <span>Slutt dato</span>
-    </div>
-      
-      <div class="ui calendar end-date" id="end-date">
-        <div class="ui">
-          <i class="calendar icon"></i>
-          <input
-          min="${now.toISOString().slice(0, 16)}"
-          value="${
-            model.inputs.userPage.chosenDateTo
-              ? model.inputs.userPage.chosenDateTo
-              : (this.value = now.toISOString().slice(0, 16))
-          }"
-          onchange="model.inputs.userPage.chosenDateTo=this.value"
-          class="input date-field" type="datetime-local" placeholder="Slutt dato"
-          
-          >
-        </div>
-      </div>
-  </div>
-  </div>
-
-
-        `;
-
-  
+       `;
   searchHappeningBar +=
-  
     `
     <div class="filterBar-container-div category-searhBtnDiv">
-  <div class="category-container">
-    <div class="filterBar-container__item  category_filter">
-     <span class="category_label date-title"> Kategori</span>
-      <div class="filterBar-container__item-category  category_field_selectBtn  calendar"  >     `;
-
-  let categoryIconBtn = `
-    
-    <a for="kategori" onclick="model.inputs.userPage.isCategoryBtnClicked=!model.inputs.userPage.isCategoryBtnClicked; updateView() "
-   
-    >
-    <input
-    class="category-input"
-    value="Kategori"
-     style="border:none; outline:none " id="kategori" type="text" >
-    <i class="fa-solid category-up-down fa-angle-${
+      <div class="category-container">
+        <div class="filterBar-container__item  category_filter">
+          <span class="category_label date-title"> Kategori</span>
+        <div class="filterBar-container__item-category  category_field_selectBtn  calendar"  > `;
+    let categoryIconBtn = `
+    <a for="kategori" onclick="model.inputs.userPage.isCategoryBtnClicked=!model.inputs.userPage.isCategoryBtnClicked; updateView() ">
+      <input
+      class="category-input"
+      value="Kategori"
+      style="border:none; outline:none " id="kategori" type="text" >
+      <i class="fa-solid category-up-down fa-angle-${
       model.inputs.userPage.isCategoryBtnClicked ? "up" : "down"
-    }"></i>
-    
-    
+      }"></i>
     </a>
-    
     `;
-
   searchHappeningBar +=
     categoryIconBtn +
     `  <span>
@@ -290,148 +259,133 @@ function createSearchHappeningBar() {
         ? ""
         : getselectedCategoryCountNumber(model.inputs.userPage.categories)
     }
-      </span>
+        </span>
       </div>
     </div>
-
   </div>
-
-
-
-<div class="search-happening-btn ">
-
-<button
-onclick="
- searchHappenings(
-    getHappeningAsideFromExtraPaid(model.data.happenings),
-    model.inputs.userPage.categories,
-    model.inputs.userPage.chosenDateFrom,
-    model.inputs.userPage.chosenDateTo
- ); 
- model.inputs.userPage.filterBtnState='';
- updateView()"
-class="search-btn   ">Søk Happening &nbsp &nbsp<i class="fa-solid fa-play"></i></button></div>
-</div>
+  <div class="search-happening-btn ">
+  <span class="search-happening-btnLabel"> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+  </span>
+    <button
+    onclick="
+    searchHappenings(
+        getHappeningAsideFromExtraPaid(model.data.happenings),
+        model.inputs.userPage.categories,
+        model.inputs.userPage.chosenDateFrom,
+        model.inputs.userPage.chosenDateTo
+    ); 
+    model.inputs.userPage.filterBtnState='';
+    updateView()"
+    class="search-btn   ">Søk Happening &nbsp &nbsp<i class="fa-solid fa-play"></i></button>
+  </div>
+ </div>
 </section>
-    
-    `;
-
+      `;
   return searchHappeningBar;
 }
 
 function createMultipleChoiceCategory() {
   let multipleCoiceCategory = ``;
   multipleCoiceCategory += `
-    <section class="category-container__item   category_list    ">
-  <div class="category_list__item  " >
-    <input ${getChecked(model.inputs.userPage.isSelectedAll)} 
-    type="checkbox"
-    onclick="selectAllOrNone(this.checked)" >
-    <label> Select All</label>
-  </div>   `;
+  <section class="category-container__item   category_list">
+       <div class="category_list__item  " >
+          <input ${getChecked(model.inputs.userPage.isSelectedAll)} 
+           type="checkbox"
+           onclick="selectAllOrNone(this.checked)" >
+          <label> Select All</label>
+          </div>   `;
 
-  let categories = model.inputs.userPage.categories;
-  let categoryCheckBox = ``;
-  for (let i = 0; i < categories.length; i++) {
-    let category = categories[i];
+      let categories = model.inputs.userPage.categories;
+      let categoryCheckBox = ``;
+      for (let i = 0; i < categories.length; i++) {
+        let category = categories[i];
 
-    categoryCheckBox += `
-   <div class="category_list__item  " >
-    <input ${getChecked(
-      category.isSelected
-    )}  onclick="toggleCategorySelected(${category.id})" type="checkbox" >
-    <label> ${category.title}</label>
-  </div> 
-   
+     categoryCheckBox += `
+      <div class="category_list__item  " >
+        <input ${getChecked(
+          category.isSelected
+        )}  onclick="toggleCategorySelected(${category.id})" type="checkbox" >
+        <label> ${category.title}</label>
+      </div> 
    `;
   }
-
   multipleCoiceCategory += categoryCheckBox + `</section>`;
-
   return multipleCoiceCategory;
+}
+
+
+//Refactoring
+function getFilterBtn(state,btnValue){
+  return `
+  <div>
+    <button
+    class="filter-btn ${getFilterBtnState(state)}"
+    onclick="model.inputs.userPage.filterBtnState='${state}';
+    updateView()">${btnValue}
+    </button>   
+  </div>
+  `;
+}
+
+function getFilterBtnState(state){
+  return model.inputs.userPage.filterBtnState==state ? 'active' : '';
 }
 
 function createFilterButtons() {
   let filterButtons = ``;
   filterButtons += `
     <div class="filterBtns-wrapper" >
-<div   class="happenings-title main-title">
-<h1>Happenings</h1>
-</div>
-<div class="filterBtns-container">
-<div><button
-
-class="filter-btn ${model.inputs.userPage.filterBtnState=='tomorrow' ? 'active' : ''} "
- onclick="model.inputs.userPage.filterBtnState='tomorrow';
- updateView()">I morgen</button></div>
-<div><button
-onclick="model.inputs.userPage.filterBtnState='this-week';
- updateView()"
-class="filter-btn  ${model.inputs.userPage.filterBtnState=='this-week' ? 'active' : ''}">Denne uka</button></div>
-<div><button
-onclick="model.inputs.userPage.filterBtnState='this-month';
- updateView()"
-class="filter-btn ${model.inputs.userPage.filterBtnState=='this-month' ? 'active' : ''} ">Denne måneden</button></div>
-</div>
-</div>
-    
-    `;
-
-  return filterButtons;
+        <div   class="happenings-title main-title">
+            <h1>Happenings</h1>
+        </div>
+        <div class="filterBtns-container">
+          ${getFilterBtn('tomorrow','I morgen')}
+          ${getFilterBtn('this-week','Denne uka')}
+          ${getFilterBtn('this-month','Denne måneden')}
+       </div>
+    </div>
+`;
+ return filterButtons;
 }
 
-function createHappeningList() {
+function createNonExtraPaidDayMonthField(timeUnitName,timeUnitValue){
+  return `
+    <span class="cart-calender-${timeUnitName} nonExtraPaid-${timeUnitName} ">${timeUnitValue}
+    </span>
+  `;
+}
 
+
+
+function createHappeningList() {
   let { categories } = model.inputs.userPage;
   let { chosenDateFrom, chosenDateTo } = model.inputs.userPage;
   let result=getHappeningsFromStorage().sort((a,b)=>{
     return new Date(a.happeningStartDate)-new Date(b.happeningStartDate)
   });
-  
-  
-
   let happeningsWithoutExtraPaid = getHappeningAsideFromExtraPaid(
     result
   );
-  //searchHappenings working fra begynnelsen
   let getFilteredData = searchHappenings(
     happeningsWithoutExtraPaid,
     categories,
     chosenDateFrom,
     chosenDateTo
   );
-  
-
   let happeningList = ``;
-  /*  
-  ${model.inputs.userPage.isReadMoreNoneExtraPaidBtnClicked ? createReadMoreModal() : ""}
-  */
   happeningList += `
-   
 <section class="happenings">
-<div class="container1 slider-container nonExtraPaidContainer ">
-${createReadMoreModal() }
-
+    <div class="container1 slider-container nonExtraPaidContainer ">
+    ${createReadMoreModal() }    
 `;
-
-
   let happeningsDiv = ``;
-
-  // for(let i=0; i<getFilteredData.length; i++){
-  //   let happening=getFilteredData[i];
-  //   happeningsDiv+=`
-  //   <div class="box box1"> ${happening.title}</div>
-  //   `;
-  // }
 
   for (let i = 0; i < getFilteredData.length; i++) {
     let happening = getFilteredData[i];
-  
     let category = getCategoryById(
       model.inputs.userPage.categories,
       happening.categoryId
     );
-
     let categoryTitleInEnglish = translateCategoryTitleToEnglish(
       category.title
     );
@@ -439,180 +393,75 @@ ${createReadMoreModal() }
     let endDate = happening.happeningEndDate;
     let startTime = happening.happeningStartTime;
     let endTime = happening.happeningEndTime;
+    let startEndTime=`${startTime}  - ${endTime}`;
     let startDateAllFormats = getMyAllDateFormats(startDate);
     let endDateAllFormats = getMyAllDateFormats(endDate);
-    happeningsDiv += `
-<div id="${happening.id}" class="cart-container">
-<div class="cart-image"
-
-style="
-background-image: url(
-${
-  happening.imageUrl ||
-  `https://source.unsplash.com/random/?${categoryTitleInEnglish}`
-}
-)
-
-"
-
->
-
-<div class="category-icon icon-container">
-<span class="${category.icon}"></span>
-</div>
-</div>
-
-<div class="cart-calender">
-<div class="cart-calender-date nonExtraPaid">
-<span class="cart-calender-day nonExtraPaid-day ">${
-      startDateAllFormats.day
-    }</span>
-<span class="cart-calender-month nonExtraPaid-month"> ${startDateAllFormats.monthByShortText.toUpperCase()}</span>
-</div>
-
-<div class="cart-calender-content">
-<!-- <span class="cart-calender-title">Konsert</span> -->
-<h3>${happening.title}</h3>
-
-<div>
-
-<div class="cart-calender-text">
-<i class="fa-solid calender-icon fa-calendar-days"></i>
-<span class="cart-calender-wholeDate"
- >${startDateAllFormats.monthByLongText} ${
+    let startEndDays=`
+    ${startDateAllFormats.monthByLongText} ${
       startDateAllFormats.dayByOneDigit
     }, ${startDateAllFormats.year} - ${endDateAllFormats.monthByLongText} ${
       endDateAllFormats.dayByOneDigit
-    }, ${endDateAllFormats.year}</span
->
-</div>
-<div class="cart-calender-text">
-<i class="fa-solid calender-icon fa-clock"></i>
-<span class="cart-calender-time">${startTime}  - ${endTime}</span>
-</div>
-<div class="cart-calender-text">
-<i class="fa-solid calender-icon fa-location-dot"></i>
-<span class="cart-calender-place"
- >Hemsedal</span
->
-</div>
-</div>
+    }, ${endDateAllFormats.year}
+    
+    `;
+    happeningsDiv += `
+        <div id="${happening.id}" class="cart-container">
+          <div class="cart-image"
+          style="
+          background-image: url(
+          ${
+            happening.imageUrl ||
+            `https://source.unsplash.com/random/?${categoryTitleInEnglish}`
+          }
+          )
+          ">
+          ${createIconOnCartImage(category.icon)}
 
-</div>
-</div>
-
-<div class="read-more">
-<a onclick="readMore('${happening.id}')">
-<span>Les mer</span> <i class="fa-solid fa-right-long"></i>
-</a>
-</div>
-</div>
-
- `;
-  }
-
-  // <div class="box box1"> 1</div>
+         </div>
+          <div class="cart-calender">
+             <div class="cart-calender-date nonExtraPaid">
+                ${createNonExtraPaidDayMonthField('day', startDateAllFormats.day)}
+                ${createNonExtraPaidDayMonthField('month', startDateAllFormats.monthByShortText.toUpperCase())}
+             </div>
+             <div class="cart-calender-content">
+                <h3>${happening.title}</h3>
+             <div>
+             ${getCalenderDateField('calendar-days',startEndDays)}
+             ${getCalenderDateField('clock',startEndTime)}
+             ${getCalenderDateField('location-dot','Hemsedal')}
+           </div>  
+          </div>
+        </div>
+         ${readMoreBtn(happening.id)}
+      </div>
+             
+              `;
+               }
 
   happeningList += happeningsDiv + `</div></section> `;
-
   return happeningList;
 }
 
-function createReadMoreModal1() {
-  let readMoreModal = ``;
-  //kommer begynnelsen med ingen id 
-if(!model.inputs.userPage.clickedHappeningId)return readMoreModal;
-  let happeningId=model.inputs.userPage.clickedHappeningId;
-  let happening = findElementById(
-    model.data.happenings,
-    parseInt(happeningId)
-  );
-
-  let category = getCategoryById(
-    model.inputs.userPage.categories,
-    happening.categoryId
-  );
-  let categoryTitleInEnglish = translateCategoryTitleToEnglish(category.title);
-
-
-  let {
-    monthByToDigit,
-    monthByShortText,
-    year,
-    day
-  } = getMyAllDateFormats(happening.happeningStartDate);
-
-  let {
-    monthByToDigit:monthEndToDigit,
-    monthByShortText:monthEndShortText,
-    year:yearEndDate,
-    day:endDay
-  } = getMyAllDateFormats(happening.happeningEndDate);
-  let monthStartDate=doFirstLetterUpper(monthByShortText);
-let monthEndDate=doFirstLetterUpper(monthEndShortText);
-
-  readMoreModal += `
-  <section
-  style="
-  display:${model.inputs.userPage.isReadMoreExtraPaidBtnClicked ? 'flex' : 'none'};
-  position:absolute;
-  top:${document.getElementById(happeningId)?.offsetTop-130}px;
- 
-  "
-  onclick
-  class="modal modal1">
-  <div class="modal-wrapper">
-  <div class="modal-image"
-  style="
-background-image: url(
-   ${
-     happening.imageUrl ||
-     `https://source.unsplash.com/random/?${categoryTitleInEnglish}`
-   }
-)
-
-"
-  >  
-  <section class="modal-date"> 
-  <div class="modal-date__day">${day}</div>
-  <div class="modal-date__mon-year">
-  ${monthStartDate} ${year}
-  </div>
-  </section>
-  </div>
-  <div class="modal-description">
-      <div class="cancel-icon"><a href="#"  onclick="cancelModal()
-      " > 
-      <span class="icon-cross"></span>
-      </a></div>
-
-      <div class="modal-description__title">
-      <h1>
-      ${happening.title}</div>
-      </h1>
-      <div class="small-info">
-      <div> <span> Type:${category.title}</span></div>
-    
-      <div><span>Start dato:${day} ${monthStartDate} ${year} ${happening.happeningStartTime}
-      </span></div>
-<div> <span>Slutt dato:${endDay} ${monthEndDate} ${yearEndDate} ${happening.happeningEndTime}</span></div>     
-<div><span>Sted: Hemsedal</span></div>
-</div>
-      <div class="modal-description__text">${happening.description} </div>
-      
-  </div>
-</div>
-</section>
-  
-  `;
-
-    return readMoreModal;
+function readMoreBtn(id){
+return `
+        <div class="read-more">
+          <a onclick="readMore('${id}')">
+            <span>Les mer</span>
+            <i class="fa-solid fa-right-long"></i>
+          </a>
+        </div>
+`;
 }
-//Read-more olunca display block 
+
+function createReadMoreText(title,value){
+  return `
+        <div> 
+          <span> ${title}:${value}</span>
+        </div>
+  `;
+}
 
 function createReadMoreModal() {
-    //kommer begynnelsen med ingen id 
-console.log("id: ",model.inputs.userPage.clickedHappeningId)
     let readMoreModal = ``;
 if(!model.inputs.userPage.clickedHappeningId)  return readMoreModal;  
 
@@ -628,14 +477,12 @@ if(!model.inputs.userPage.clickedHappeningId)  return readMoreModal;
   );
   let categoryTitleInEnglish = translateCategoryTitleToEnglish(category.title);
 
-let a= 120;
   let {
     monthByToDigit,
     monthByShortText,
     year,
     day
   } = getMyAllDateFormats(happening.happeningStartDate);
-
   let {
     monthByToDigit:monthEndToDigit,
     monthByShortText:monthEndShortText,
@@ -643,61 +490,63 @@ let a= 120;
     day:endDay
   } = getMyAllDateFormats(happening.happeningEndDate);
   let monthStartDate=doFirstLetterUpper(monthByShortText);
-let monthEndDate=doFirstLetterUpper(monthEndShortText);
+  let monthEndDate=doFirstLetterUpper(monthEndShortText);
 
+  let startDate=`${day}  ${monthStartDate}  ${year}   ${happening.happeningStartTime}`;
+  let endDate=`${endDay}  ${monthEndDate}  ${yearEndDate}  ${happening.happeningEndTime}`;      
   readMoreModal += `
   <section
-  
-  onclick="cancelModal()"
-  class="modal
-  ${ model.inputs.userPage.isReadMoreNoneExtraPaidBtnClicked || model.inputs.userPage.isReadMoreExtraPaidBtnClicked? 'modal2' : ''}
-  ">
-  <div class="modal-wrapper">
-  <div class="modal-image"
-  style="
-background-image: url(
-   ${
-     happening.imageUrl ||
-     `https://source.unsplash.com/random/?${categoryTitleInEnglish}`
-   }
-)
+    onclick="cancelModal()"
+    class="modal
+    ${ model.inputs.userPage.isReadMoreNoneExtraPaidBtnClicked || model.inputs.userPage.isReadMoreExtraPaidBtnClicked? 'modal2' : ''}
+    ">
+    <div class="modal-wrapper">
+       <div class="modal-image"
+       style="
+        background-image: url(
+          ${
+            happening.imageUrl ||
+            `https://source.unsplash.com/random/?${categoryTitleInEnglish}`
+          }
+        )
 
-"
-  >
-  <section class="modal-date"> 
-  <div class="modal-date__day">${day}</div>
-  <div class="modal-date__mon-year">
-  ${monthStartDate} ${year}
-  </div>
+        "
+        >
+          <section class="modal-date"> 
+            <div class="modal-date__day">${day}</div>
+            <div class="modal-date__mon-year">
+            ${monthStartDate} ${year}
+            </div>
+          </section>
+       </div>
+        <div class="modal-description">
+          <div class="cancel-icon">
+            <a   onclick="cancelModal()"> 
+              <span class="icon-cross"></span>
+            </a>
+          </div>
+          <div class="modal-description__title">
+            <h1>
+            ${happening.title}
+            </h1>
+          </div>
+          <div class="small-info">
+              ${createReadMoreText('Type',category.title)}
+              ${createReadMoreText('Start dato',startDate)}
+              ${createReadMoreText('Slutt dato',endDate)}
+              <div>
+                  <span>
+                    Sted: Hemsedal
+                  </span>
+              </div>
+          </div>
+          <div class="modal-description__text">${happening.description} 
+          </div>
+      </div>
+    </div>
   </section>
-
-  </div>
-  <div class="modal-description">
-      <div class="cancel-icon"><a   onclick="cancelModal()
-      " > 
-      <span class="icon-cross"></span>
-      </a></div>
-
-      <div class="modal-description__title">
-      <h1>
-      ${happening.title}</div>
-      </h1>
-      <div class="small-info">
-      <div> <span> Type:${category.title}</span></div>
-    
-      <div><span>Start dato:${day} ${monthStartDate} ${year} ${happening.happeningStartTime}
-      </span></div>
-<div> <span>Slutt dato:${endDay} ${monthEndDate} ${yearEndDate} ${happening.happeningEndTime}</span></div>     
-<div><span>Sted: Hemsedal</span></div>
-</div>
-      <div class="modal-description__text">${happening.description} </div>
-      
-  </div>
-</div>
-</section>
   
   `;
-
   return readMoreModal;
 }
 
@@ -707,7 +556,6 @@ function cancelModal() {
   console.log("Cancel Modal");
   model.inputs.userPage.isReadMoreExtraPaidBtnClicked = false;
   model.inputs.userPage.isReadMoreNoneExtraPaidBtnClicked = false;
- 
   updateView();
   
 }
@@ -715,10 +563,6 @@ function cancelModal() {
 
 
 function readMore(happeningId) {
-console.log("heppnginId: ", happeningId)
-//  console.log("cart-container div elementLeft:  ", document.getElementById(happeningId).offsetLeft);
-//   console.log("cart-container div elementTop:  ", document.getElementById(happeningId).offsetTop);
-  //Eger extrapaid ise isReadMoreExtraPaidi true yap.. degilse digerini
   let happening=findElementById(model.data.happenings,happeningId);
   let {paymentTypeId}=happening;
   console.log("paymetnTypeId: ", paymentTypeId);

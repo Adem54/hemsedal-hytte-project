@@ -50,6 +50,7 @@ function doFirstLetterUpper(text) {
   return result;
 }
 
+
 function translateCategoryTitleToEnglish(title = "event") {
   switch (title) {
     case "Familie og moro":
@@ -342,6 +343,15 @@ function getHappeningsByCheckedCategory(happenings, categories) {
 
   return result;
 }
+
+
+function showMobilMenu(){
+  model.inputs.userPage.isMobilToggleMenu=!model.inputs.userPage.isMobilToggleMenu;
+  updateView();
+}
+
+
+
 
 //happenings som vi lister opp er, bare betalt og gratis, og en månedslig
 

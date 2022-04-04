@@ -14,37 +14,25 @@ function updateAdminView(){
   class="btnUserPage "
   onclick="model.app.page='user'; updateView()"
   >  Tilbake til Bruker Side </button>
-  
   </div>
-
   <div
   class="form-content">
 <form id = "admin-form" class="admin-form"
 onsubmit="handleSubmit(event)"
 name="admin-form">
-
-
 ${createHappeningTitleHtml()}
-
 ${createHappeningDescHtml()}
-
 ${createHappeningImageHtml()}
-
 ${createMainCategoryHtml()}
-
 ${createPaymentCategoryHtml()}
-
 ${createHappeningDate()}
-
 ${createAnnouncementDate()}
-
 ${createWebUrlHtml()}
 <div class="submitBtn">
 <button
 ${model.inputs.adminPage.isSubmitted ? "disabled" : ""}
 type="submit"  class="btn btn-primary ">Publiser happening</button>
 </div>
-
 
 </form>
 </div>
@@ -209,19 +197,11 @@ onchange="choosePaymentType(${paymentType.id})"  />
 
 return paymentCategory;
 }
-{/* <input 
 
-class="payTypeInput" type="radio" id="${paymentType.id}" name="${paymentType.title}" 
-onchange="choosePaymentType(${paymentType.id})" 
-> */}
-// <input type="radio" name="tutorial" />
 
 function createHappeningDate(){
 const now = new Date();
 now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-//console.log("now; ", now);
-// console.log("localDateTime; ", now.toLocaleDateString("nb-no"))
-// console.log("localTime; ", now.toLocaleTimeString("nb-no").slice(0,5))
 let happeningDate=``;
 happeningDate+=`
 <label  class="formLabel"><span class="requiredStar">*</span><span >Happening start-end dato og klokkaslett</span></label>
@@ -263,19 +243,14 @@ ${model.inputs.adminPage.isSubmitted ? showValidationMessage(model.inputs.adminP
 return happeningDate;
 }
 
-
-//model.inputs.adminPage.happening.happeningStartDate
 function createAnnouncementDate(){
 const now = new Date();
 now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
 let announcementDate=``;
 announcementDate+=`
 <label  class="formLabelAnnounce"> <span >Annonsering start-end dato og klokkaslett</span></label>
-
 <div class="happeningformRow  happeningDate form-element ">
-
 <div class="happeningDateSection">
-
 <input
 min="${now.toISOString().slice(0, 16)}"
 class="form-date happeningDateInput"
