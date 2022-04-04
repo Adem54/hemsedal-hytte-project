@@ -263,9 +263,10 @@ function createSearchHappeningBar() {
       </div>
     </div>
   </div>
-  <div class="search-happening-btn ">
-  <span class="search-happening-btnLabel"> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-  </span>
+  <div class="search-happening-btn filterBar-container__item ">
+  <div class="end-date-title date-title">
+    <span></span>
+  </div>
     <button
     onclick="
     searchHappenings(

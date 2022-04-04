@@ -1620,12 +1620,6 @@ text-overflow:hidden;
   align-items: center;
 }
 
-.search-happening-btn {
-  color: #000;
-  display: flex;
-  justify-content: flex-start;
-}
-
 .search-btn {
   border: none;
   background-color: #fff;
@@ -1683,20 +1677,6 @@ text-overflow:hidden;
   outline: none;
 }
 
-@media only screen and (min-width: 1650px) {
-  .search-happening-btn {
-    color: #000;
-    display: flex;
-    justify-content: flex-start;
-  }
-}
-
-@media only screen and (max-width: 1500px) {
-  .search-happening-btn {
-    margin-left: 18.5%;
-  }
-}
-
 @media only screen and (min-width: 1500px) {
   .search-happening-btnLabel {
     margin-right: 8rem;
@@ -1707,13 +1687,20 @@ text-overflow:hidden;
   .filterBar-subcontainer {
     margin-left: 15%;
   }
+  .category-container {
+    width: 65%;
+  }
+  .search-happening-btn {
+    color: #000;
+    margin-left: -15%;
+  }
 }
 
 @media only screen and (max-width: 1000px) {
   .filterBar-container {
     height: 11.6rem;
     justify-content: flex-start;
-    margin-left: -2.5rem;
+    margin-left: -1.5rem;
   }
   .search-happening-btnLabel {
     margin-right: -2.4rem;
@@ -1739,7 +1726,7 @@ text-overflow:hidden;
   }
   .filterBar-container__item-category {
     width: 45%;
-    padding: 0.2rem .5rem;
+    padding: 0.2rem .4rem;
     color: black;
   }
   .category-input {
@@ -1751,9 +1738,12 @@ text-overflow:hidden;
     border: none;
     outline: none;
   }
+  .category-container {
+    width: 60%;
+  }
   .search-happening-btn {
     color: #000;
-    margin-left: 9.5%;
+    margin-left: -15%;
   }
 }
 
@@ -1770,9 +1760,12 @@ text-overflow:hidden;
   .filterBar-container__item {
     margin-bottom: 0.4rem;
   }
+  .category-container {
+    width: 140%;
+  }
   .search-happening-btn {
     color: #000;
-    margin-left: 32.4%;
+    margin-left: 2%;
   }
 }
 
@@ -1781,11 +1774,6 @@ text-overflow:hidden;
     width: 100%;
     height: 8rem;
   }
-  .search-happening-btn {
-    color: #000;
-    display: flex;
-    justify-content: flex-start;
-  }
   .search-happening-btnLabel {
     margin-right: 5.5rem;
   }
@@ -1793,7 +1781,7 @@ text-overflow:hidden;
 
 .filterBar-container__item-category {
   background-color: #fff;
-  padding: 0.2rem 1rem;
+  padding: 0.2rem .8rem;
   color: black;
   border-radius: 0.2rem;
   cursor: pointer;
@@ -1839,12 +1827,6 @@ text-overflow:hidden;
   .input {
     width: 76%;
     font-size: .7rem;
-  }
-  .search-happening-btn {
-    margin-left: 34%;
-    margin-top: .3rem;
-    display: flex;
-    justify-content: flex-start;
   }
   .search-happening-btnLabel {
     margin-right: -1rem;

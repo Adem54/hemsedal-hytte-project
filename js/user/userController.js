@@ -67,7 +67,6 @@ function translateCategoryTitleToEnglish(title = "event") {
       return "theater";
     case "Utstilling":
       return "exhibition";
-
     default:
       break;
   }
@@ -173,7 +172,6 @@ function getHappeningAsideFromExtraPaid(happenings) {
 function getCurrentAndOneMonthLaterDates() {
   let myNowDate = new Date();
 
-
   let currentDateInputFormat = myNowDate.toISOString().slice(0, 16);
   let currentDate = myNowDate.toISOString().slice(0, 10);
   let myFutureDate = myNowDate.setMonth(myNowDate.getMonth() + 1);
@@ -270,15 +268,12 @@ function getStartEndDateCurrentValue() {
 }
 
 
-//Bu filtrelemenin donderdigi tarihleri input formatina gore donderecek ve sadece calismasi yetecek...
-
-//Unutmayalim bizim search islemindeki happenings dedgimiz extrabetalt disinda kalan happenigs ler cunku extra betalt happenings leri biz en ustte listeledik
+//happenings som vi bruker i parameter er at de som er borsett fra ekstrabetalte happenings
 function searchHappenings(happenings, categories, startDate, endDate) {
-  //starDate secilmis mi onu cek et
+
   if (model.inputs.userPage.filterBtnState == "this-month") {
     let { currentDate, oneMonthLaterDate } = getCurrentAndOneMonthLaterDates();
-    // model.inputs.userPage.chosenDateFrom=currentDate;
-    // model.inputs.userPage.chosenDateTo=oneMonthLaterDate;
+
     return getDateBetweenTwoDates(happenings, currentDate, oneMonthLaterDate);
   } else if (model.inputs.userPage.filterBtnState == "this-week") {
     let { currentDate, futureDate } = getDateSomeDaysLater(7);
@@ -317,8 +312,6 @@ function searchHappenings(happenings, categories, startDate, endDate) {
   } else {
     let { currentDate, oneMonthLaterDate } = getCurrentAndOneMonthLaterDates();
     //Som default får vi en date en måneds videre
-    //    model.inputs.userPage.chosenDateFrom=currentDate;
-    //    model.inputs.userPage.chosenDateTo=oneMonthLaterDate;
     return getDateBetweenTwoDates(happenings, currentDate, oneMonthLaterDate);
   }
 }
@@ -329,7 +322,7 @@ function isAnyCategoryChecked(categories) {
   return result;
 }
 
-//Bu catgory filtrelemesine catgory den en az 1 tane secilirse girecek ondan dolayi oncesinde category secimi kontrol edilmeli eger kategory den en az 1 tane secilmis ise bu fonksiyona girmeli..
+//Hvis i det minste blir valgt en category, denne funksjonen skal kjøres...
 function getHappeningsByCheckedCategory(happenings, categories) {
   //Once isSelected i true olanlarin id sini bul... sonra da o id lerden happenings icinde categoryId sine bu id ler olanlari getir...
   let getCheckedCategories = categories.filter(
@@ -349,27 +342,5 @@ function showMobilMenu(){
   model.inputs.userPage.isMobilToggleMenu=!model.inputs.userPage.isMobilToggleMenu;
   updateView();
 }
-
-
-
-
-//happenings som vi lister opp er, bare betalt og gratis, og en månedslig
-
-//Burayi simdilik kaldirdik montha gore filtrelemeyi
-// let {monthByLongText}=getMyAllDateFormats("2022-04-15");
-
-// function getHappeningsByMonth(happenings,month){
-
-//     let result=happenings.filter(happening=>{
-
-//         return getMyAllDateFormats(happening.happeningStartDate).monthByLongText.toUpperCase()==month.toUpperCase();
-//     })
-// console.log("result: ", result);
-
-//   model.inputs.userPage.filteredData=result;
-//   console.log("filteredData month filtresi :",model.inputs.userPage.filteredData,)
-//   updateView();
-// }
-
 
 

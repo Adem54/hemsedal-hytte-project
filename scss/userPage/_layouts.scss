@@ -817,12 +817,12 @@ text-overflow:hidden;
   align-items: center;
 
 }
-.search-happening-btn {
-  color: #000;
-  // margin-left: 18%;
-  display: flex;
-  justify-content: flex-start;
-}
+// .search-happening-btn {
+//   color: #000;
+//   // margin-left: 18%;
+//   display: flex;
+//   justify-content: flex-start;
+// }
 
 
 
@@ -887,20 +887,20 @@ text-overflow:hidden;
 
 
 @media only screen and (min-width: 1650px){
-  .search-happening-btn {
-    color: #000;
-    display: flex;
-    justify-content: flex-start;
-}
+//   .search-happening-btn {
+//     color: #000;
+//     display: flex;
+//     justify-content: flex-start;
+// }
  }
 
 
 @media only screen and (max-width: 1500px){
-  .search-happening-btn {
+  // .search-happening-btn {
     
-    margin-left: 18.5%;
+  //   margin-left: 18.5%;
     
-  }
+  // }
 
 }
 
@@ -914,6 +914,15 @@ text-overflow:hidden;
     margin-left: 15%;
     
   }
+
+  .category-container {
+    width: 65%;
+  }
+ 
+  .search-happening-btn {
+    color: #000;
+    margin-left: -15%;
+  }
 }
 
 //FILTER BARIN RESPONSIVE LIK DURUMUNU AYARLAYACAGIZ BURDA MOBILDE SONRASINI.....
@@ -921,11 +930,12 @@ text-overflow:hidden;
   .filterBar-container {
     height: 11.6rem;
     justify-content: flex-start;
-    margin-left:-2.5rem;
+    margin-left:-1.5rem;
   }
   .search-happening-btnLabel{
     margin-right: -2.4rem;
  }
+
 
   .filterBar-container-div {
   
@@ -955,7 +965,7 @@ text-overflow:hidden;
 
   .filterBar-container__item-category {
     width: 45%;
-    padding: 0.2rem .5rem;
+    padding: 0.2rem .4rem;
     color: black;
   }
 
@@ -971,9 +981,13 @@ text-overflow:hidden;
     outline: none;
   }
 
+  .category-container {
+    width: 60%;
+  }
+ 
   .search-happening-btn {
     color: #000;
-    margin-left: 9.5%;
+    margin-left: -15%;
   }
 }
 
@@ -998,10 +1012,16 @@ text-overflow:hidden;
 
   
   }
+
+  .category-container {
+    width: 140%;
+  }
+ 
   .search-happening-btn {
     color: #000;
-    margin-left: 32.4%;
+    margin-left: 2%;
   }
+
 }
 
 
@@ -1014,11 +1034,11 @@ text-overflow:hidden;
    
   }
 
-  .search-happening-btn {
-    color: #000;
-    display: flex;
-    justify-content: flex-start;
-}
+//   .search-happening-btn {
+//     color: #000;
+//     display: flex;
+//     justify-content: flex-start;
+// }
 .search-happening-btnLabel{
   margin-right: 5.5rem;
 }
@@ -1028,7 +1048,7 @@ text-overflow:hidden;
 
 .filterBar-container__item-category {
   background-color: #fff;
-  padding: 0.2rem 1rem;
+  padding: 0.2rem .8rem;
   color: black;
   border-radius: 0.2rem;
   cursor: pointer;
@@ -1079,13 +1099,13 @@ text-overflow:hidden;
     font-size: .7rem;
     
   }
-  .search-happening-btn {
+  // .search-happening-btn {
  
-    margin-left: 34%;
-    margin-top: .3rem;
-    display: flex;
-    justify-content: flex-start;
-  }
+  //   margin-left: 34%;
+  //   margin-top: .3rem;
+  //   display: flex;
+  //   justify-content: flex-start;
+  // }
 
   .search-happening-btnLabel {
     margin-right: -1rem;
