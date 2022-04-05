@@ -1,9 +1,4 @@
-//Normalde bu sekilde currentSupplier tutulur ve her kayit olan i database e atilir ve bir token verilir ve de sign in oldugunda veriler database de oldugu icin, senin gonderidgin verilerden token kontrol edilir ve token dondurur ve bunsan sonra tum istekler token ile yapilacaktir..
-//imageFileObject:{},
-//Bir file bilgilerini tutan obje gelecek bu objeyi kullanarak biz image elementimize url uretecegiz...
-//category bizim model de sabit datamizda tutulacak ve biz burda id uzerinden gidecegiz.Categoriler listelenir ve dropdown ile categori seceriz, ve secilen kategoinin id sini burda tutariz ki artik istedgimiz zaman categori verilerini ortak, kategori dizisinden alabilirz..relational database
 
-//Onemli bir nokta biz adminpage de admin resim ekleyecek ve orda imageFileObjecti alacagiz ve imageFileObject uzerinden biz controller da veya view da ona karar verecegiz imageUrl sini elde edecek fonksiyonu yazacagiz ve imageUrl i de veri eklerken imageUrl olarak ekleyecegiz...
 
 const model={
 
@@ -36,21 +31,6 @@ const model={
              
             },
              isSubmitted:false,
-            // isFocused:{
-            //     title:false,
-            // },
-            // isBlured:{
-            //     title:false,
-            // },
-            // isOnInput:{
-            //     title:false,
-            // },
-            // isWarningMessage:{
-            //     title:false,
-            // },
-            // isOnChange:{
-            //     title:false,
-            // }
             
         
         },
@@ -69,7 +49,9 @@ const model={
 
             filterBtnState:"this-month",
           /*categories datasi burda olacakti...bunu dusunelim...cunku degisken ve on tarafta kullanici ile etkilesim ile bir dinamizm sagliyor ve onu kullaniyoruz...dolayisi ile burda olacakti... */
-            categories:[{id:1,title:"Familie og moro", isSelected:false,icon:"icon-family-svgrepo-com"},{id:2,title:"Barn og familie", isSelected:false,icon:"icon-two-childs-playing-silhouettes-svgrepo-com"},{id:3,title:"Festival", isSelected:false,icon:"icon-party-svgrepo-com"},{id:4,title:"Sport", isSelected:false,icon:"icon-sports_baseball"},{id:5,title:"Konsert", isSelected:false,icon:"icon-music"},{id:6,title:"Utstilling", isSelected:false,icon:"icon-presentation-exhibition-svgrepo-com"},{id:7,title:"Teater", isSelected:false, icon:"icon-theater-svgrepo-com"}]
+            categories:[{id:1,title:"Familie og moro", isSelected:false,icon:"icon-family-svgrepo-com"},{id:2,title:"Barn og familie", isSelected:false,icon:"icon-two-childs-playing-silhouettes-svgrepo-com"},{id:3,title:"Festival", isSelected:false,icon:"icon-party-svgrepo-com"},{id:4,title:"Sport", isSelected:false,icon:"icon-sports_baseball"},{id:5,title:"Konsert", isSelected:false,icon:"icon-music"},{id:6,title:"Utstilling", isSelected:false,icon:"icon-presentation-exhibition-svgrepo-com"},{id:7,title:"Teater", isSelected:false, icon:"icon-theater-svgrepo-com"}],
+            isMobilToggleMenu:false,
+
             
         }
     

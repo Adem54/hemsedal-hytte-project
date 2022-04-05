@@ -344,23 +344,8 @@ function getHappeningsByCheckedCategory(happenings, categories) {
   return result;
 }
 
-//happenings som vi lister opp er, bare betalt og gratis, og en månedslig
 
-//Burayi simdilik kaldirdik montha gore filtrelemeyi
-// let {monthByLongText}=getMyAllDateFormats("2022-04-15");
-
-// function getHappeningsByMonth(happenings,month){
-
-//     let result=happenings.filter(happening=>{
-
-//         return getMyAllDateFormats(happening.happeningStartDate).monthByLongText.toUpperCase()==month.toUpperCase();
-//     })
-// console.log("result: ", result);
-
-//   model.inputs.userPage.filteredData=result;
-//   console.log("filteredData month filtresi :",model.inputs.userPage.filteredData,)
-//   updateView();
-// }
-
-
-
+function showMobilMenu(){
+  model.inputs.userPage.isMobilToggleMenu=!model.inputs.userPage.isMobilToggleMenu;
+  updateView();
+}

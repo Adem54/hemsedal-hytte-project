@@ -3,39 +3,37 @@ function updateUserView() {
 
   document.getElementById("app").innerHTML = `  
     ${createHeaderTopHtml()}
-
- 
     ${createEkstraPaidSlider()}
-
-
 ${createSearchHappeningBar()}
-
 ${
   model.inputs.userPage.isCategoryBtnClicked
     ? createMultipleChoiceCategory()
     : ""
 }
-
 ${createFilterButtons()}
-
-
-
 ${createHappeningList()}
-
-    `;
-  
-   
+  `;
+ 
 }
 
+function createMobilMenu(){
+  return `
+    <a class="nav-mobil-icon" onclick="showMobilMenu()">
+      <i class="fa-solid fa-bars"></i>
+    </a> 
+  `;
+}
 function createHeaderTopHtml() {
   let headerTop = ``;
   headerTop += `
     <header class="fullscreen-header">
     <nav class="nav nav-top">
-      <figure class="nav__list">
+      <figure class="nav__list ">
         <a href="" class="nav__list-item"> Hemsedal-logo</a>
       </figure>
-      <ul class="nav__list">
+      <ul class="nav__list nav-menu
+      ${model.inputs.userPage.isMobilToggleMenu ? 'responsive' : ''}
+      ">
         <li><a class="nav__list-item" href="">Hjem</a></li>
         <li>
           <a class="nav__list-item create-happening-btn " href="#adminPage"
@@ -46,6 +44,7 @@ function createHeaderTopHtml() {
         </li>
         <li><a class="nav__list-item" href="">Logg in</a></li>
       </ul>
+      ${createMobilMenu()}
     </nav>
     
     <h1 class="header__title">HVA SKJER I HEMSEDAL!</h1>
@@ -65,13 +64,10 @@ function createEkstraPaidSlider() {
   ekstraPaidSlider += `
     <div class="slider-title main-title">
     <h1>Ekstrabetalte Aktiviteter</h1>
-    
-  
-    
     </div>
     <section class="happenings">
     <section class="slider-container extraPaid-container">
-    ${createReadMoreModal1()}
+    ${createReadMoreModal()}
     `;
 
 
@@ -195,9 +191,11 @@ function createSearchHappeningBar() {
   searchHappeningBar += `
     <div class="filterBar-title"><h2>Søk Happening</h2></div>
 <section class="filterBar-container">
- <div></div>
+
 <div class="filterBar-subcontainer">
+
   <div class="filterBar-container-div">
+
     <div class="filterBar-container__item">
       <div class="start-date-title date-title">
         <span>Start dato</span>
@@ -222,55 +220,10 @@ function createSearchHappeningBar() {
           </div>
         </div>
       
-    </div>    `;
+    </div> 
+    
 
-  let monthSelectOptionField = ``;
-  //     monthSelectOptionField+=`
-  //     <div class="filterBar-container__item">
-  //     <div class="month-date-title date-title">
-  //       <span>Måned</span>
-  //     </div>
-  //   <div class="ui calendar" id="month">
-  //     <div class="ui  ">
-  //       <i class=" time icon"></i>
-
-  //       <select
-  //       onchange="model.inputs.userPage.chosenMonth=this.value;
-  //       model.inputs.userPage.chosenDateFrom='';
-  //       model.inputs.userPage.chosenDateTo='';
-  //       updateView();
-  //       ;
-
-  //       "
-  //       class="select-month date-field" name="cars" id="cars">
-  //       <option selected disabled hidden>Velg måned</option>`;
-
-  //        for(let i=0; i<model.data.months.length; i++){
-  //          let month=model.data.months[i];
-  //          monthSelectOptionField+=`
-  //          <option value="${month}">${month}</option>
-
-  //          `;
-  //        }
-
-  //     monthSelectOptionField+=`
-  //     </select>
-
-  //     </div>
-  //   </div>
-  // </div>
-
-  // </div>
-
-  //     `;
-
-  searchHappeningBar +=
-    monthSelectOptionField +
-    `
-
-<div class="filterBar-container-div">
-
-<div class="filterBar-container__item">
+    <div class="filterBar-container__item">
   <div class="end-date-title date-title">
     <span>Slutt dato</span>
   </div>
@@ -292,6 +245,19 @@ function createSearchHappeningBar() {
       </div>
     </div>
 </div>
+
+    </div>   `;
+
+  let monthSelectOptionField = ``;
+
+
+  searchHappeningBar +=
+    monthSelectOptionField +
+    `
+    
+<div class="filterBar-container-div">
+
+
   <div class="category-container">
     <div class="filterBar-container__item  category_filter">
      <span class="category_label date-title"> Kategori</span>
@@ -328,9 +294,12 @@ function createSearchHappeningBar() {
     </div>
 
   </div>
-</div>
-</div>
-<div class="search-happening-btn "><button
+
+  <div class="search-happening-btn filterBar-container__item ">
+  <div class=" date-title">
+    <span>&nbsp&nbsp&nbsp</span>
+  </div>
+  <button
 onclick="
  searchHappenings(
     getHappeningAsideFromExtraPaid(model.data.happenings),
@@ -341,6 +310,8 @@ onclick="
  model.inputs.userPage.filterBtnState='';
  updateView()"
 class="search-btn   ">Søk Happening &nbsp &nbsp<i class="fa-solid fa-play"></i></button></div>
+</div>
+
 </section>
     
     `;
@@ -414,7 +385,7 @@ function createHappeningList() {
   let { categories } = model.inputs.userPage;
   let { chosenDateFrom, chosenDateTo } = model.inputs.userPage;
   let happeningsWithoutExtraPaid = getHappeningAsideFromExtraPaid(
-    getHappeningsFromStorage()
+  getHappeningsFromStorage()
   );
   //searchHappenings working fra begynnelsen
   let getFilteredData = searchHappenings(
@@ -432,8 +403,8 @@ function createHappeningList() {
   happeningList += `
    
 <section class="happenings">
-<div class="container1 slider-container nonExtraPaidContainer ">
-${createReadMoreModal2()}
+<div class=" slider-container nonExtraPaidContainer ">
+${createReadMoreModal()}
 
 `;
 
@@ -542,215 +513,140 @@ ${
   return happeningList;
 }
 
-function createReadMoreModal1() {
-  let readMoreModal = ``;
-  //kommer begynnelsen med ingen id 
-if(!model.inputs.userPage.clickedHappeningId)return readMoreModal;
-  let happeningId=model.inputs.userPage.clickedHappeningId;
-  let happening = findElementById(
-    model.data.happenings,
-    parseInt(happeningId)
-  );
-
-  let category = getCategoryById(
-    model.inputs.userPage.categories,
-    happening.categoryId
-  );
-  let categoryTitleInEnglish = translateCategoryTitleToEnglish(category.title);
 
 
-  let {
-    monthByToDigit,
-    monthByShortText,
-    year,
-    day
-  } = getMyAllDateFormats(happening.happeningStartDate);
-
-  let {
-    monthByToDigit:monthEndToDigit,
-    monthByShortText:monthEndShortText,
-    year:yearEndDate,
-    day:endDay
-  } = getMyAllDateFormats(happening.happeningEndDate);
-  let monthStartDate=doFirstLetterUpper(monthByShortText);
-let monthEndDate=doFirstLetterUpper(monthEndShortText);
-
-  readMoreModal += `
-  <section
-  style="
-  display:${model.inputs.userPage.isReadMoreExtraPaidBtnClicked ? 'flex' : 'none'};
-  position:absolute;
-  top:${document.getElementById(happeningId)?.offsetTop-130}px;
- 
-  "
-  
-  class="modal modal1">
-  <div class="modal-wrapper">
-  <div class="modal-image"
-  style="
-background-image: url(
-   ${
-     happening.imageUrl ||
-     `https://source.unsplash.com/random/?${categoryTitleInEnglish}`
-   }
-)
-
-"
-  >  
-  <section class="modal-date"> 
-  <div class="modal-date__day">${day}</div>
-  <div class="modal-date__mon-year">
-  ${monthStartDate} ${year}
-  </div>
-  </section>
-  </div>
-  <div class="modal-description">
-      <div class="cancel-icon"><a href="#"  onclick="cancelModal()
-      " > 
-      <span class="icon-cross"></span>
-      </a></div>
-
-      <div class="modal-description__title">
-      <h1>
-      ${happening.title}</div>
-      </h1>
-      <div class="small-info">
-      <div> <span> Type:${category.title}</span></div>
-    
-      <div><span>Start dato:${day} ${monthStartDate} ${year} ${happening.happeningStartTime}
-      </span></div>
-<div> <span>Slutt dato:${endDay} ${monthEndDate} ${yearEndDate} ${happening.happeningEndTime}</span></div>     
-<div><span>Sted: Hemsedal</span></div>
-</div>
-      <div class="modal-description__text">${happening.description} </div>
-      
-  </div>
-</div>
-</section>
-  
+function readMoreBtn(id){
+  return `
+          <div class="read-more">
+            <a onclick="readMore('${id}')">
+              <span>Les mer</span>
+              <i class="fa-solid fa-right-long"></i>
+            </a>
+          </div>
   `;
-
-    return readMoreModal;
-}
-//Read-more olunca display block 
-
-function createReadMoreModal2() {
-    //kommer begynnelsen med ingen id 
-    let readMoreModal = ``;
-if(!model.inputs.userPage.clickedHappeningId)return readMoreModal;
-  let happeningId=model.inputs.userPage.clickedHappeningId;
-  let happening = findElementById(
-    model.data.happenings,
-    parseInt(happeningId)
-  );
-
-  let category = getCategoryById(
-    model.inputs.userPage.categories,
-    happening.categoryId
-  );
-  let categoryTitleInEnglish = translateCategoryTitleToEnglish(category.title);
-
-let a= 120;
-  let {
-    monthByToDigit,
-    monthByShortText,
-    year,
-    day
-  } = getMyAllDateFormats(happening.happeningStartDate);
-
-  let {
-    monthByToDigit:monthEndToDigit,
-    monthByShortText:monthEndShortText,
-    year:yearEndDate,
-    day:endDay
-  } = getMyAllDateFormats(happening.happeningEndDate);
-  let monthStartDate=doFirstLetterUpper(monthByShortText);
-let monthEndDate=doFirstLetterUpper(monthEndShortText);
-
-  readMoreModal += `
-  <section
-  style="
-  display:${model.inputs.userPage.isReadMoreNoneExtraPaidBtnClicked ? 'flex' : 'none'};
-  position:absolute;
-  top:${document.getElementById(happeningId)?.offsetTop-130}px;
-  left:1rem;
-  
-  
-  "
-  
-  class="modal modal2">
-  <div class="modal-wrapper">
-  <div class="modal-image"
-  style="
-background-image: url(
-   ${
-     happening.imageUrl ||
-     `https://source.unsplash.com/random/?${categoryTitleInEnglish}`
-   }
-)
-
-"
-  >
-  <section class="modal-date"> 
-  <div class="modal-date__day">${day}</div>
-  <div class="modal-date__mon-year">
-  ${monthStartDate} ${year}
-  </div>
-  </section>
-  
-  </div>
-  <div class="modal-description">
-      <div class="cancel-icon"><a href="#"  onclick="cancelModal()
-      " > 
-      <span class="icon-cross"></span>
-      </a></div>
-
-      <div class="modal-description__title">
-      <h1>
-      ${happening.title}</div>
-      </h1>
-      <div class="small-info">
-      <div> <span> Type:${category.title}</span></div>
-    
-      <div><span>Start dato:${day} ${monthStartDate} ${year} ${happening.happeningStartTime}
-      </span></div>
-<div> <span>Slutt dato:${endDay} ${monthEndDate} ${yearEndDate} ${happening.happeningEndTime}</span></div>     
-<div><span>Sted: Hemsedal</span></div>
-</div>
-      <div class="modal-description__text">${happening.description} </div>
-      
-  </div>
-</div>
-</section>
-  
-  `;
-
-  return readMoreModal;
-}
-
-function cancelModal() {
-  console.log("Cancel Modal");
-  model.inputs.userPage.isReadMoreExtraPaidBtnClicked = false;
-  model.inputs.userPage.isReadMoreNoneExtraPaidBtnClicked = false;
-  // model.inputs.userPage.clickedHappeningId="";
-  updateView();
-}
-
-function readMore(happeningId) {
-console.log("heppnginId: ",typeof happeningId)
-//  console.log("cart-container div elementLeft:  ", document.getElementById(happeningId).offsetLeft);
-//   console.log("cart-container div elementTop:  ", document.getElementById(happeningId).offsetTop);
-  //Eger extrapaid ise isReadMoreExtraPaidi true yap.. degilse digerini
-  let happening=findElementById(model.data.happenings,happeningId);
-  let {paymentTypeId}=happening;
-  if(paymentTypeId===3){
-    model.inputs.userPage.isReadMoreExtraPaidBtnClicked = true;
-
-  }else{
-    model.inputs.userPage.isReadMoreNoneExtraPaidBtnClicked = true;
-
   }
-  model.inputs.userPage.clickedHappeningId = happeningId;
-  updateView();
-
-}
+  
+  function createReadMoreText(title,value){
+    return `
+          <div> 
+            <span> ${title}:${value}</span>
+          </div>
+    `;
+  }
+  
+  function createReadMoreModal() {
+      let readMoreModal = ``;
+  if(!model.inputs.userPage.clickedHappeningId)  return readMoreModal;  
+  
+    let happeningId=model.inputs.userPage.clickedHappeningId;
+    let happening = findElementById(
+      model.data.happenings,
+      parseInt(happeningId)
+    );
+  
+    let category = getCategoryById(
+      model.inputs.userPage.categories,
+      happening.categoryId
+    );
+    let categoryTitleInEnglish = translateCategoryTitleToEnglish(category.title);
+  
+    let {
+      monthByToDigit,
+      monthByShortText,
+      year,
+      day
+    } = getMyAllDateFormats(happening.happeningStartDate);
+    let {
+      monthByToDigit:monthEndToDigit,
+      monthByShortText:monthEndShortText,
+      year:yearEndDate,
+      day:endDay
+    } = getMyAllDateFormats(happening.happeningEndDate);
+    let monthStartDate=doFirstLetterUpper(monthByShortText);
+    let monthEndDate=doFirstLetterUpper(monthEndShortText);
+  
+    let startDate=`${day}  ${monthStartDate}  ${year}   ${happening.happeningStartTime}`;
+    let endDate=`${endDay}  ${monthEndDate}  ${yearEndDate}  ${happening.happeningEndTime}`;      
+    readMoreModal += `
+    <section
+      onclick="cancelModal()"
+      class="modal
+      ${ model.inputs.userPage.isReadMoreNoneExtraPaidBtnClicked || model.inputs.userPage.isReadMoreExtraPaidBtnClicked? 'modal2' : ''}
+      ">
+      <div class="modal-wrapper">
+         <div class="modal-image"
+         style="
+          background-image: url(
+            ${
+              happening.imageUrl ||
+              `https://source.unsplash.com/random/?${categoryTitleInEnglish}`
+            }
+          )
+  
+          "
+          >
+            <section class="modal-date"> 
+              <div class="modal-date__day">${day}</div>
+              <div class="modal-date__mon-year">
+              ${monthStartDate} ${year}
+              </div>
+            </section>
+         </div>
+          <div class="modal-description">
+            <div class="cancel-icon">
+              <a   onclick="cancelModal()"> 
+                <span class="icon-cross"></span>
+              </a>
+            </div>
+            <div class="modal-description__title">
+              <h1>
+              ${happening.title}
+              </h1>
+            </div>
+            <div class="small-info">
+                ${createReadMoreText('Type',category.title)}
+                ${createReadMoreText('Start dato',startDate)}
+                ${createReadMoreText('Slutt dato',endDate)}
+                <div>
+                    <span>
+                      Sted: Hemsedal
+                    </span>
+                </div>
+            </div>
+            <div class="modal-description__text">${happening.description} 
+            </div>
+        </div>
+      </div>
+    </section>
+    
+    `;
+    return readMoreModal;
+  }
+  
+  
+  
+  function cancelModal() {
+    console.log("Cancel Modal");
+    model.inputs.userPage.isReadMoreExtraPaidBtnClicked = false;
+    model.inputs.userPage.isReadMoreNoneExtraPaidBtnClicked = false;
+    updateView();
+    
+  }
+  
+  
+  
+  function readMore(happeningId) {
+    let happening=findElementById(model.data.happenings,happeningId);
+    let {paymentTypeId}=happening;
+    console.log("paymetnTypeId: ", paymentTypeId);
+    if(paymentTypeId===3){
+      model.inputs.userPage.isReadMoreExtraPaidBtnClicked = true;
+  
+    }else{
+      model.inputs.userPage.isReadMoreNoneExtraPaidBtnClicked = true;
+  
+    }
+    model.inputs.userPage.clickedHappeningId = happeningId;
+    updateView();
+  
+  }
