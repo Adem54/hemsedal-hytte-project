@@ -962,6 +962,9 @@ textarea, input[type="datetime-local"] {
     display: flex;
     right: 3.6rem;
   }
+  .nav__list {
+    margin-left: -12rem;
+  }
   .fullscreen-header {
     height: 55vh;
     background-position-x: 60%;
