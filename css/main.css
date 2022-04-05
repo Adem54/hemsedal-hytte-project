@@ -885,6 +885,10 @@ textarea, input[type="datetime-local"] {
   color: #828c96;
 }
 
+div#app {
+  overflow: hidden;
+}
+
 .fullscreen-header {
   height: 85vh;
   /*3be8b0    00aeef*/
@@ -947,7 +951,7 @@ textarea, input[type="datetime-local"] {
     display: block;
     color: #fff;
     position: absolute;
-    right: 8.5rem;
+    right: 1.5rem;
     top: 1.7rem;
     cursor: pointer;
   }
@@ -962,7 +966,7 @@ textarea, input[type="datetime-local"] {
     display: flex;
   }
   .nav__list {
-    margin-left: -7rem;
+    margin-left: -1rem;
   }
   .fullscreen-header {
     height: 55vh;
@@ -1389,7 +1393,6 @@ textarea, input[type="datetime-local"] {
   }
   .extraPaid-container-cart {
     margin: 1rem;
-    width: 24rem;
     /*Burasi onemli...*/
     min-width: 91%;
     /*Bu da cok onemli...*/
@@ -1398,13 +1401,13 @@ textarea, input[type="datetime-local"] {
 
 @media only screen and (max-width: 580px) {
   .happenings-ekstraPaid {
-    margin-left: -.1rem;
+    margin-left: .1rem;
   }
   .extraPaid-container {
-    width: 88%;
+    width: 69%;
   }
   .extraPaid-container-cart {
-    margin: 1rem;
+    margin: .8rem;
     width: 24rem;
     /*Burasi onemli...*/
     min-width: 92%;

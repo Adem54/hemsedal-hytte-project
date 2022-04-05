@@ -1,3 +1,8 @@
+div#app{
+  overflow: hidden;
+}
+
+
 .fullscreen-header {
   height: 85vh;
 
@@ -70,7 +75,7 @@
     display: block;
     color: #fff;
     position: absolute;
-    right: 8.5rem;
+    right: 1.5rem;
     top: 1.7rem;
     cursor: pointer;
   }
@@ -83,13 +88,12 @@
   }
   .responsive {
     display: flex;
-   
     
   }
 
   .nav__list {
     
-    margin-left: -7rem;
+    margin-left: -1rem;
   }
   .fullscreen-header {
     height: 55vh;
@@ -174,8 +178,7 @@
 
 .happenings-ekstraPaid{
   margin-top: 1rem;
-  //Burasi onemli burya dikkat edelim...
-  // padding-right: 2rem;
+ 
   position: relative;
 }
 
@@ -585,7 +588,6 @@
 }
 .extraPaid-container-cart {
   margin: 1rem;
-  width: 24rem;
   /*Burasi onemli...*/
   min-width: 91%;
   /*Bu da cok onemli...*/
@@ -595,14 +597,14 @@
 @media only screen and (max-width: 580px){
  
   .happenings-ekstraPaid {
-    margin-left: -.1rem;
+    margin-left: .1rem;
    }
   .extraPaid-container {
-    width: 88%;
+    width: 69%;
    
   }
   .extraPaid-container-cart {
-    margin: 1rem;
+    margin: .8rem;
     width: 24rem;
     /*Burasi onemli...*/
     min-width: 92%;
