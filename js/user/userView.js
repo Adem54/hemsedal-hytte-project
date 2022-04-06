@@ -1,6 +1,7 @@
 function updateUserView() {
-   const scrollPosition = document.body.scrollTop;
+   //onclick="model.inputs.userPage.isCategoryBtnClicked=false; updateView() 
   document.getElementById("app").innerHTML = `  
+  <div onclick="closetoggleCategoryBox(event)" >
     ${createHeaderTopHtml()}
     ${createEkstraPaidSlider()}
     ${createSearchHappeningBar()}
@@ -11,6 +12,8 @@ function updateUserView() {
     }
     ${createFilterButtons()}
     ${createHappeningList()}
+</div>
+
     `;
   runSlider();
 }
@@ -45,7 +48,7 @@ function navMenu(){
 function createMobilMenu(){
   return `
     <a class="nav-mobil-icon" onclick="showMobilMenu()">
-      <i class="fa-solid fa-bars"></i>
+    ${model.inputs.userPage.isMobilToggleMenu ? '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars"></i>'}
     </a> 
   `;
 }
@@ -207,7 +210,7 @@ function createDatePicker(startOrEnd,StartOrEndValue){
               ? StartOrEndValue
               : (this.value = now.toISOString().slice(0, 16))
           }"
-          onchange="${StartOrEndValue}=this.value;
+          onchange="StartOrEndValue=this.value;
           "
           class="input date-field" type="datetime-local" placeholder="${startOrEnd} dato"
           >
@@ -219,6 +222,7 @@ function createDatePicker(startOrEnd,StartOrEndValue){
   `;
 }
 
+
 function createSearchHappeningBar() {
   getStartEndDateCurrentValue();
   const now = new Date();
@@ -229,8 +233,57 @@ function createSearchHappeningBar() {
 <section class="filterBar-container">
   <div class="filterBar-subcontainer">
     <div class="filterBar-container-div">
-      ${createDatePicker('start',model.inputs.userPage.chosenDateFrom)}
-      ${createDatePicker('end',model.inputs.userPage.chosenDateTo)}
+  
+
+   
+    <div class="filterBar-container__item start-date-item">
+    <div class="start-date-title date-title">
+      <span>Start dato</span>
+    </div>
+    <div class="ui calendar start-date" id="start-date">
+        <div class="ui">
+          <i class="calendar icon"></i>
+          <input 
+          min="${now.toISOString().slice(0, 16)}"
+          value="${
+            model.inputs.userPage.chosenDateFrom
+              ? model.inputs.userPage.chosenDateFrom
+              : (this.value = now.toISOString().slice(0, 16))
+          }"
+          onchange="getStartDate(event)"
+          onClick="stopPropagation(event)"
+          class="input date-field" type="datetime-local" placeholder="start dato"
+          >
+        </div>
+    </div>
+ </div>
+    
+    <div class="filterBar-container__item end-date-item">
+    <div class="end-date-title date-title">
+      <span>Slutt dato</span>
+    </div>
+    <div class="ui calendar end-date" id="end-date">
+        <div class="ui">
+          <i class="calendar icon"></i>
+          <input 
+          min="${now.toISOString().slice(0, 16)}"
+          value="${
+            model.inputs.userPage.chosenDateTo
+              ? model.inputs.userPage.chosenDateTo
+              : (this.value = now.toISOString().slice(0, 16))
+          }"
+          onchange="getEndDate(event)"
+          onClick="stopPropagation(event)"
+          class="input date-field" type="datetime-local" placeholder="end dato"
+          >
+        </div>
+    </div>
+ </div>
+
+
+
+
+
     </div>
        `;
   searchHappeningBar +=
@@ -241,7 +294,7 @@ function createSearchHappeningBar() {
           <span class="category_label date-title"> Kategori</span>
         <div class="filterBar-container__item-category  category_field_selectBtn  calendar"  > `;
     let categoryIconBtn = `
-    <a for="kategori" onclick="model.inputs.userPage.isCategoryBtnClicked=!model.inputs.userPage.isCategoryBtnClicked; updateView() ">
+    <a id="category-toggle" for="kategori" onclick="toggleCategory(event)">
       <input
       class="category-input"
       value="Kategori"
@@ -292,7 +345,7 @@ function createMultipleChoiceCategory() {
        <div class="category_list__item  " >
           <input ${getChecked(model.inputs.userPage.isSelectedAll)} 
            type="checkbox"
-           onclick="selectAllOrNone(this.checked)" >
+           onclick="selectAllOrNone(this.checked); stopPropagation(event);" >
           <label> Select All</label>
           </div>   `;
 
@@ -305,7 +358,7 @@ function createMultipleChoiceCategory() {
       <div class="category_list__item  " >
         <input ${getChecked(
           category.isSelected
-        )}  onclick="toggleCategorySelected(${category.id})" type="checkbox" >
+        )}  onclick="toggleCategorySelected(${category.id});stopPropagation(event);" type="checkbox" >
         <label> ${category.title}</label>
       </div> 
    `;
